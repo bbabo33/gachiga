@@ -163,7 +163,7 @@ public class MemberDAO {
 			conn = new ConnectionFactory().getConnection();
 			StringBuilder sql = new StringBuilder();
 			
-			sql.append(" select name, id, email, ");
+			sql.append(" select name, id, email, password, ");
 			sql.append(" birth, tel, age, ");
 			sql.append(" addr, reg_date ");
 			sql.append(" from c_member ");
@@ -178,6 +178,7 @@ public class MemberDAO {
 				member = new MemberVO();
 				member.setName(rs.getString("name"));
 				member.setId(rs.getString("id"));
+				member.setPassword(rs.getString("password"));
 				member.setEmail(rs.getString("email"));
 				member.setBirth(rs.getString("birth"));
 				member.setTel(rs.getString("tel"));
