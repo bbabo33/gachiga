@@ -1,4 +1,4 @@
-package kr.controller.board;
+package kr.controller.board.review;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,7 +19,7 @@ public class Delete_Controller implements Controller {
 
 		request.setAttribute("cnt", cnt);
 
-		return "/jsp/board/delete_board.jsp";
+		return "/jsp/boardReview/delete_board.jsp";
 	}
 
 }

@@ -1,25 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<script src="<%= request.getContextPath() %>/assets/js/add_post.js"></script>
+<script src="<%= request.getContextPath() %>/assets/js/add_board.js"></script>
 <script>
 $(document).ready(function(){
 	$("form[name=wForm]").submit(function(e) {
 		if( ! checkForm() )
+		/* 	console.log(!!!); */
 			return false;
 		
 		e.preventDefault();
 	
 		var title = $("input[name=title]").val();
-		var writer = $("input[name=writer]").val();
+		var id = $("input[name=id]").val();
 		var content = $("textarea[name=content]").val();
 	
 		$.ajax({
-			url : '<%=request.getContextPath()%>/board/add_post.do',
+			url : '<%=request.getContextPath()%>/board/add_board.do',
 			type : 'post',
 			data : {
-				'title' : title,
-				'writer'	 : writer,
-				'content' : content
+				  'title' : title
+				, 'id'	 : id
+				, 'content' : content
 			},
 			success : callback,
 			error : function(xhr, ajaxOptions, thrownError) {
@@ -33,10 +34,9 @@ $(document).ready(function(){
 	function callback(data) {
 		if (data.trim() > 0) {
 			alert(data.trim() + '개의 게시글이 추가되었습니다');
-			location.href = "list_post.do";
+			location.href = "free_board.do";
 		}
 	}
-	
 	function checkForm() {
 		var f = document.wForm;
 		if (f.title.value == '') {
@@ -44,31 +44,18 @@ $(document).ready(function(){
 			f.title.focus();
 			return false;
 		}
-
-		if (f.writer.value == '') {
-			alert('글쓴이를 입력하세요');
-			f.writer.focus();
-			return false;
-		}
-
-		if (f.content.value == '') {
+ 		if (f.content.value == '') {
 			alert('내용을 입력하세요');
 			f.content.focus();
 			return false;
 		}
-		
-		/* if( ! checkExt(f.attachfile1) )
-			return false;
-		if( ! checkExt(f.attachfile2) )
-			return false; */
 		return true;
 	}
 });
 </script>
 <div align="center">
 	<h3>게시글 등록</h3>
-
-	<form name="wForm" method="post">
+ 	<form name="wForm" method="post" action="/carpool/board/add_board.do">
 		<table class="post_table">
 			<tr>
 				<th width="23%">제목</th>
@@ -78,7 +65,7 @@ $(document).ready(function(){
 				<th width="23%">글쓴이</th>
 				<td class="L">
 					<span>${ login_result.id}</span>
-					<input type="hidden" name="writer" value="${ login_result.id }">
+					<input type="hidden" name="id" value="${ login_result.id }">
 				</td>
 			</tr>
 			<tr>
@@ -87,7 +74,7 @@ $(document).ready(function(){
 						style="width: 100%;"></textarea></td>
 			</tr>
 		</table>
-		<input type="submit" name="new_post" value="등록"> <input
-			type="button" name="post_list" value="목록">
+		<input type="submit" name="new_board" value="등록"> 
+		<input type="button" name="post_list" value="목록">
 	</form>
 </div>

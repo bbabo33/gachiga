@@ -6,18 +6,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.controller.Controller;
-import kr.dao.BoardDAO;
+import kr.dao.ReviewDAO;
 import kr.vo.BoardVO;
 
-public class FreeBoardList_Controller implements Controller{
+public class ReviewBoardList_Controller implements Controller {
 	@Override
 	public String handRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		BoardDAO dao = new BoardDAO();
-		List<BoardVO> BoardList = dao.selectAllBoard();
+		ReviewDAO dao = new ReviewDAO();
+		List<BoardVO> ReviewList = dao.selectAllBoard();
 		
-		request.setAttribute("boardList", BoardList);
-		
-
-		return "/page/board/free_list.jsp";
+		request.setAttribute("reviewList", ReviewList);
+		return "/page/boardReview/review_list.jsp";
 	}
+
+	
 }

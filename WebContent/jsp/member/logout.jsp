@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="notice.vo.MemberVO"%>
-<%@ page import="notice.dao.MemberDAO"%>
+<%@page import="kr.vo.MemberVO"%>
 <%
 	request.setCharacterEncoding("utf-8");
 
@@ -10,7 +9,7 @@
 		session.removeAttribute("member");
 	}
 	MemberVO member2 = (MemberVO) session.getAttribute("member");
-	
+
 	String back_url = request.getHeader("REFERER");
 %>
 <script>

@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+$(document).ready(function() {
+	$("input[name=new_post]").click(function() {
+		location.href = "add_board_form.do";
+	});
+});
+</script> 
 <hr>
 <h3 align="center">자유 게시판</h3>
 <hr>
@@ -26,18 +34,19 @@
 			</tr>
 		</c:forEach>
 	</table>
- 	<%-- <div id="page_step">
+
+	 <div id="page_step">
 		<c:forEach var="i" begin="1" end="${step}" step="1">
-			<a class="page_link ${ page == i || page == null ? 'check' : '' }" href="list_post.do?page=${i}">${i}</a>
+			<a class="page_link ${ page == i || page == null ? 'check' : '' }" href="free_board.do?page=${i}">${i}</a>
 		</c:forEach>
 	</div>
-	<c:if test="${ not empty login_result }">
+	<%-- <c:if test="${ not empty login_result }"> --%>
 		<div class="R">
 			<input class="btn" type="button" name="new_post" value="새글등록">
 		</div>
-	</c:if>
-</div> --%>
-	<!-- 	<form class="R" action="/carpool/page/board/search_post.jsp" name="search" method="GET">
+	<%-- </c:if> --%>
+</div> 
+	 <!-- 	<form class="R" action="/carpool/page/board/search_post.jsp" name="search" method="GET">
 		<select name="category">
 			<option value="">선택하세요</option>
 			<option value="writer">글쓴이</option>
@@ -45,6 +54,4 @@
 		</select>
 		<input type="text" name="search">
 		<input type="submit" value="검색">		
-	</form> -->
-	<input type="button" value="목록으로">
-</div>
+	</form>  -->

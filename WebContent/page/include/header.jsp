@@ -84,7 +84,7 @@ MemberVO member = (MemberVO)session.getAttribute("member");
 	<nav id="gnb">
 		<ul>
 			<li><a href="<%=request.getContextPath()%>/member/list_user.do">회원관리</a></li>
-			<li><a href="<%=request.getContextPath()%>/board/hugi_board_list.do">후기게시판</a></li>
+			<li><a href="<%=request.getContextPath()%>/boardReview/review_board_list.do">후기게시판</a></li>
 			<li><a href="<%=request.getContextPath()%>/board/free_board_list.do">자유게시판</a></li>
 			<li><a href="<%=request.getContextPath()%>/member/add_user_form.do">회원가입</a></li>
 			<li><a href="<%=request.getContextPath()%>/carpool/add_carpool_form.do">카풀등록</a></li>
@@ -101,7 +101,7 @@ MemberVO member = (MemberVO)session.getAttribute("member");
 	
 			<input type="submit" class="btn" value="로그인">
 		</form> --%>
-		<input type="button" class="btn" id="loginBtn" value="로그인">
+		<input type="button" class="btn" id="loginBtn" value="네이버로로그인">
 		</c:when>
 		
 		<c:otherwise>

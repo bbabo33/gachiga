@@ -17,7 +17,7 @@ import kr.vo.BoardVO;
  * @author acorn
  *
  */
-public class BoardDAO {
+public class ReviewDAO {
 	/**
 	 * 조회기능
 	 */
@@ -34,7 +34,7 @@ public class BoardDAO {
 			//sql.append(" select * ");
 			sql.append(" select * ");
 			//sql.append(" to_char(reg_date, 'yyyy-mm-dd') as reg_date ");
-			sql.append("  from c_board ");
+			sql.append("  from c_review_board ");
 			sql.append(" order by board_no desc ");
 
 			pstmt = conn.prepareStatement(sql.toString());
@@ -69,7 +69,7 @@ public class BoardDAO {
 	 */
 
 	public int selectNo() {
-		String sql = "select seq_c_board_no.nextval from dual ";
+		String sql = "select seq_c_review_board_no.nextval from dual ";
 
 		try (Connection conn = new ConnectionFactory().getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);) {
@@ -97,7 +97,7 @@ public class BoardDAO {
 		try {
 			conn = new ConnectionFactory().getConnection();
 			StringBuilder sql = new StringBuilder();
-			sql.append("insert into c_board( board_no, title, id, content ) ");
+			sql.append("insert into c_review_board( board_no, title, id, content ) ");
 			sql.append(" values( seq_t_board_no.nextval, ?, ?, ? ) ");
 			
 			pstmt = conn.prepareStatement(sql.toString());
@@ -130,7 +130,7 @@ public class BoardDAO {
 			conn = new ConnectionFactory().getConnection();
 			StringBuilder sql = new StringBuilder();
 			sql.append("select * ");
-			sql.append("  from c_board ");
+			sql.append("  from c_review_board ");
 			sql.append(" where board_no = ? ");
 
 			pstmt = conn.prepareStatement(sql.toString());
@@ -181,7 +181,7 @@ public class BoardDAO {
 			conn = new ConnectionFactory().getConnection();
 			StringBuilder sql = new StringBuilder();
 			
-			sql.append("update c_board ");
+			sql.append("update c_review_board ");
 			sql.append(" set title = ?, content = ? ");
 			sql.append(" where board_no = ? ");
 
@@ -209,7 +209,7 @@ public class BoardDAO {
 	public void updateViewCnt(int board_no) {
 //		finally에 close를 할 필요가 없다
 		StringBuilder sql = new StringBuilder();
-		sql.append("update c_board ");
+		sql.append("update c_review_board ");
 		sql.append(" set cnt = cnt + 1 ");
 		sql.append(" where board_no = ? ");
 		try (Connection conn = new ConnectionFactory().getConnection();
@@ -238,7 +238,7 @@ public class BoardDAO {
 	public int deleteBoard(int no) {
 
 		StringBuilder sql = new StringBuilder();
-		sql.append("delete from c_board ");
+		sql.append("delete from c_review_board ");
 		sql.append(" where board_no = ?  ");
 		
 		int result = 0;
