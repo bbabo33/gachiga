@@ -1,0 +1,19 @@
+@charset "UTF-8";
+.error_msg {
+	color: red;
+	font-size: 15px;
+}
+
+#tel input {
+	width: 50px;
+}
+
+#add_user_form form{
+	width:400px;
+	margin: 0 auto;
+	text-align:center;
+}
+
+#add_user_form h3{
+	text-align:center;
+}

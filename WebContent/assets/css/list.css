@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+.list_wrap {
+	display: table; 
+	width: 1000px;
+}
+.row {
+	display: table-row;
+	width:100%;
+}
+.list:hover{
+	cursor:pointer;
+	background-color:#fafafa;
+}
+.cell {
+	display: table-cell; 
+	padding: 3px; 
+	border: 1px solid #ddd;
+	font-size:17px;
+}
+.head{
+	background-color:#fafafa;
+}
+.col1 { width: 20%;}
+.col2 {width: 30%;}

@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+header {
+}
+
+header #header_content {
+	width: 1000px;
+	margin: 0 auto;
+	padding: 15px 0;
+	min-height: 90px;
+}
+
+header nav#gnb {
+	display: inline-block;
+}
+
+header nav#gnb ul {
+	padding: 0;
+}
+
+header nav#gnb li {
+	padding: 15px; display : inline-block;
+	font-size: 15px;
+	display: inline-block;
+}
+
+header #main_link {
+	display: inline-block;
+	line-height: 80px;
+}
+
+header #main_link img {
+	vertical-align: middle;
+	padding: 0 15px;
+}
+
+div#user_info {
+	display: inline-block;
+	font-size: 15px;
+}
+
+div#user_info form .login {
+	width: 100px;
+}
