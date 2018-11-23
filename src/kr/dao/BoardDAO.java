@@ -156,7 +156,7 @@ public class BoardDAO {
 				int cnt = rs.getInt("cnt");
 				String regDate = rs.getString("reg_date");
 				//System.out.println(no +  " : dao");
-				hugiboard = new BoardVO(no, title, id, content, cnt, regDate);
+				hugiboard = new BoardVO(no, cnt, title, id, content, cnt, regDate, cnt, regDate);
 				//System.out.println(hugiboard + "dao ");
 			}
 

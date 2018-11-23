@@ -20,9 +20,7 @@ $(document).ready(function(){
 })
 </script>
 <div align="center">
-	<hr>
 	<h3>카풀 목록</h3>
-	
 	<form class="R" action="/carpool/page/carpool/search_post.jsp" name="search" method="GET">
 		<select name="category">
 			<option value="">선택하세요</option>

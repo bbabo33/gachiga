@@ -7,9 +7,7 @@
 	pageEncoding="UTF-8"%>
 <script src="<%= request.getContextPath() %>/assets/js/list.js"></script>
 <div align="center">
-	<hr>
 	<h3>게시글 목록</h3>
-	
 	<form class="R" action="/carpool/page/board/search_post.jsp" name="search" method="GET">
 		<select name="category">
 			<option value="">선택하세요</option>

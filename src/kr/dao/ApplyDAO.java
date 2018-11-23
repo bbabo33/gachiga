@@ -42,7 +42,7 @@ public List<ApplyVO> selectById(String id){
 		StringBuilder sql = new StringBuilder();
 		sql.append(" select a.writer_id as writer_id, a.post_no as post_no, " );
 		sql.append("  a.user_cnt as user_cnt, a.status as status, c.start_place_name as start_place_name ");
-		sql.append(" ,c.start_time as start_time, c.end_place_name as end_place_name, ");
+		sql.append(" ,c.start_time as start_time, c.start_date as start_date, c.end_place_name as end_place_name, ");
 		sql.append(" a.id as id, c.post_type as post_type ");
 		sql.append(" from c_apply a, c_carpool_post c ");
 		sql.append(" where a.post_no = c.no ");
@@ -64,6 +64,7 @@ public List<ApplyVO> selectById(String id){
 				apply.setStatus(rs.getString("status"));
 				apply.setStart_place_name(rs.getString("start_place_name"));
 				apply.setStart_time(rs.getString("start_time"));
+				apply.setStart_date(rs.getString("start_date"));
 				apply.setEnd_place_name(rs.getString("end_place_name"));
 				apply.setType(rs.getString("post_type"));
 				

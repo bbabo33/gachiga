@@ -22,7 +22,7 @@ public class NaverCheckUser_Controller implements Controller{
 		request.setCharacterEncoding("utf-8");
 
 		String token = request.getParameter("token");// 네이버 로그인 접근 토큰;
-		System.out.println("checkusercontrol line 26:" + token);
+		
 		String header = "Bearer " + token; // Bearer 다음에 공백 추가
 
 		try {
@@ -52,7 +52,7 @@ public class NaverCheckUser_Controller implements Controller{
 			JSONObject jsonObj = (JSONObject) json.parse(obj.toString());
 			JSONObject resp = (JSONObject) jsonObj.get("response");
 
-			System.out.println(resp.toJSONString());
+			//System.out.println(resp.toJSONString());
 
 			String YandD = (String) resp.get("birthday");
 			String[] days = YandD.split("-");
@@ -61,21 +61,17 @@ public class NaverCheckUser_Controller implements Controller{
 			MemberDAO dao = new MemberDAO();
 
 			MemberVO NaverUser = dao.selectById((String) resp.get("id"));
-
-			if (NaverUser == null) {
-
+			
+			if (NaverUser == null ) { //로그인 실패 -> 회원가입
 				request.getSession().setAttribute("Nid", resp.get("id"));
 				request.getSession().setAttribute("birthday", birthday);
 				request.getSession().setAttribute("gender", resp.get("gender"));
 				request.getSession().setAttribute("name", resp.get("name"));
 				request.getSession().setAttribute("email", resp.get("email"));
-				System.out.println("checkusercon line 75:naveruserNull");
+				
 				request.setAttribute("value", 1);
 
-			} else {
-				System.out.println("checkusercon line 78:naveruserNotNull");
-				System.out.println("checkusercon line 78:" + NaverUser.toString());
-
+			} else { // 로그인성공
 				request.setAttribute("value", 0);
 				request.getSession().setAttribute("login_result", NaverUser);
 			}

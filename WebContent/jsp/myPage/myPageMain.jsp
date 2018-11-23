@@ -1,18 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
- <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 <link rel="stylesheet" href="/carpool/assets/css/myPageCss.css">
-</head>
-<body>
-	<div class="myProfileArea">
-	<jsp:include page="/jsp/myPage/myPageMenu.jsp"/>
-	<hr style="clear:both;">
-	<h2>마이페이지</h2>
-	
+<div class="myProfileArea">
+	<jsp:include page="/jsp/myPage/myPageMenu.jsp" />
+	<hr style="clear: both;">
+	<h2>내 정보</h2>
+	<table>
+		<tr>
+			<th>이름</th>
+			<td>${login_result.name}</td>
+		</tr>
+		<tr>
+			<th>이메일</th>
+			<td>${login_result.email }</td>
+		</tr>
+		<tr>
+			<th>생일</th>
+			<td>${login_result.birth }</td>
+		</tr>
+		<tr>
+			<th>나이</th>
+			<td>${login_result.age }</td>
+		</tr>
+		<tr>
+			<th>전화번호</th>
+			<td>${login_result.tel }</td>
+		</tr>
+		<tr>
+			<th>주소</th>
+			<td>${login_result.addr }</td>
+		</tr>
+		<tr>
+			<th>회원가입일</th>
+			<td>${login_result.regDate }</td>
+		</tr>
+
+	</table>
+	<div align="center">
+		<input type="button" value="회원정보 수정" id="updateBtn">
 	</div>
-</body>
- </html> 
+</div>

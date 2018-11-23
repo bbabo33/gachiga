@@ -7,7 +7,7 @@
 	var naver_id_login = new naver_id_login("vn1YKe4V6kRs4kKBMhb0",
 			"http://localhost:8888/carpool/login/naver_login.do");
 	var state = naver_id_login.getUniqState();
-	naver_id_login.setButton("white", 2, 40);
+	naver_id_login.setButton("green", 3, 60);
 	naver_id_login.setDomain("http://localhost:8888/carpool");
 	naver_id_login.setState(state);
 	naver_id_login.setPopup();

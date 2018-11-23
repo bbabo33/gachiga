@@ -30,7 +30,7 @@ public class HandlerMapping {
 	}
 	
 	public Controller get_Controller(String uri) {
-		//System.out.println(mappings.size());
+		System.out.println(mappings.size());
 		return mappings.get(uri);		
 	}
 

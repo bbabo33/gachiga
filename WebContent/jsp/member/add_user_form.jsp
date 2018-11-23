@@ -4,28 +4,6 @@
 <link rel="stylesheet" href="/carpool/assets/css/add_user_form.css">
 <script src="/carpool/assets/js/httpRequest.js"></script>
 <script type="text/javascript">
-	if(window.sessionStorage.getItem('token') != null){
-		
-		$.ajax({
-			url : '<%=request.getContextPath()%>/member/naver_check_user.do',
-			type : 'post',
-			data : {
-				'token' : window.sessionStorage.getItem('token')
-			},
-			success : getData,
-			error : function(xhr, ajaxOptions, thrownError) {
-				alert(xhr.status);
-				alert(thrownError);
-			}
-		});
-	}	
-	
-	function getData(data){
-		if( data == 0) { //로그인성공
-			location.href="<%=request.getContextPath()%>";
-		}else { // 로그인실패				
-		}
-	}
 	$(document).ready(function() {
 		var is_idCheck = false;
 		
@@ -162,18 +140,17 @@
 		};
 	});
 </script>
-<hr>
 <div id="add_user_form">
 	<h3>회원가입</h3>
 	<form action="/carpool/member/add_user.do" name="signform"
 		method="post">
 		<div id="id">
 				<c:choose> 
-					<c:when test="${ empty Nid }">				
-						<label for="id">* 아이디 :</label><input type="text" name="id" value="${login_result.id}">&nbsp;&nbsp;
+					<c:when test="${is_naver == 0 }">			
+						<label for="id">* 아이디 :</label><input type="text" name="id" id="id">
 					</c:when>
 					<c:otherwise>
-						<label for="id">* 아이디 :</label><input type="text" name ="id" value = "${Nid}" readonly>&nbsp;&nbsp;
+						<label for="id">* 아이디 :</label><input type="text" name ="id" id="id" value = "${Nid}" readonly>	
 					</c:otherwise>
 				</c:choose>
 			<input type="button" value="중복체크" name="idCheck"><br>
@@ -181,19 +158,19 @@
 		</div>
 		<div id="name">
 			<c:choose> 
-					<c:when test="${empty name }">				
-						<label for="name">* 이름 :</label><input type="text" name="name"><br>
+					<c:when test="${is_naver == 0}">				
+						<label for="name">* 이름 :</label><input type="text" id="name" name="name"><br>
 					</c:when>
 					<c:otherwise>
-						<label for="name">* 이름 :</label><input type="text" name ="name" value = "${name}" readonly><br>
+						<label for="name">* 이름 :</label><input type="text" name ="name" id="name" value = "${name}" readonly><br>
 					</c:otherwise>
 				</c:choose>
 			<span class="error_msg"></span><br>
 		</div>
  		<div id="password">
 				<c:choose> 
-					<c:when test="${empty Nid }">				
-						<label for="password">* 패스워드 :</label><input type="text" name="password"><br>
+					<c:when test="${is_naver == 0 }">				
+						<label for="password">* 패스워드 :</label><input type="text" name="password" id="password"><br>
 					</c:when>
 					<c:otherwise>
 						<input type="hidden" name ="password" value = "${Nid}">
@@ -203,42 +180,41 @@
 		</div>
  		<div id="email">
 				<c:choose> 
-					<c:when test="${empty email }">				
-						<label for="email"> 이메일 :</label><input type="text" name="email" value="${login_result.email }"><br>
+					<c:when test="${is_naver == 0 }">				
+						<label for="email"> 이메일 :</label><input type="text" name="email" value=""><br>
 					</c:when>
 					<c:otherwise>
-						<label for="email"> 이메일 :</label><input type="email" name="email"
-											placeholder="xxx@xxx.com" pattern="{30}@{20}" value="${email }" readonly><br>
+						<label for="email"> 이메일 :</label><input type="email" name="email" placeholder="xxx@xxx.com" value="${email}" readonly><br>
 					</c:otherwise>
 				</c:choose>
 			<span class="error_msg"></span><br>
 		</div>
 		
 		<div>
-			<label for ="age">나이 : </label><input type="text" name ="age" value="${login_result.age }">
+			<label for ="age">나이 : </label><input type="text" name ="age" value="">
 			<br> <span class="error_msg"></span><br>
 		</div>
 		
 		<div id="birth">
 			<c:choose> 
-					<c:when test="${empty birthday }">				
-						<label for="birth"> 생일 :</label><input type="text" name="birth" value="${ login_result.birth}"><br>
+					<c:when test="${is_naver == 0}">				
+						<label for="birth"> 생일 :</label><input type="text" name="birth" value=""><br>
 					</c:when>
 					<c:otherwise>
-						<label for="birth"> 생일 :</label><input type ="text" placeholder =" -없이 4자리를 입력해주세요" name ="birth" value="${birthday}" readonly><br>
+						<label for="birth"> 생일 :</label><input type ="text" placeholder =" -없이 4자리를 입력해주세요" name="birth" value="${birthday}" readonly><br>
 					</c:otherwise>
 			</c:choose>
 			<span class="error_msg"></span><br>
 		</div>
 		
 		<div id="tel">
-			<label for="tel1">전화번호 : </label> <input type="text" name="tel1" placeholder="-없이 입력해주세요" size="11" value="${login_result.tel}">
+			<label for="tel1">전화번호 : </label> <input type="text" name="tel1" placeholder="-없이 입력해주세요" size="11" value="">
 			<br><span class="error_msg"></span><br>
 		</div>
 		
 		<div id="basic_addr">
 			<label for="basic_addr">주소 : </label><input type="text"
-				name="basic_addr" value="${login_result.addr}"><br> <span class="error_msg"></span><br>
+				name="basic_addr" value=""><br> <span class="error_msg"></span><br>
 		</div>
  		<input type="submit" value="회원가입" name="submit">
 	</form>

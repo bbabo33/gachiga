@@ -29,9 +29,7 @@ $(document).ready(function(){
 });
 </script>
 <div align="center">
-	<hr>
 	<h3>상세</h3>
-	<hr>
 	<table style="width: 100%;">
 
 		<c:if test="${ board != null }">

@@ -45,7 +45,6 @@
  	});
 </script>
 <div align="center">
-	<hr>
 	<h3>게시글 수정</h3>
  	<form name="wForm" method="post"
 		action="/carpool/jsp/board/update_board.jsp">

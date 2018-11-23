@@ -15,15 +15,34 @@
 
 /* Modal Content/Box */
 .modal_content {
+	z-index: 2;
 	display: none;
-	position: fixed; /* Stay in place */
-	overflow: auto; /* Enable scroll if needed */
-	background-color: #fefefe;
-	margin: 5% 25%; /* 15% from the top and centered */
+	position: fixed;
+	top: calc(50% - ( 300px/ 2));
+	left: calc(50% - ( 500px/ 2));
+	background-color: #eee;
 	padding: 20px;
 	border: 1px solid #888;
-	height: 30%;
-	width: 40%; /* Could be more or less, depending on screen size */
+	height: 300px;
+	width: 500px; /* Could be more or less, depending on screen size */
+}
+
+.modal_content h1 {
+	color: rgb(3, 207, 93);
+	text-align: center;
+}
+
+.modal_content input[type=submit] {
+	width: 280px;
+	height: 50px;
+}
+
+.modal_content input {
+	width: 270px;
+	height: 30px;
+	font-size: 20px;
+	padding: 5px;
+	margin-bottom:5px;
 }
 
 /* The Close Button */
@@ -33,6 +52,8 @@
 	float: right;
 	font-size: 28px;
 	font-weight: bold;
+	position: absolute;
+	right: 0;
 }
 
 .close:hover, .close:focus {
@@ -42,10 +63,9 @@
 }
 
 .loginBox {
-	margin-top: 4%;
+	margin: 0 auto;
 	width: 280px;
-	height: 90px;
-	float: left;
+	height: auto;
 }
 
 #loginBtn {

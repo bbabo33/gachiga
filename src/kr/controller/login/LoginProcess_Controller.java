@@ -22,16 +22,14 @@ public class LoginProcess_Controller implements Controller{
 		
 		MemberVO login_result = dao.selectForLogin(member);
 		
-		String msg = "";
 		if( login_result != null){
-			msg = login_result.getId() + "님 환영합니다";
+			request.setAttribute("login_name", login_result.getId());
 			
 			HttpSession session = request.getSession();
 			session.setAttribute("login_result", login_result);		
 		} else {
-			msg = "다시 로그인해주세요";
+			request.setAttribute("login_name", 0);
 		}
-		request.setAttribute("msg", msg);
 		
 		return "/jsp/login/loginProcess.jsp";
 	}

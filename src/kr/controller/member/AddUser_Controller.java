@@ -11,6 +11,8 @@ public class AddUser_Controller implements Controller{
 	
 	@Override
 	public String handRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		
 		MemberDAO dao = new MemberDAO();
 		MemberVO user = new MemberVO();
 		
@@ -34,6 +36,7 @@ public class AddUser_Controller implements Controller{
 		
 		int i = dao.insertMember(user);
 		
+		request.getSession().setAttribute("login_result", user);				
 		request.setAttribute("cnt", i);
 		
 		return "/jsp/member/add_user.jsp";

@@ -23,7 +23,6 @@ public class FrontController extends HttpServlet {
 		String uri = request.getRequestURI();
 		String context = request.getContextPath();
 		uri = uri.substring(context.length());
-		
 		try {
 			Controller controller = mapping.get_Controller(uri);
 			String callPage = controller.handRequest(request, response); 
