@@ -22,7 +22,7 @@ public class MyProfileController implements Controller {
 
 		request.setAttribute("member", member);
 
-		return "/jsp/myPage/myProfile.jsp";
+		return "/page/myPage/myProfile.jsp";
 	}
 
 }

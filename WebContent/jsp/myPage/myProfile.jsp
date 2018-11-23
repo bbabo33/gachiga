@@ -5,32 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-li {
-	list-style: none;
-	float: left;
-	margin: 0 10px;
-}
- hr {
-	margin: 10px;
-}
- .myInfo {
-	float: left;
-	margin: 0 10px;
-}
- .myInfo {
-	float: left;
-	margin: 0 10px;
-}
-</style>
+<link rel="stylesheet" href="/carpool/assets/css/myPageCss.css">
 </head>
  <body>
 	<section>
 		<div class="myProfileArea">
 			<jsp:include page="/jsp/myPage/myPageMenu.jsp"/>
 			
-			<hr style="clear: both;">
 			
+			<hr style="clear: both;">
+			<h2>내 정보</h2>
 			<table>
 			<tr>
 				<th>이름</th>

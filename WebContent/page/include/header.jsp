@@ -107,7 +107,7 @@ MemberVO member = (MemberVO)session.getAttribute("member");
 		<c:otherwise>
 			<a>${ login_result.name }님</a>
 			<input class="btn" type="button" name="logout" value="로그아웃">	
-			<a href="<%=request.getContextPath()%>/member/detail_user.jsp?id=${login_result.id}">마이페이지</a>
+			<a href="<%=request.getContextPath()%>/myPage/MyPageMain.do">마이페이지</a>
 		</c:otherwise>
 	</c:choose>
 		<div id="myModal" class="modal">

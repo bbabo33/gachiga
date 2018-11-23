@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 	public String handRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		if (session.getAttribute("login_result") != null) {
- 			return "/jsp/myPage/myPageMain.jsp";
+ 			return "/page/myPage/myPageMain.jsp";
 		}
 		return "redirect:" + request.getContextPath();
 	}

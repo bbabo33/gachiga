@@ -58,4 +58,28 @@ public class CarDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * id를 받아와서 차정보를 삭제시키는 메소드 
+	 * @param id
+	 */
+	public int deleteCar(String id) {
+		StringBuilder sql = new StringBuilder();
+		sql.append("delete from c_car " );
+		sql.append(" where id = ? ");
+		int result = -1;
+		
+		try(
+			Connection conn = new ConnectionFactory().getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+			){
+			pstmt.setString(1, id);
+			result = pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 }

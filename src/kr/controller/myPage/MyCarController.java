@@ -18,7 +18,7 @@ public class MyCarController implements Controller {
 		CarDAO dao = new CarDAO();
 		car = dao.selectByID(user.getId());
 
-		request.setAttribute("car", car);
-		return "/jsp/myPage/myCar.jsp";
+		request.setAttribute("car", car);//리퀘스트 영역에 등록함
+		return "/page/myPage/myCar.jsp";
 	}
 }
