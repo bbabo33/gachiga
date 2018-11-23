@@ -148,7 +148,7 @@ public class ReviewDAO {
 				hugiboard.setContent(rs.getString("content"));
 				hugiboard.setCnt(rs.getInt("cnt"));
 				hugiboard.setRegDate(rs.getString("reg_date"));
-*/
+
 				int no = rs.getInt("board_no");
 				String title = rs.getString("title");
 				String id = rs.getString("id");
@@ -158,6 +158,7 @@ public class ReviewDAO {
 				//System.out.println(no +  " : dao");
 				hugiboard = new BoardVO(no, title, id, content, cnt, regDate);
 				//System.out.println(hugiboard + "dao ");
+*/
 			}
 
 		} catch (Exception e) {

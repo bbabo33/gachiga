@@ -10,6 +10,7 @@ import kr.util.ConnectionFactory;
 import kr.util.JDBCClose;
 import kr.vo.BoardFileVO;
 import kr.vo.BoardVO;
+import kr.vo.CommentVO;
 
 /**
  * 게시판(t_board)를 CRUD하는 기능클래스
@@ -120,12 +121,12 @@ public class BoardDAO {
 	/**
 	 * 게시판 번호로 조회하는 기능
 	 */
-	public BoardVO selectByNo(int board) {
+	public BoardVO selectByNo(int boardNo) {
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		BoardVO hugiboard = null;
-
+		BoardVO board = null;
+		
 		try {
 			conn = new ConnectionFactory().getConnection();
 			StringBuilder sql = new StringBuilder();
@@ -136,35 +137,33 @@ public class BoardDAO {
 			pstmt = conn.prepareStatement(sql.toString());
 			
 			int loc = 1;
-			pstmt.setInt(loc++, board);
+			pstmt.setInt(loc++, boardNo);
 			
 			ResultSet rs = pstmt.executeQuery();
 			
 			if (rs.next()) {
-
-/*				hugiboard.setBoard_no(rs.getInt("board_no"));
-				hugiboard.setTitle(rs.getString("Title"));
-				hugiboard.setId(rs.getString("id"));
-				hugiboard.setContent(rs.getString("content"));
-				hugiboard.setCnt(rs.getInt("cnt"));
-				hugiboard.setRegDate(rs.getString("reg_date"));
-*/
-				int no = rs.getInt("board_no");
-				String title = rs.getString("title");
-				String id = rs.getString("id");
-				String content = rs.getString("content");
-				int cnt = rs.getInt("cnt");
-				String regDate = rs.getString("reg_date");
-				//System.out.println(no +  " : dao");
-				hugiboard = new BoardVO(no, title, id, content, cnt, regDate);
-				//System.out.println(hugiboard + "dao ");
+				
+				board =new BoardVO();
+				int board_no = rs.getInt("board_no");	//게시글 번호
+				String title = rs.getString("title");	//게시글 제목
+				String id = rs.getString("id");			//게시글 작성자
+				String content = rs.getString("content");	//게시글 내용
+				int cnt = rs.getInt("cnt");				//게시글 조회수
+				String regDate = rs.getString("reg_date");	//게시글 작성일
+				
+				board.setBoard_no(board_no);
+				board.setTitle(title);
+				board.setId(id);
+				board.setContent(content);
+				board.setCnt(cnt);
+				board.setRegDate(regDate);
+				System.out.println(board.toString()+":dao line 160");
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		return hugiboard;
+		return board;
 	}
 
 	/**
@@ -188,14 +187,15 @@ public class BoardDAO {
 			int loc = 1;
 			pstmt = conn.prepareStatement(sql.toString());
 		
+			
 			pstmt.setString(loc++, board.getTitle());
 			pstmt.setString(loc++, board.getContent());
 			pstmt.setInt(loc++, board.getBoard_no());
 			
-			System.out.println(pstmt + " : dao");
-
+			System.out.println(pstmt + " : dao line195");
+			
 			result = pstmt.executeUpdate();
-
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
@@ -342,4 +342,114 @@ public class BoardDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}*/
+	
+	public int cntAllRows() {
+		
+		String sql="select count(*) as count from c_board";
+		int cntRows=0;
+		
+		try(
+			Connection conn=new ConnectionFactory().getConnection();
+			PreparedStatement pstmt=conn.prepareStatement(sql);	
+		){
+			ResultSet rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				cntRows = rs.getInt("count");
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return cntRows;
+	}
+	
+	public List<BoardVO> getPage(int pageNo) {
+		
+		List<BoardVO> boardList=new ArrayList<>();
+		
+		StringBuilder sql=new StringBuilder();
+		sql.append(" select *  ");
+		sql.append(" from ( select rowNum as rnum, c.* ");
+		sql.append(" from ( select * from c_board order by board_no desc) c ) ");
+		sql.append(" where rnum between ? and ? ");
+		
+		try(
+			Connection conn=new ConnectionFactory().getConnection();
+			PreparedStatement pstmt=conn.prepareStatement(sql.toString());	
+		){
+			pstmt.setInt(1, (pageNo*5)-4);
+			pstmt.setInt(2, pageNo*5);
+			ResultSet rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				BoardVO board=new BoardVO();
+				board.setBoard_no(rs.getInt("board_no"));
+				board.setTitle(rs.getString("title"));
+				board.setId(rs.getString("id"));
+				board.setContent(rs.getString("content"));
+				board.setCnt(rs.getInt("cnt"));
+				board.setRegDate(rs.getString("reg_date"));
+				//System.out.println(board.toString()); //board객체확인 Ok 
+				boardList.add(board);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return boardList;
+	}
+	
+	public int insertComment(CommentVO comment) {
+		
+		int commentResult = 0;
+		
+		StringBuffer sql = new StringBuffer();
+		sql.append(" insert into c_comment(no,writer_id,post_no,content) ");
+		sql.append(" values (seq_c_comment_no.nextval, ?,?,?) ");
+		
+		try(
+				Connection conn=new ConnectionFactory().getConnection();
+				PreparedStatement pstmt=conn.prepareStatement(sql.toString());	
+			){
+			int i=1;
+			pstmt.setString(i++, comment.getWriter());
+			pstmt.setInt(i++, comment.getPost_no());
+			pstmt.setString(i++, comment.getContent());
+			commentResult = pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return commentResult;
+	}
+	
+	public List<CommentVO> selectAllComment() {
+		List<CommentVO> comments =new ArrayList<>();
+		
+		StringBuffer sql = new StringBuffer();
+		sql.append(" select * ");
+		sql.append(" from c_comment ");
+		CommentVO CVO = null;
+		
+		try(
+				Connection conn=new ConnectionFactory().getConnection();
+				PreparedStatement pstmt=conn.prepareStatement(sql.toString());	
+			){
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				CVO = new CommentVO();
+				CVO.setNo(rs.getInt("no"));
+				CVO.setWriter(rs.getString("writer_id"));
+				CVO.setPost_no(rs.getInt("post_no"));
+				CVO.setContent(rs.getString("content"));
+				CVO.setRegDate(rs.getString("reg_date"));
+				comments.add(CVO);
+				System.out.println(CVO.toString());
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return comments;
+	}
 }

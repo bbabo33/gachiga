@@ -25,6 +25,6 @@ public class AddComment_Controller implements Controller {
 		request.setAttribute("no", post_no); // 다시 디테일보드로 돌아가기 위해 지정*/
 		request.setAttribute("commentResult", commentResult);
 
-		return "/board/detail_board_commentResult.jsp";
+		return "/jsp/board/detail_board_commentResult.jsp";
 	}
 }

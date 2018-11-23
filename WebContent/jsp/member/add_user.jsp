@@ -4,7 +4,8 @@
 <%@page import="java.sql.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
+	${ cnt }
+<%-- <%
 	request.setCharacterEncoding("utf-8");
 
 	MemberVO member = new MemberVO();
@@ -38,4 +39,4 @@
 	alert("회원가입 실패");
 <%}%>
 	location.href = "/carpool/page/member/list_user.jsp";
-</script>
+</script> --%>

@@ -8,11 +8,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script>
 	$(document).ready(function() {
-		<c:if test="${ empty member }">
+		<c:if test="${ empty login_result }">
 		alert("로그인하세요");
 		history.back(1);
 		</c:if>
 	});
+
 </script>
 </head>
 <body>
@@ -21,7 +22,7 @@
 	</header>
 	<section>
 		<jsp:include page="/jsp/board/update_board_form.jsp">
-			<jsp:param name="no" value="${no}" />
+			<jsp:param name="no" value="${no}"/>
 		</jsp:include>
 	</section>
 	<footer>

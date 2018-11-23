@@ -1,12 +1,10 @@
 package kr.vo;
 
 public class BoardVO {
-	private int no;
+	
 	private int board_no;
 	private String title;
-	private String writer;
 	private String content;
-	private int viewCnt;
 	private String id;
 	private int cnt;
 	private String regDate;
@@ -15,27 +13,19 @@ public class BoardVO {
 		super();
 	}
 
-	public BoardVO(int no, int board_no, String title, String writer, String content, int viewCnt, String id, int cnt, String regDate) {
-		super();
-		this.no = no;
+	public BoardVO(int board_no, String title, String content, String id, int cnt, String regDate) {
+
 		this.board_no = board_no;
 		this.title = title;
-		this.writer = writer;
+		
 		this.content = content;
-		this.viewCnt = viewCnt;
+		
 		this.id = id;
 		this.cnt = cnt;
 		this.regDate = regDate;
 	}
 
-	public int getNo() {
-		return no;
-	}
-
-	public void setNo(int no) {
-		this.no = no;
-	}
-
+	
 	public int getBoard_no() {
 		return board_no;
 	}
@@ -52,28 +42,12 @@ public class BoardVO {
 		this.title = title;
 	}
 
-	public String getWriter() {
-		return writer;
-	}
-
-	public void setWriter(String writer) {
-		this.writer = writer;
-	}
-
 	public String getContent() {
 		return content;
 	}
 
 	public void setContent(String content) {
 		this.content = content;
-	}
-
-	public int getViewCnt() {
-		return viewCnt;
-	}
-
-	public void setViewCnt(int viewCnt) {
-		this.viewCnt = viewCnt;
 	}
 
 	public String getId() {
@@ -99,5 +73,13 @@ public class BoardVO {
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
+
+	@Override
+	public String toString() {
+		return "BoardVO [board_no=" + board_no + ", title=" + title + ", content="
+				+ content + ", id=" + id + ", cnt=" + cnt + ", regDate=" + regDate + "]";
+	}
+	
+	
 
 }
