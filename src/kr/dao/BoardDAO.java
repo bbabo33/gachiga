@@ -426,8 +426,9 @@ public class BoardDAO {
 		List<CommentVO> comments =new ArrayList<>();
 		
 		StringBuffer sql = new StringBuffer();
-		sql.append(" select * ");
+		sql.append(" select no, writer_id, post_no, content, to_char(reg_date,'yyyy-MM-dd') as regDate ");
 		sql.append(" from c_comment ");
+		sql.append(" order by reg_date desc ");
 		CommentVO CVO = null;
 		
 		try(
@@ -442,7 +443,7 @@ public class BoardDAO {
 				CVO.setWriter(rs.getString("writer_id"));
 				CVO.setPost_no(rs.getInt("post_no"));
 				CVO.setContent(rs.getString("content"));
-				CVO.setRegDate(rs.getString("reg_date"));
+				CVO.setRegDate(rs.getString("regDate"));
 				comments.add(CVO);
 				System.out.println(CVO.toString());
 			}
@@ -451,5 +452,54 @@ public class BoardDAO {
 			e.printStackTrace();
 		}
 		return comments;
+	}
+	
+	public List<BoardVO> searchBoard(String category, String word){
+		
+		List<BoardVO> searchedList = null;
+		BoardVO searchedBoard =null;
+		StringBuffer sql = new StringBuffer();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		//num rname
+		
+		try{
+			conn = new ConnectionFactory().getConnection();
+			
+			if(category.equals("rname")) {
+				sql.append(" select board_no, title, id, reg_date from c_board ");
+				sql.append(" where id = ? ");
+				sql.append(" order by board_no asc ");
+				
+				pstmt = conn.prepareStatement(sql.toString());
+				pstmt.setString(1, word);
+			}
+		
+			System.out.println("dao 483:"+category+","+word);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				searchedList = new ArrayList<>();
+			}
+			while(rs.next()) {
+				searchedBoard = new BoardVO();
+				searchedBoard.setBoard_no(rs.getInt("board_no"));
+				searchedBoard.setTitle(rs.getString("title"));
+				searchedBoard.setContent(rs.getString("reg_date"));
+				searchedBoard.setId(rs.getString("id"));
+				searchedList.add(searchedBoard);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			}catch(Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return searchedList;
 	}
 }

@@ -43,7 +43,7 @@ $(document).ready(function(){
 </script>
 <div align="center">
 	<hr>
-	<h3>상세2</h3>
+	<h3>상세 내용</h3>
 	<hr>
 	<table style="width: 100%;">
 
@@ -76,9 +76,37 @@ $(document).ready(function(){
 			
 		</c:if>
 	</table>
+	
  	<c:if test="${ login_result.id == board.id  }">
 		<input class="btn" type="button" name="edit_board" value="수정"> 
 		<input class="btn" type="button" name="delete_board" value="삭제">
 	</c:if>
-	<input class="btn" type="button" name="post_list" value="목록">
+	<hr width="100%">
+	<input class="btn" type="button" name="post_list" value="목록"><br><br>
+	<div id="div_comment">Comment</div>	
+			<c:if test="${ ! empty login_result }">
+				<jsp:include page="/page/include/board_Comment.jsp"/>
+			</c:if>
+	
+	<table class="commentBox">
+		<tr>
+			<th>작성자</th>
+			<th>내용</th>
+			<th>등록일</th>
+		</tr>
+		<c:forEach var="cl" items="${commentList }">
+		<tr>
+			<td>				
+				${cl.writer }
+			</td>
+			<td>
+				${cl.content }
+			</td>
+			<td>
+				${cl.regDate }
+			</td>
+		</tr>		
+		</c:forEach>
+	</table>	
+	<br>
 </div>
