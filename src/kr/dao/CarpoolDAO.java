@@ -13,6 +13,47 @@ import kr.vo.CarpoolVO;
 
 public class CarpoolDAO {
 	
+	/**
+	 * 최신글 5개 반환하는 메소드
+	 * @param postNo
+	 * @param cnt
+	 */
+	
+	public List<CarpoolVO> selectFive(){
+		  Connection conn = null;
+	      PreparedStatement pstmt = null;
+	      List<CarpoolVO> newList = new ArrayList<>();
+	      try {
+	         conn = new ConnectionFactory().getConnection();
+	         StringBuilder sql = new StringBuilder();
+	         sql.append(" select * from ( ");
+	         sql.append(" select rownum as rnum, c.* from ( ");
+	         sql.append(" select writer_id, start_place_name, end_place_name, post_type , user_cnt, start_time ");
+	         sql.append(" from ( select * from c_carpool_post order by reg_date desc) ");
+	         sql.append(" ) c ");
+	         sql.append(" )where rnum between 1 and 5 ");
+	          pstmt = conn.prepareStatement(sql.toString());
+	          ResultSet rs = pstmt.executeQuery();
+	          while (rs.next()) {
+	            CarpoolVO carpool = new CarpoolVO();
+	             carpool.setWriter_id(rs.getString("writer_id"));
+	             carpool.setStart_place_name(rs.getString("start_place_name"));
+	             carpool.setEnd_place_name(rs.getString("end_place_name"));
+	             carpool.setPost_type(rs.getString("post_type"));
+	             carpool.setUser_cnt(rs.getInt("user_cnt"));
+	             carpool.setStart_time(rs.getString("start_time"));
+
+	             newList.add(carpool);
+	         }
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         JDBCClose.close(pstmt, conn);
+	      }
+	      return newList;
+
+	}
+	
 	// 예약자수 증가/감소
 	public void CountApply(int postNo, int cnt) {
 		StringBuilder sql = new StringBuilder();

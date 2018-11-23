@@ -3,6 +3,7 @@ package kr.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -256,6 +257,43 @@ public class ReviewDAO {
 			e.printStackTrace();
 		}
 		return result;
+
+	}
+	
+	/**
+	 * 최신 게시물 5개를 반환하는 메소드
+	 */
+
+	public List<BoardVO> selectFive(){
+		  Connection conn = null;
+	      PreparedStatement pstmt = null;
+	      List<BoardVO> newList = new ArrayList<>();
+	      try {
+	         conn = new ConnectionFactory().getConnection();
+	         StringBuilder sql = new StringBuilder();
+	         sql.append(" select * from ( ");
+	         sql.append(" select rownum as rnum, c.* from ( ");
+	         sql.append(" select board_no , title, id, reg_date ");
+	         sql.append(" from ( select * from c_review_board order by reg_date desc) ");
+	         sql.append(" ) c ");
+	         sql.append(" )where rnum between 1 and 5 ");
+	          pstmt = conn.prepareStatement(sql.toString());
+	          ResultSet rs = pstmt.executeQuery();
+	          while (rs.next()) {
+	        	  BoardVO board = new BoardVO();
+	        	  board.setBoard_no(rs.getInt("board_no"));
+	        	  board.setTitle(rs.getString("title"));
+	        	  board.setId(rs.getString("id"));
+	        	  board.setRegDate(rs.getString("reg_date"));
+
+	             newList.add(board);
+	         }
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         JDBCClose.close(pstmt, conn);
+	      }
+	      return newList;
 
 	}
 
