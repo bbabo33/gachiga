@@ -1,39 +1,16 @@
 package kr.vo;
 
 public class BoardVO {
-	private int no;
 	private int board_no;
 	private String title;
-	private String writer;
-	private String content;
-	private int viewCnt;
 	private String id;
+	private String content;
 	private int cnt;
 	private String regDate;
-
+	
 	public BoardVO() {
 		super();
-	}
-
-	public BoardVO(int no, int board_no, String title, String writer, String content, int viewCnt, String id, int cnt, String regDate) {
-		super();
-		this.no = no;
-		this.board_no = board_no;
-		this.title = title;
-		this.writer = writer;
-		this.content = content;
-		this.viewCnt = viewCnt;
-		this.id = id;
-		this.cnt = cnt;
-		this.regDate = regDate;
-	}
-
-	public int getNo() {
-		return no;
-	}
-
-	public void setNo(int no) {
-		this.no = no;
+		// TODO Auto-generated constructor stub
 	}
 
 	public int getBoard_no() {
@@ -52,12 +29,12 @@ public class BoardVO {
 		this.title = title;
 	}
 
-	public String getWriter() {
-		return writer;
+	public String getId() {
+		return id;
 	}
 
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getContent() {
@@ -66,22 +43,6 @@ public class BoardVO {
 
 	public void setContent(String content) {
 		this.content = content;
-	}
-
-	public int getViewCnt() {
-		return viewCnt;
-	}
-
-	public void setViewCnt(int viewCnt) {
-		this.viewCnt = viewCnt;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	public int getCnt() {
@@ -100,4 +61,27 @@ public class BoardVO {
 		this.regDate = regDate;
 	}
 
+	public BoardVO(int board_no, String title, String id, String content, int cnt, String regDate) {
+		super();
+		this.board_no = board_no;
+		this.title = title;
+		this.id = id;
+		this.content = content;
+		this.cnt = cnt;
+		this.regDate = regDate;
+	}
+
+	@Override
+	public String toString() {
+		return "BoardVO [board_no=" + board_no + ", title=" + title + ", id=" + id + ", content=" + content + ", cnt="
+				+ cnt + ", regDate=" + regDate + "]";
+	}
+
+	
+	
+	
+	
+	
+	
+	
 }

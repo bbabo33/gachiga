@@ -7,25 +7,23 @@
 	/* BoardDAO dao = new BoardDAO();
 	pageContext.setAttribute("boardList", dao.selectBoardList(1, 5)); */
 %>
-<div id="container">
-	<h3>최신글목록</h3>
-
-	<table class="list_table">
-		<tr>
-			<th width="7%">번호</th>
-			<th>제목</th>
-			<th width="20%">등록일</th>
-			<th width="16%">글쓴이</th>
-		</tr>
-		<c:forEach items="${boardList}" var="board">
-			<tr>
-				<td>${board.no }</td>
-				<td><a href="javascript:go_detail('${board.no }', '${ not empty login_result }')">
-				${board.title }</a></td>
-				<td>${board.writer }</td>
-				<td>${board.regDate }</td>
-			</tr>
-		</c:forEach>
-
-	</table>
+<div style="float: left; width: 20%;" align="center" id="logo">
+	<img src="/carpool/assets/images/carpool1.jpg"> 
+	<br>1. 출발지와 목적지가 비슷한 운전자 또는 승객을 고릅니다.
+</div> 
+<div style="float: left; width: 20%;" align="center" id="logo">
+	<img src="/carpool/assets/images/carpool2.png">
+	<br>2. 운전자 또는 승객을 고르면 서로 연락을 해서 약속을 합니다.
+</div>
+<div style="float: left; width: 20%;" align="center" id="logo">
+	<img src="/carpool/assets/images/carpool3.jpg">
+	<br>3. 만나서 상대방을 확인합니다.
+</div>
+<div style="float: left; width: 20%;" align="center" id="logo">
+	<img src="/carpool/assets/images/carpool4.jpg">
+	<br>4. 목적지로 출발합니다.
+</div> 
+<div style="float: left; width: 20%;" align="center" id="logo">
+	<img src="/carpool/assets/images/carpool5.png">
+	<br>5. 승객은 운전자에게 사전에 협의한 금액을 지불합니다.
 </div>

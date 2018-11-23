@@ -24,12 +24,12 @@ public class LoginProcess_Controller implements Controller{
 		
 		String msg = "";
 		if( login_result != null){
-			msg = login_result.getId() + "ë‹˜ í™˜ì˜í•©ë‹ˆë‹¤";
+			msg = login_result.getId() + "´Ô È¯¿µÇÕ´Ï´Ù";
 			
 			HttpSession session = request.getSession();
 			session.setAttribute("login_result", login_result);		
 		} else {
-			msg = "ë‹¤ì‹œ ë¡œê·¸ì¸í•´ì£¼ì„¸ìš”";
+			msg = "´Ù½Ã ·Î±×ÀÎÇÏ¼¼¿ä";
 		}
 		request.setAttribute("msg", msg);
 		

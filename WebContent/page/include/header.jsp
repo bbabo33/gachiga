@@ -79,7 +79,7 @@ MemberVO member = (MemberVO)session.getAttribute("member");
 </script>
 <div id="header_content">
 	<a id="main_link" href="/carpool"> 
-		<img alt="google_logo" src="/carpool/assets/images/logo.png">
+			<img alt="google_logo" src="/carpool/assets/images/GCG_logo.png" >
 	</a>
 	<nav id="gnb">
 		<ul>
@@ -96,7 +96,7 @@ MemberVO member = (MemberVO)session.getAttribute("member");
 	<c:choose>
 		<c:when test="${ empty login_result }">
 		<%-- <form name="login_form" action="<%=request.getContextPath()%>/login/login.do" method="POST">
-			<input class="login" type="text" name="login_id" placeholder="Id">
+			<input class="login" type="text" na+me="login_id" placeholder="Id">
 			<input class="login" type="password" name="login_password" placeholder="Password">
 	
 			<input type="submit" class="btn" value="로그인">
