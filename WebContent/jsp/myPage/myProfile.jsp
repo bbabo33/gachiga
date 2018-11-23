@@ -6,6 +6,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/carpool/assets/css/myPageCss.css">
+<script>
+	$(document).ready(function(){
+		$('#updateBtn').click(function(){
+			location.href="<%= request.getContextPath()%>/member/UpdateMForm.do";
+		});
+	});
+</script>
 </head>
  <body>
 	<section>
@@ -47,6 +54,13 @@
 		
 		
 		</table>
+		<br>
+		<br>
+		<div align="center">
+		<input type="button" value="회원정보 수정" id="updateBtn">
+		</div>
+		<br>
+		<br>
 		</div>
 		</section>
 			

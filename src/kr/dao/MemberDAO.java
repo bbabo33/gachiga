@@ -201,7 +201,7 @@ public class MemberDAO {
 			conn = new ConnectionFactory().getConnection();
 			StringBuilder sql = new StringBuilder();
 
-			sql.append(" delete from t_member ");
+			sql.append(" delete from c_member ");
 			sql.append(" where id = ? ");
 
 			pstmt = conn.prepareStatement(sql.toString());
@@ -213,5 +213,31 @@ public class MemberDAO {
 		}
 		
 		return result;
+	}
+	
+	public int updateUser(MemberVO member) {
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append(" update c_member ");
+		sql.append(" set age=? , tel=?, addr=?, birth=? ");
+		sql.append(" where id = ? ");
+		int result = -1;
+		try(
+				Connection conn = new ConnectionFactory().getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+		){
+			pstmt.setInt(1, member.getAge());
+			pstmt.setString(2, member.getTel());
+			pstmt.setString(3, member.getAddr());
+			pstmt.setString(4, member.getBirth());
+			pstmt.setString(5, member.getId());
+			
+			result =  pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+		
 	}
 }
