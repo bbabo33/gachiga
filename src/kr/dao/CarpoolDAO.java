@@ -9,8 +9,6 @@ import java.util.List;
 
 import kr.util.ConnectionFactory;
 import kr.util.JDBCClose;
-import kr.vo.ApplyVO;
-import kr.vo.BoardVO;
 import kr.vo.CarpoolVO;
 
 public class CarpoolDAO {
@@ -115,6 +113,99 @@ public class CarpoolDAO {
 			JDBCClose.close(pstmt, conn);
 		}
 
+		return carpoolList;
+	}
+	
+	/**
+	 * id로 적은 카풀글의 글번호를 배열에 넣어 리턴해주는 메소드
+	 * @param id
+	 * @return
+	 */
+	public List<Integer> selectBoardNO(String id) {
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append(" select no ");
+		sql.append(" from c_carpool_post ");
+		sql.append(" where writer_id = ? ");
+		List<Integer> list = new ArrayList<>();
+		try(
+				Connection conn = new ConnectionFactory().getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+		){
+			pstmt.setString(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				list.add(rs.getInt("no"));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	/**
+	 * id로 적은 카풀 내용을 반환하는 메소드 
+	 * @param id
+	 * @return
+	 */
+	public List<CarpoolVO> selectById(String id){
+		
+		List<CarpoolVO> carpoolList = new ArrayList<>();
+		
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append(" select no, start_date, start_place, start_time, end_place, money, user_cnt, post_type, add_info, reg_date, smoke, start_place_name, end_place_name, apply_cnt ");
+		sql.append(" from c_carpool_post ");
+		sql.append(" where writer_id = ? ");
+		
+		try(
+			Connection conn = new ConnectionFactory().getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+		){
+			pstmt.setString(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				int no = rs.getInt("no");
+				String startDate = rs.getString("start_date");
+				String startPlace = rs.getString("start_place");
+				String startTime = rs.getString("start_time");
+				String endPlace = rs.getString("end_place");
+				int money = rs.getInt("money");
+				int userCnt = rs.getInt("user_cnt");
+				String postType = rs.getString("post_type");
+				String addInfo = rs.getString("add_info");
+				String regDate = rs.getString("reg_date");
+				String smoke = rs.getString("smoke");
+				String startPlaceName = rs.getString("start_place_name");
+				String endPlaceName = rs.getString("end_place_name");
+				int applyCnt = rs.getInt("apply_cnt");
+				
+				CarpoolVO carpool = new CarpoolVO();
+				carpool.setNo(no);
+				carpool.setStart_date(startDate);
+				carpool.setStart_place(startPlace);
+				carpool.setStart_time(startTime);
+				carpool.setEnd_place(endPlace);
+				carpool.setMoney(money);
+				carpool.setUser_cnt(userCnt);
+				carpool.setPost_type(postType);
+				carpool.setAdd_info(addInfo);
+				carpool.setReg_date(regDate);
+				carpool.setSmoke(smoke);
+				carpool.setStart_place_name(startPlaceName);
+				carpool.setEnd_place_name(endPlaceName);
+				carpool.setWriter_id(id);
+				carpool.setApply_cnt(applyCnt);
+				
+				carpoolList.add(carpool);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 		return carpoolList;
 	}
 
