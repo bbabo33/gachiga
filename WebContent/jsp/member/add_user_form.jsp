@@ -139,62 +139,82 @@
 	<h3>회원가입</h3>
 	<form action="/carpool/member/add_user.do" name="signform"
 		method="post">
-		<div id="id">
-				<c:choose> 
-					<c:when test="${is_naver == 0 }">			
-						<label for="id">* 아이디 :</label><input type="text" name="id" id="id">
-					</c:when>
-					<c:otherwise>
-						<label for="id">* 아이디 :</label><input type="text" name ="id" id="id" value = "${Nid}" readonly>	
-					</c:otherwise>
-				</c:choose>
-			<input type="button" value="중복체크" name="idCheck"><br>
-			<span class="error_msg"></span><br>
-		</div>
-		<div id="name">
-			<c:choose> 
-					<c:when test="${is_naver == 0}">				
-						<label for="name">* 이름 :</label><input type="text" id="name" name="name"><br>
-					</c:when>
-					<c:otherwise>
-						<label for="name">* 이름 :</label><input type="text" name ="name" id="name" value = "${name}" readonly><br>
-					</c:otherwise>
-				</c:choose>
-			<span class="error_msg"></span><br>
-		</div>
- 		<div id="password">
-				<c:choose> 
-					<c:when test="${is_naver == 0 }">				
-						<label for="password">* 패스워드 :</label><input type="text" name="password" id="password"><br>
-					</c:when>
-					<c:otherwise>
-						<input type="hidden" name ="password" value = "${Nid}">
-					</c:otherwise>
-				</c:choose>
-			 <span class="error_msg"></span>
-		</div>
+		<fieldset>
+		<ol>
+			<li>
+				<div id="id">
+						<c:choose> 
+							<c:when test="${is_naver == 0 }">			
+								<label for="id">* 아이디 :</label><input type="text" name="id" id="id">
+							</c:when>
+							<c:otherwise>
+								<label for="id">* 아이디 :</label><input type="text" name ="id" id="id" value = "${Nid}" readonly>	
+							</c:otherwise>
+						</c:choose>
+					<input type="button" value="중복체크" name="idCheck"><br>
+					<span class="error_msg"></span><br>
+				</div>
+			</li>
 		
-		<div id="tel1">
-			<label for="tel1">* 전화번호 : </label> <input type="text" name="tel1" placeholder="-없이 입력해주세요" size="11" value="">
-			<br><span class="error_msg"></span><br>
-		</div>
-		
- 		<div id="email">
+		<li>	
+			<div id="name">
 				<c:choose> 
-					<c:when test="${is_naver == 0 }">				
-						<label for="email"> 이메일 :</label><input type="text" name="email" value=""><br>
-					</c:when>
-					<c:otherwise>
-						<label for="email"> 이메일 :</label><input type="email" name="email" placeholder="xxx@xxx.com" value="${email}" readonly><br>
-					</c:otherwise>
-				</c:choose>
-			<span class="error_msg"></span><br>
-		</div>
+						<c:when test="${is_naver == 0}">				
+							<label for="name">* 이름 :</label><input type="text" id="name" name="name"><br>
+						</c:when>
+						<c:otherwise>
+							<label for="name">* 이름 :</label><input type="text" name ="name" id="name" value = "${name}" readonly><br>
+						</c:otherwise>
+					</c:choose>
+				<span class="error_msg"></span><br>
+			</div>
+		</li>
 		
-		<div id="basic_addr">
-			<label for="basic_addr">주소 : </label><input type="text"
-				name="basic_addr" value=""><br> <span class="error_msg"></span><br>
-		</div>
- 		<input type="submit" value="회원가입" name="submit">
+		<li>
+ 			<div id="password">
+					<c:choose> 
+						<c:when test="${is_naver == 0 }">				
+							<label for="password">* 패스워드 :</label><input type="text" name="password" id="password"><br>
+						</c:when>
+						<c:otherwise>
+							<label for="password">* 패스워드 :</label><input type="password" name ="password" value = "${Nid}">
+						</c:otherwise>
+					</c:choose>
+				 <span class="error_msg"></span>
+			</div>
+		</li>
+		
+		<li>
+			<div id="tel1">
+				<label for="tel1">* 전화번호 : </label> <input type="text" name="tel1" placeholder="-없이 입력해주세요" size="11" value="">
+				<br><span class="error_msg"></span><br>
+			</div>
+		</li>
+		
+		<li>
+ 			<div id="email">
+					<c:choose> 
+						<c:when test="${is_naver == 0 }">				
+							<label for="email"> 이메일 :</label><input type="text" name="email" value=""><br>
+						</c:when>
+						<c:otherwise>
+							<label for="email"> 이메일 :</label><input type="email" name="email" placeholder="xxx@xxx.com" value="${email}" readonly><br>
+						</c:otherwise>
+					</c:choose>
+				<span class="error_msg"></span><br>
+			</div>
+		</li>
+		
+		<li>
+			<div id="basic_addr">
+				<label for="basic_addr">주소 : </label><input type="text"
+					name="basic_addr" value=""><br> <span class="error_msg"></span><br>
+			</div>
+		</li>
+		</ol>
+		</fieldset>
+		<fieldset>	
+ 			<input type="submit" value="회원가입" name="submit">
+		</fieldset>
 	</form>
 </div>
