@@ -24,7 +24,7 @@ public class LoginProcess_Controller implements Controller{
 		
 		if( login_result != null){
 			request.setAttribute("login_name", login_result.getId());
-			
+
 			HttpSession session = request.getSession();
 			session.setAttribute("login_result", login_result);		
 		} else {

@@ -14,14 +14,14 @@ import kr.vo.BoardVO;
 import kr.vo.CarpoolVO;
 
 /**
- * 게시판(t_board)를 CRUD하는 기능클래스
+ * 寃뚯떆�뙋(t_board)瑜� CRUD�븯�뒗 湲곕뒫�겢�옒�뒪
  * 
  * @author acorn
  *
  */
 public class BoardDAO {
 	/**
-	 * 조회기능
+	 * 議고쉶湲곕뒫
 	 */
 	public List<BoardVO> selectAllBoard() {
 
@@ -67,7 +67,7 @@ public class BoardDAO {
 	}
 
 	/**
-	 * 게시물 삽입을 위한 시퀀시번호 추출(seq_t_board_no)
+	 * 寃뚯떆臾� �궫�엯�쓣 �쐞�븳 �떆���떆踰덊샇 異붿텧(seq_t_board_no)
 	 */
 
 	public int selectNo() {
@@ -87,7 +87,7 @@ public class BoardDAO {
 	}
 
 	/**
-	 * 게시글 삽입하는 기능
+	 * 寃뚯떆湲� �궫�엯�븯�뒗 湲곕뒫
 	 * @return 
 	 */
 	public int insertBoard(BoardVO board) {
@@ -120,13 +120,13 @@ public class BoardDAO {
 	}
 
 	/**
-	 * 게시판 번호로 조회하는 기능
+	 * 寃뚯떆�뙋 踰덊샇濡� 議고쉶�븯�뒗 湲곕뒫
 	 */
 	public BoardVO selectByNo(int board) {
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		BoardVO hugiboard = null;
+		BoardVO freeboard = null;
 
 		try {
 			conn = new ConnectionFactory().getConnection();
@@ -144,33 +144,32 @@ public class BoardDAO {
 			
 			if (rs.next()) {
 
-/*				hugiboard.setBoard_no(rs.getInt("board_no"));
-				hugiboard.setTitle(rs.getString("Title"));
-				hugiboard.setId(rs.getString("id"));
-				hugiboard.setContent(rs.getString("content"));
-				hugiboard.setCnt(rs.getInt("cnt"));
-				hugiboard.setRegDate(rs.getString("reg_date"));
+/*				freeboard.setBoard_no(rs.getInt("board_no"));
+				freeboard.setTitle(rs.getString("Title"));
+				freeboard.setId(rs.getString("id"));
+				freeboard.setContent(rs.getString("content"));
+				freeboard.setCnt(rs.getInt("cnt"));
+				freeboard.setRegDate(rs.getString("reg_date"));
 */
-				int no = rs.getInt("board_no");
+				int board_no = rs.getInt("board_no");
 				String title = rs.getString("title");
 				String id = rs.getString("id");
 				String content = rs.getString("content");
 				int cnt = rs.getInt("cnt");
 				String regDate = rs.getString("reg_date");
-				//System.out.println(no +  " : dao");
-				hugiboard = new BoardVO(no, cnt, title, id, content, cnt, regDate, cnt, regDate);
-				//System.out.println(hugiboard + "dao ");
+				
+				freeboard = new BoardVO(board_no, title, id, content, cnt, regDate);
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return hugiboard;
+		return freeboard;
 	}
 
 	/**
-	 * 게시물 수정하는 기능
+	 * 寃뚯떆臾� �닔�젙�븯�뒗 湲곕뒫
 	 */
 	public int updateBoard(BoardVO board) {
 		Connection conn = null;
@@ -205,11 +204,11 @@ public class BoardDAO {
 	}
 
 	/**
-	 * view_cnt를 증가하는 기능
+	 * view_cnt瑜� 利앷��븯�뒗 湲곕뒫
 	 */
 
 	public void updateViewCnt(int board_no) {
-//		finally에 close를 할 필요가 없다
+//		finally�뿉 close瑜� �븷 �븘�슂媛� �뾾�떎
 		StringBuilder sql = new StringBuilder();
 		sql.append("update c_board ");
 		sql.append(" set cnt = cnt + 1 ");
@@ -234,7 +233,7 @@ public class BoardDAO {
 	}
 
 	/**
-	 * 게시물 삭제하는 기능
+	 * 寃뚯떆臾� �궘�젣�븯�뒗 湲곕뒫
 	 * @return 
 	 */
 	public int deleteBoard(int no) {
@@ -300,9 +299,9 @@ public class BoardDAO {
 
 	}
 
-	// ----------------------------------첨부파일---------------------------------
+	// ----------------------------------泥⑤��뙆�씪---------------------------------
 	/**
-	 * 첨부파일 저장하는기능
+	 * 泥⑤��뙆�씪 ���옣�븯�뒗湲곕뒫
 	 */
 
 	/*public void insertFile(BoardFileVO fileVO) {
@@ -329,7 +328,7 @@ public class BoardDAO {
 	}*/
 
 	/**
-	 * 게시물 번호에 해당 첨부파일 조회하는 기능
+	 * 寃뚯떆臾� 踰덊샇�뿉 �빐�떦 泥⑤��뙆�씪 議고쉶�븯�뒗 湲곕뒫
 	 */
 
 	/*public List<BoardFileVO> selectFileByNo(int boardNo) {
@@ -362,7 +361,7 @@ public class BoardDAO {
 	}*/
 
 	/**
-	 * 첨부파일 삭제
+	 * 泥⑤��뙆�씪 �궘�젣
 	 */
 
 /*	public void deleteFile(int boardNo) {

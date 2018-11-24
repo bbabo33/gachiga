@@ -4,7 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.controller.Controller;
-import kr.dao.BoardDAO;
+import kr.dao.ReviewDAO;
+
 
 public class Delete_Controller implements Controller {
 
@@ -13,7 +14,7 @@ public class Delete_Controller implements Controller {
 		request.setCharacterEncoding("utf-8");
 		int no = Integer.parseInt(request.getParameter("no"));
 
-		BoardDAO dao = new BoardDAO();
+		ReviewDAO dao = new ReviewDAO();
 
 		int cnt = dao.deleteBoard(no);
 

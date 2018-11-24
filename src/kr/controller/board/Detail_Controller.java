@@ -11,7 +11,9 @@ public class Detail_Controller implements Controller {
 
 	@Override
 	public String handRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
 		request.setCharacterEncoding("utf-8");
+		
 		int boardno = Integer.parseInt(request.getParameter("no"));
 		BoardDAO dao = new BoardDAO();
 	

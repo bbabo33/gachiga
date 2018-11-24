@@ -8,7 +8,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script>
 	$(document).ready(function() {
-		<c:if test="${ empty member }">
+		<c:if test="${ login result }">
 		alert("로그인하세요");
 		history.back(1);
 		</c:if>

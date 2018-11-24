@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import kr.controller.Controller;
 import kr.dao.BoardDAO;
 
+
 public class Delete_Controller implements Controller {
 
 	@Override

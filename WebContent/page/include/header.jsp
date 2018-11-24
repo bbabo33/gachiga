@@ -84,7 +84,7 @@
 </script>
 <div id="header_content">
 	<a id="main_link" href="/carpool"> 
-		<img alt="google_logo" src="/carpool/assets/images/logo.png">
+			<img alt="google_logo" src="/carpool/assets/images/GCG_logo.png" >
 	</a>
 	<nav id="gnb">
 		<ul>
