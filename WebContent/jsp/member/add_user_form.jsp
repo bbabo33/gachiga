@@ -102,7 +102,7 @@
 
 		function check_value(type, required, leng) {
 			var value = $("form input[name=" + type + "]").val();
-			var error_msg = $("form div#" + type + " span");
+			var error_msg = $("form li#" + type + " span");
 
 			if (!value && required) {
 				switch (type) {
@@ -141,8 +141,7 @@
 		method="post">
 		<fieldset>
 		<ol>
-			<li>
-				<div id="id">
+			<li id="id">
 						<c:choose> 
 							<c:when test="${is_naver == 0 }">			
 								<label for="id">* 아이디 :</label><input type="text" name="id" id="id">
@@ -153,11 +152,9 @@
 						</c:choose>
 					<input type="button" value="중복체크" name="idCheck"><br>
 					<span class="error_msg"></span><br>
-				</div>
-			</li>
+				</li>
 		
-		<li>	
-			<div id="name">
+			<li id="name">	
 				<c:choose> 
 						<c:when test="${is_naver == 0}">				
 							<label for="name">* 이름 :</label><input type="text" id="name" name="name"><br>
@@ -167,11 +164,9 @@
 						</c:otherwise>
 					</c:choose>
 				<span class="error_msg"></span><br>
-			</div>
-		</li>
+			</li>
 		
-		<li>
- 			<div id="password">
+			<li id="password">
 					<c:choose> 
 						<c:when test="${is_naver == 0 }">				
 							<label for="password">* 패스워드 :</label><input type="text" name="password" id="password"><br>
@@ -181,36 +176,30 @@
 						</c:otherwise>
 					</c:choose>
 				 <span class="error_msg"></span>
-			</div>
-		</li>
+			</li>
 		
-		<li>
-			<div id="tel1">
-				<label for="tel1">* 전화번호 : </label> <input type="text" name="tel1" placeholder="-없이 입력해주세요" size="11" value="">
+			<li id="tel1">
+				<label for="tel1">* 전화번호 : </label> <input type="text" name="tel1" placeholder="-없이 입력해주세요" value="">
 				<br><span class="error_msg"></span><br>
-			</div>
+			</li>
+		
+		<li id="email">
+				<c:choose> 
+					<c:when test="${is_naver == 0 }">				
+						<label for="email"> 이메일 :</label><input type="text" name="email" value=""><br>
+					</c:when>
+					<c:otherwise>
+						<label for="email"> 이메일 :</label><input type="email" name="email" placeholder="xxx@xxx.com" value="${email}" readonly><br>
+					</c:otherwise>
+				</c:choose>
+			<span class="error_msg"></span><br>
 		</li>
 		
-		<li>
- 			<div id="email">
-					<c:choose> 
-						<c:when test="${is_naver == 0 }">				
-							<label for="email"> 이메일 :</label><input type="text" name="email" value=""><br>
-						</c:when>
-						<c:otherwise>
-							<label for="email"> 이메일 :</label><input type="email" name="email" placeholder="xxx@xxx.com" value="${email}" readonly><br>
-						</c:otherwise>
-					</c:choose>
-				<span class="error_msg"></span><br>
-			</div>
-		</li>
-		
-		<li>
-			<div id="basic_addr">
+		<li id="basic_addr">
 				<label for="basic_addr">주소 : </label><input type="text"
 					name="basic_addr" value=""><br> <span class="error_msg"></span><br>
-			</div>
 		</li>
+		
 		</ol>
 		</fieldset>
 		<fieldset>	
