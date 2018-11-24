@@ -9,7 +9,7 @@ import kr.vo.CarVO;
 public class CarDAO {
 
 	/**
-	 * id로 차량등록여부를 확인하고 정보를 리턴해주는 메소드
+	 * id濡� 李⑤웾�벑濡앹뿬遺�瑜� �솗�씤�븯怨� �젙蹂대�� 由ы꽩�빐二쇰뒗 硫붿냼�뱶
 	 */
 	public CarVO selectByID(String id) {
 
@@ -58,4 +58,29 @@ public class CarDAO {
 			e.printStackTrace();
 		}
 	}
+
+	/**
+	 * id를 받아와서 차정보를 삭제시키는 메소드 
+	 * @param id
+	 */
+	public int deleteCar(String id) {
+		StringBuilder sql = new StringBuilder();
+		sql.append("delete from c_car " );
+		sql.append(" where id = ? ");
+		int result = -1;
+		
+		try(
+			Connection conn = new ConnectionFactory().getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+			){
+			pstmt.setString(1, id);
+			result = pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+}
 }
