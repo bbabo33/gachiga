@@ -19,8 +19,6 @@ public class UpdateMProcessController implements Controller{
 		user = (MemberVO)session.getAttribute("login_result");
 		
 		MemberVO member = new MemberVO();
-		member.setBirth(request.getParameter("birth"));
-		member.setAge(Integer.parseInt(request.getParameter("age")));
 		member.setAddr(request.getParameter("addr"));
 		member.setTel(request.getParameter("tel"));
 		member.setId(user.getId());

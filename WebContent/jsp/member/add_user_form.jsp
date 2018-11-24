@@ -20,9 +20,7 @@
 					'password' : $("input[name=password]").val(),
 					'name' : $("input[name=name]").val(),
 					'email' : $("input[name=email]").val(),
-					'birth' : $("input[name=birth]").val(),
 					'tel1' : $("input[name=tel1]").val(),
-					'age' : $("input[name=age]").val(),
 					'addr' : $("input[name=addr]").val(),
 				},
 				success : function(data){
@@ -83,18 +81,12 @@
 			//비밀번호
 			if (!check_value("password", true, 20))
 				is_ok = false;
+			//전화번호
+			if (!check_value("tel1", true, 11))
+				is_ok = false;
 
 			//이메일
 			if (!check_value("email", false, 20))
-				is_ok = false;
-			//생일
-			if (!check_value("birth", false, 10))
-				is_ok = false;
-			//전화번호
-			if (!check_value("tel1", false, 11))
-				is_ok = false;
-			// 나이
-			if (!check_value("age", false, 3))
 				is_ok = false;
 			
 			//기본주소
@@ -122,6 +114,9 @@
 					break;
 				case "name":
 					$(error_msg).text('이름을 입력하세요');
+					break;
+				case "tel1":
+					$(error_msg).text('전화번호를 입력하세요');
 					break;
 				}
 				return false;
@@ -178,6 +173,12 @@
 				</c:choose>
 			 <span class="error_msg"></span>
 		</div>
+		
+		<div id="tel1">
+			<label for="tel1">* 전화번호 : </label> <input type="text" name="tel1" placeholder="-없이 입력해주세요" size="11" value="">
+			<br><span class="error_msg"></span><br>
+		</div>
+		
  		<div id="email">
 				<c:choose> 
 					<c:when test="${is_naver == 0 }">				
@@ -188,28 +189,6 @@
 					</c:otherwise>
 				</c:choose>
 			<span class="error_msg"></span><br>
-		</div>
-		
-		<div>
-			<label for ="age">나이 : </label><input type="text" name ="age" value="">
-			<br> <span class="error_msg"></span><br>
-		</div>
-		
-		<div id="birth">
-			<c:choose> 
-					<c:when test="${is_naver == 0}">				
-						<label for="birth"> 생일 :</label><input type="text" name="birth" value=""><br>
-					</c:when>
-					<c:otherwise>
-						<label for="birth"> 생일 :</label><input type ="text" placeholder =" -없이 4자리를 입력해주세요" name="birth" value="${birthday}" readonly><br>
-					</c:otherwise>
-			</c:choose>
-			<span class="error_msg"></span><br>
-		</div>
-		
-		<div id="tel">
-			<label for="tel1">전화번호 : </label> <input type="text" name="tel1" placeholder="-없이 입력해주세요" size="11" value="">
-			<br><span class="error_msg"></span><br>
 		</div>
 		
 		<div id="basic_addr">

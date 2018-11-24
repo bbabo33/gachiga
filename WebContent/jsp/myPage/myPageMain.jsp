@@ -15,14 +15,6 @@
 			<td>${login_result.email }</td>
 		</tr>
 		<tr>
-			<th>생일</th>
-			<td>${login_result.birth }</td>
-		</tr>
-		<tr>
-			<th>나이</th>
-			<td>${login_result.age }</td>
-		</tr>
-		<tr>
 			<th>전화번호</th>
 			<td>${login_result.tel }</td>
 		</tr>

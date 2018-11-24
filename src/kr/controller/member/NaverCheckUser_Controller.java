@@ -52,19 +52,12 @@ public class NaverCheckUser_Controller implements Controller{
 			JSONObject jsonObj = (JSONObject) json.parse(obj.toString());
 			JSONObject resp = (JSONObject) jsonObj.get("response");
 
-			//System.out.println(resp.toJSONString());
-
-			String YandD = (String) resp.get("birthday");
-			String[] days = YandD.split("-");
-			String birthday = days[0] + days[1];
-
 			MemberDAO dao = new MemberDAO();
 
 			MemberVO NaverUser = dao.selectById((String) resp.get("id"));
 			
 			if (NaverUser == null ) { //로그인 실패 -> 회원가입
 				request.getSession().setAttribute("Nid", resp.get("id"));
-				request.getSession().setAttribute("birthday", birthday);
 				request.getSession().setAttribute("gender", resp.get("gender"));
 				request.getSession().setAttribute("name", resp.get("name"));
 				request.getSession().setAttribute("email", resp.get("email"));

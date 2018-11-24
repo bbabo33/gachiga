@@ -13,14 +13,6 @@
 			<label for="name">이름</label>
 			<span>${member.name }</span>
 		</div>
-		<div id="bitrh">
-			<label for="birth">생일</label>
-			<input type="text" value="${member.birth }" name="birth">
-		</div>
-		<div id="age">
-			<label for="age">나이</label>
-			<input type="text" value="${member.age }" name="age">
-		</div>
 		<div id="addr">
 			<label for="addr">주소</label>
 			<input type="text" value="${member.addr }" name="addr">

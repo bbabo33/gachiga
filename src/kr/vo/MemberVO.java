@@ -6,9 +6,7 @@ public class MemberVO {
    private String name;
    private String password;
    private String email;
-   private String birth;
    private String tel;
-   private int age;
    private String addr;
    private String regDate;
    
@@ -22,21 +20,19 @@ public class MemberVO {
 	   this.password = password;
    }
    
-   public MemberVO(String id, String name, String password, String email, String birth, String tel, int age,
-         String addr, String regDate) {
-      super();
-      this.id = id;
-      this.name = name;
-      this.password = password;
-      this.email = email;
-      this.birth = birth;
-      this.tel = tel;
-      this.age = age;
-      this.addr = addr;
-      this.regDate = regDate;
-   }
+   public MemberVO(String id, String name, String password, String email, String tel, String addr,
+		String regDate) {
+	super();
+	this.id = id;
+	this.name = name;
+	this.password = password;
+	this.email = email;
+	this.tel = tel;
+	this.addr = addr;
+	this.regDate = regDate;
+}
 
-   public String getId() {
+public String getId() {
       return id;
    }
 
@@ -68,28 +64,12 @@ public class MemberVO {
       this.email = email;
    }
 
-   public String getBirth() {
-      return birth;
-   }
-
-   public void setBirth(String birth) {
-      this.birth = birth;
-   }
-
    public String getTel() {
       return tel;
    }
 
    public void setTel(String tel) {
       this.tel = tel;
-   }
-
-   public int getAge() {
-      return age;
-   }
-
-   public void setAge(int age) {
-      this.age = age;
    }
 
    public String getAddr() {
@@ -106,11 +86,5 @@ public class MemberVO {
 
    public void setRegDate(String regDate) {
       this.regDate = regDate;
-   }
-
-   @Override
-   public String toString() {
-      return "MemberVO [id=" + id + ", name=" + name + ", password=" + password + ", email=" + email + ", birth="
-            + birth + ", tel=" + tel + ", age=" + age + ", addr=" + addr + ", regDate=" + regDate + "]";
    }
 }

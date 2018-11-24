@@ -83,9 +83,9 @@ public class MemberDAO {
 	}
 
 	/**
-	 * ȸ�� �߰�
+	 * 회원추
 	 * @param board
-	 * @return �ݿ��� �� ����
+	 * @return 변경된 컬럼 갯
 	 */
 	public int insertMember(MemberVO member) {
 		Connection conn = null;
@@ -94,18 +94,16 @@ public class MemberDAO {
 		try {
 			conn = new ConnectionFactory().getConnection();
 			StringBuilder sql = new StringBuilder();
- 			sql.append(" insert into c_member (name, id, password, email, birth, tel, age, addr) ");
-			sql.append(" values (?, ?, ?, ?, ?, ?, ?, ?) ");
+ 			sql.append(" insert into c_member (name, id, password, email, tel, addr) ");
+			sql.append(" values (?, ?, ?, ?, ?, ?) ");
  			pstmt = conn.prepareStatement(sql.toString());
 			
 			pstmt.setString(1, member.getName());
 			pstmt.setString(2, member.getId());
 			pstmt.setString(3, member.getPassword());
 			pstmt.setString(4, member.getEmail());
-			pstmt.setString(5, member.getBirth());
-			pstmt.setString(6, member.getTel());
-			pstmt.setInt(7, member.getAge());
-			pstmt.setString(8, member.getAddr());
+			pstmt.setString(5, member.getTel());
+			pstmt.setString(6, member.getAddr());
 			
  			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -129,8 +127,8 @@ public class MemberDAO {
 			conn = new ConnectionFactory().getConnection();
 			StringBuilder sql = new StringBuilder();
 			
-			sql.append(" select name, id, password, email, birth ");
-			sql.append(" tel, age, addr,  to_char(reg_date, 'yyyy-mm-dd hh24-mi') as reg_date ");
+			sql.append(" select name, id, password, email ");
+			sql.append(" tel, addr,  to_char(reg_date, 'yyyy-mm-dd hh24-mi') as reg_date ");
 			sql.append(" from c_member ");
 			sql.append(" where id = ? ");
 			sql.append(" and password = ? ");
@@ -165,8 +163,7 @@ public class MemberDAO {
 			StringBuilder sql = new StringBuilder();
 			
 			sql.append(" select name, id, email, password, ");
-			sql.append(" birth, tel, age, ");
-			sql.append(" addr, reg_date ");
+			sql.append(" tel, addr, reg_date ");
 			sql.append(" from c_member ");
 			sql.append(" where id = ? ");
 			
@@ -181,9 +178,7 @@ public class MemberDAO {
 				member.setId(rs.getString("id"));
 				member.setPassword(rs.getString("password"));
 				member.setEmail(rs.getString("email"));
-				member.setBirth(rs.getString("birth"));
 				member.setTel(rs.getString("tel"));
-				member.setAge(rs.getInt("age"));
 				member.setAddr(rs.getString("addr"));
 				member.setRegDate(rs.getString("reg_date"));
 			}
@@ -220,18 +215,16 @@ public class MemberDAO {
 		
 		StringBuilder sql = new StringBuilder();
 		sql.append(" update c_member ");
-		sql.append(" set age=? , tel=?, addr=?, birth=? ");
+		sql.append(" set tel=?, addr=? ");
 		sql.append(" where id = ? ");
 		int result = -1;
 		try(
 				Connection conn = new ConnectionFactory().getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql.toString());
 		){
-			pstmt.setInt(1, member.getAge());
-			pstmt.setString(2, member.getTel());
-			pstmt.setString(3, member.getAddr());
-			pstmt.setString(4, member.getBirth());
-			pstmt.setString(5, member.getId());
+			pstmt.setString(1, member.getTel());
+			pstmt.setString(2, member.getAddr());
+			pstmt.setString(3, member.getId());
 			
 			result =  pstmt.executeUpdate();
 		}catch(Exception e) {
