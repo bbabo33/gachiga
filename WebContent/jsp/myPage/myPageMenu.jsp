@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <div id="myProfileMenu">
-	<h1>마이페이지</h1>
+	<h1>내정보</h1>
 	<div id="menuNav">
 		<ul class="profileMenu">
 			<li><a href="<%=request.getContextPath()%>/myPage/MyProfile.do"><span>내정보</span></a></li>

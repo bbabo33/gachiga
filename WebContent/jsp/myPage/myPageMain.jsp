@@ -38,5 +38,4 @@
 	</table>
 	<div align="center">
 		<input type="button" value="회원정보 수정" id="updateBtn">
-	</div>
 </div>

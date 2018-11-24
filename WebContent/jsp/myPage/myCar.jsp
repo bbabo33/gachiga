@@ -1,21 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="/carpool/assets/css/myPageCss.css">
+<style>
+li {
+	list-style: none;
+	float: left;
+	margin: 0 10px;
+}
+ </style>
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
 $(document).ready(function(){
 	$('#regiCar').click(function(){
 		location.href="<%=request.getContextPath()%>/myPage/MyCarForm.do";
-	});
-	
-	$('#deleteCar').click(function(){
-		location.href="<%=request.getContextPath()%>/myPage/MyCarDelete.do";
 	});
 });
 </script>
@@ -50,9 +51,7 @@ $(document).ready(function(){
 	</tr>
 	
 </table>
-<c:if test="${empty car }">
 <input type="button" value="차량등록" id="regiCar">
-</c:if>
 <input type="button" value="등록삭제" id="deleteCar">
 </div>
 </section>

@@ -13,7 +13,7 @@ public class Logout_Controller implements Controller{
 		HttpSession session = request.getSession();
 		session.removeAttribute("login_result");
 		
-		request.setAttribute("msg", "·Î±×¾Æ¿ô µÇ¾ú½À´Ï´Ù.");
+		request.setAttribute("msg", "ë¡œê·¸ì•„ì›ƒë˜ì—ˆìŠµë‹ˆë‹¤");
 		return "/jsp/login/logout.jsp";
 	}
 }

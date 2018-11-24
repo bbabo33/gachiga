@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="/carpool/assets/css/myPageCss.css">
+<link rel="stylesheet" href="/carpool/css/myPageCss.css">
 </head>
 <body>
 <section>
