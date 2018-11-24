@@ -106,9 +106,7 @@ public List<ApplyVO> selectById(String id){
 				   member =new MemberVO();
 					member.setId(rs.getString("id"));
 					member.setName(rs.getString("name"));
-					member.setAge(rs.getInt("age"));
 					member.setTel(rs.getString("tel"));
-					System.out.println(member.getId());
 					memList.add(member);
 				}
 				if(memList.size() != 0) {
