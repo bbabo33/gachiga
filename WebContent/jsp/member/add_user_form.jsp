@@ -40,11 +40,13 @@
 		});
 		
 		$("input[name=idCheck]").click(function(){
+			console.log("user_form.jsp line 43:")
 			idCheck();
 		});
 		
 		//중복체크
 		function idCheck(){
+			console.log("user_form.jsp line 48:")
 			var id = document.signform.id;
 			$.ajax({
 				url : '<%=request.getContextPath()%>/member/check_user.do',
@@ -53,15 +55,17 @@
 					'id' : id.value
 				},
 				success : function(data){
+					console.log("success: result"+data);
 					if(data == 1){
-						$("div#id span").html("중복된 아이디입니다");
+						$("li#id span").html("중복된 아이디입니다");
 						is_idCheck = false;
 					} else {
-						$("div#id span").html("사용가능한 아이디입니다");
+						$("li#id span").html("사용가능한 아이디입니다");
 						is_idCheck = true;
 					}
 				},
 				error : function(xhr, ajaxOptions, thrownError) {
+					console.log("error: result");
 					alert(xhr.status);
 					alert(thrownError);
 				}
@@ -135,6 +139,7 @@
 		};
 	});
 </script>
+
 <div id="add_user_form">
 	<h3>회원가입</h3>
 	<form action="/carpool/member/add_user.do" name="signform"
@@ -151,8 +156,8 @@
 							</c:otherwise>
 						</c:choose>
 					<input type="button" value="중복체크" name="idCheck"><br>
-					<span class="error_msg"></span><br>
-				</li>
+					<span class="error_msg"></span>
+			</li>
 		
 			<li id="name">	
 				<c:choose> 
@@ -163,47 +168,46 @@
 							<label for="name">* 이름 :</label><input type="text" name ="name" id="name" value = "${name}" readonly><br>
 						</c:otherwise>
 					</c:choose>
-				<span class="error_msg"></span><br>
+				<span class="error_msg"></span>
 			</li>
 		
 			<li id="password">
 					<c:choose> 
 						<c:when test="${is_naver == 0 }">				
-							<label for="password">* 패스워드 :</label><input type="text" name="password" id="password"><br>
+							<label for="password">* 패스워드 :</label><input type="password" name="password" id="password">
 						</c:when>
 						<c:otherwise>
 							<label for="password">* 패스워드 :</label><input type="password" name ="password" value = "${Nid}">
 						</c:otherwise>
 					</c:choose>
-				 <span class="error_msg"></span>
+				 <br><span class="error_msg"></span>
 			</li>
 		
 			<li id="tel1">
-				<label for="tel1">* 전화번호 : </label> <input type="text" name="tel1" placeholder="-없이 입력해주세요" value="">
-				<br><span class="error_msg"></span><br>
+				<label for="tel1">* 전화번호 : </label> <input type="text" name="tel1" placeholder="      '-' 없이 입력해주세요" value="">
+				<br><span class="error_msg"></span>
 			</li>
 		
-		<li id="email">
-				<c:choose> 
-					<c:when test="${is_naver == 0 }">				
-						<label for="email"> 이메일 :</label><input type="text" name="email" value=""><br>
-					</c:when>
-					<c:otherwise>
-						<label for="email"> 이메일 :</label><input type="email" name="email" placeholder="xxx@xxx.com" value="${email}" readonly><br>
-					</c:otherwise>
-				</c:choose>
-			<span class="error_msg"></span><br>
-		</li>
+			<li id="email">
+					<c:choose> 
+						<c:when test="${is_naver == 0 }">				
+							<label for="email"> 이메일 :</label><input type="text" name="email" placeholder="      xxx@xxx.com" value="">
+						</c:when>
+						<c:otherwise>
+							<label for="email"> 이메일 :</label><input type="email" name="email" placeholder="xxx@xxx.com" value="${email}" readonly>
+						</c:otherwise>
+					</c:choose>
+				<span class="error_msg"></span>
+			</li>
 		
-		<li id="basic_addr">
-				<label for="basic_addr">주소 : </label><input type="text"
-					name="basic_addr" value=""><br> <span class="error_msg"></span><br>
-		</li>
+			<li id="basic_addr">
+					<label for="basic_addr">주소 : </label><input type="text"
+						name="basic_addr" value=""><span class="error_msg"></span><br>
+			</li>
 		
 		</ol>
 		</fieldset>
-		<fieldset>	
+		
  			<input type="submit" value="회원가입" name="submit">
-		</fieldset>
 	</form>
 </div>
