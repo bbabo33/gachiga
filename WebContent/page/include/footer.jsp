@@ -5,8 +5,6 @@
 footer {
 	color: #707070;
 	font-size: 15px;
-	margin-top: 50px;
-	margin-bottom: 100px;
 	position: relative;
 	bottom: 0;
 	display: block;
