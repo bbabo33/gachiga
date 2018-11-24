@@ -178,8 +178,8 @@ public class ReviewDAO {
 			ResultSet rs = pstmt.executeQuery();
 			
 			if (rs.next()) {
-
-/*				hugiboard.setBoard_no(rs.getInt("board_no"));
+				hugiboard = new  BoardVO();
+				hugiboard.setBoard_no(rs.getInt("board_no"));
 				hugiboard.setTitle(rs.getString("Title"));
 				hugiboard.setId(rs.getString("id"));
 				hugiboard.setContent(rs.getString("content"));
@@ -195,7 +195,6 @@ public class ReviewDAO {
 				//System.out.println(no +  " : dao");
 				hugiboard = new BoardVO(no, title, id, content, cnt, regDate);
 				//System.out.println(hugiboard + "dao ");
-*/
 			}
 
 		} catch (Exception e) {
