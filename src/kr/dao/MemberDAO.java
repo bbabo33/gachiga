@@ -127,8 +127,8 @@ public class MemberDAO {
 			conn = new ConnectionFactory().getConnection();
 			StringBuilder sql = new StringBuilder();
 			
-			sql.append(" select name, id, password, email ");
-			sql.append(" tel, addr,  to_char(reg_date, 'yyyy-mm-dd hh24-mi') as reg_date ");
+			sql.append(" select name, id, password, email, ");
+			sql.append(" tel, addr ");
 			sql.append(" from c_member ");
 			sql.append(" where id = ? ");
 			sql.append(" and password = ? ");
