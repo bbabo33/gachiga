@@ -15,6 +15,9 @@ public class LoginProcess_Controller implements Controller{
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
 		
+		System.out.println(id);
+		System.out.println(password);
+		
 		MemberDAO dao = new MemberDAO();
 		MemberVO member = new MemberVO();
 		member.setId(id);
@@ -33,9 +36,4 @@ public class LoginProcess_Controller implements Controller{
 		
 		return "/jsp/login/loginProcess.jsp";
 	}
-/*	@Override
-	public String handRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		return "redirect:" + request.getContextPath() + "/login/login.do";
-	}
-*/	
 }

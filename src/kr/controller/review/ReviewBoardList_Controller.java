@@ -1,4 +1,4 @@
-package kr.controller.board.review;
+package kr.controller.review;
 
 import java.util.List;
 
