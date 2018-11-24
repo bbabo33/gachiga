@@ -54,6 +54,14 @@ $(document).ready(function(){
 	}
 });
 </script>
+<style>
+#wform td {
+    border: none;
+}
+#write-form textarea {
+    width: 99%;
+}
+</style>
 <div align="center">
 	<h3>게시글 등록</h3>
 
@@ -71,9 +79,8 @@ $(document).ready(function(){
 				</td>
 			</tr>
 			<tr>
-				<th width="23%">내용</th>
-				<td><textarea rows="7" cols="20" name="content"
-						style="width: 100%;"></textarea></td>
+			
+				<td><textarea rows="17" cols="50" name="content" style="width: 100%;"></textarea></td>
 			</tr>
 		</table>
 		<input type="submit" name="new_board" value="등록"> 

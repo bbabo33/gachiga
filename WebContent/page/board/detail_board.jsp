@@ -24,8 +24,13 @@
 	<section>
 		<jsp:include page="/jsp/board/detail_board.jsp" />
 	</section>
+	<section>
+		<%@ include file="/jsp/board/free_board.jsp" %>
+	</section>
 	<footer>
 		<%@ include file="/page/include/footer.jsp"%>
 	</footer>
+	
+	
 </body>
 </html>
