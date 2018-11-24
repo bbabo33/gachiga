@@ -10,19 +10,21 @@
  	pageContext.setAttribute("board", board);
 %>
 <script type="text/javascript">
+
 	$(document).ready(function() {
 		$("input[name = post_list]").click(function() {
 			location.href = "free_board.jsp";
 		});
+		
 		$("input").click(function(event) {
 			var name = $(event.target).attr("name");
 			switch (name) {
-			case "post_detail":
-				location.href = "detail_board.do?no=" + <%= no %>;
-				break;
-			case "post_list":
-				location.href = "free_board_list.do";
-				break;
+				case "post_detail":
+					location.href = "detail_board.do?no=" + <%= no %>;
+					break;
+				case "post_list":
+					location.href = "free_board_list.do";
+					break;
 			}
 		});
  		$("form[name=wForm]").submit(function() {
@@ -45,9 +47,10 @@
  	});
 </script>
 <div align="center">
+	<hr>
 	<h3>게시글 수정</h3>
  	<form name="wForm" method="post"
-		action="/carpool/jsp/board/update_board.jsp">
+		action="<%=request.getContextPath() %>/board/update_board.do">
 		<table>
 			<tr>
 				<th width="23%">번호</th>

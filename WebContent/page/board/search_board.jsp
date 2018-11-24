@@ -7,7 +7,7 @@
 		<%@ include file="/page/include/header.jsp" %> 
 	</header>
 	<section>
-		<%@ include file="/jsp/board/list_post.jsp" %>
+		<%@ include file="/jsp/board/search_board_result.jsp" %>
 	</section>
 	<footer>
 		<%@ include file="/page/include/footer.jsp" %>

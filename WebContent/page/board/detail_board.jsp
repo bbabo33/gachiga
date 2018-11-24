@@ -9,12 +9,12 @@
 	pageContext.setAttribute("no", no);
 %>
 <script>
-	 $(document).ready(function() {
+	/* $(document).ready(function() {
 		<c:if test="${ empty login_result }">
 		alert("로그인이 필요합니다.");
 		history.back(1);
 		</c:if>
-	}); 
+	}); */
 </script>
 </head>
 <body>

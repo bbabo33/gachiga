@@ -3,7 +3,6 @@ package kr.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,14 +12,14 @@ import kr.vo.BoardFileVO;
 import kr.vo.BoardVO;
 
 /**
- * 寃뚯떆�뙋(t_board)瑜� CRUD�븯�뒗 湲곕뒫�겢�옒�뒪
+ * 게시판(t_board)를 CRUD하는 기능클래스
  * 
  * @author acorn
  *
  */
 public class ReviewDAO {
 	/**
-	 * 議고쉶湲곕뒫
+	 * 조회기능
 	 */
 	public List<BoardVO> selectAllBoard() {
 
@@ -66,7 +65,7 @@ public class ReviewDAO {
 	}
 
 	/**
-	 * 寃뚯떆臾� �궫�엯�쓣 �쐞�븳 �떆���떆踰덊샇 異붿텧(seq_t_board_no)
+	 * 게시물 삽입을 위한 시퀀시번호 추출(seq_t_board_no)
 	 */
 
 	public int selectNo() {
@@ -86,7 +85,7 @@ public class ReviewDAO {
 	}
 
 	/**
-	 * 寃뚯떆湲� �궫�엯�븯�뒗 湲곕뒫
+	 * 게시글 삽입하는 기능
 	 * @return 
 	 */
 	public int insertBoard(BoardVO board) {
@@ -119,7 +118,7 @@ public class ReviewDAO {
 	}
 
 	/**
-	 * 寃뚯떆�뙋 踰덊샇濡� 議고쉶�븯�뒗 湲곕뒫
+	 * 게시판 번호로 조회하는 기능
 	 */
 	public BoardVO selectByNo(int board) {
 
@@ -149,16 +148,17 @@ public class ReviewDAO {
 				hugiboard.setContent(rs.getString("content"));
 				hugiboard.setCnt(rs.getInt("cnt"));
 				hugiboard.setRegDate(rs.getString("reg_date"));
-*/
-				int board_no = rs.getInt("board_no");
+
+				int no = rs.getInt("board_no");
 				String title = rs.getString("title");
 				String id = rs.getString("id");
 				String content = rs.getString("content");
 				int cnt = rs.getInt("cnt");
 				String regDate = rs.getString("reg_date");
 				//System.out.println(no +  " : dao");
-				hugiboard = new BoardVO(board_no, title, id, content, cnt, regDate);
+				hugiboard = new BoardVO(no, title, id, content, cnt, regDate);
 				//System.out.println(hugiboard + "dao ");
+*/
 			}
 
 		} catch (Exception e) {
@@ -169,7 +169,7 @@ public class ReviewDAO {
 	}
 
 	/**
-	 * 寃뚯떆臾� �닔�젙�븯�뒗 湲곕뒫
+	 * 게시물 수정하는 기능
 	 */
 	public int updateBoard(BoardVO board) {
 		Connection conn = null;
@@ -204,11 +204,11 @@ public class ReviewDAO {
 	}
 
 	/**
-	 * view_cnt瑜� 利앷��븯�뒗 湲곕뒫
+	 * view_cnt를 증가하는 기능
 	 */
 
 	public void updateViewCnt(int board_no) {
-//		finally�뿉 close瑜� �븷 �븘�슂媛� �뾾�떎
+//		finally에 close를 할 필요가 없다
 		StringBuilder sql = new StringBuilder();
 		sql.append("update c_review_board ");
 		sql.append(" set cnt = cnt + 1 ");
@@ -233,7 +233,7 @@ public class ReviewDAO {
 	}
 
 	/**
-	 * 寃뚯떆臾� �궘�젣�븯�뒗 湲곕뒫
+	 * 게시물 삭제하는 기능
 	 * @return 
 	 */
 	public int deleteBoard(int no) {
@@ -259,47 +259,10 @@ public class ReviewDAO {
 		return result;
 
 	}
-	
+
+	// ----------------------------------첨부파일---------------------------------
 	/**
-	 * 최신 게시물 5개를 반환하는 메소드
-	 */
-
-	public List<BoardVO> selectFive(){
-		  Connection conn = null;
-	      PreparedStatement pstmt = null;
-	      List<BoardVO> newList = new ArrayList<>();
-	      try {
-	         conn = new ConnectionFactory().getConnection();
-	         StringBuilder sql = new StringBuilder();
-	         sql.append(" select * from ( ");
-	         sql.append(" select rownum as rnum, c.* from ( ");
-	         sql.append(" select board_no , title, id, reg_date ");
-	         sql.append(" from ( select * from c_review_board order by reg_date desc) ");
-	         sql.append(" ) c ");
-	         sql.append(" )where rnum between 1 and 5 ");
-	          pstmt = conn.prepareStatement(sql.toString());
-	          ResultSet rs = pstmt.executeQuery();
-	          while (rs.next()) {
-	        	  BoardVO board = new BoardVO();
-	        	  board.setBoard_no(rs.getInt("board_no"));
-	        	  board.setTitle(rs.getString("title"));
-	        	  board.setId(rs.getString("id"));
-	        	  board.setRegDate(rs.getString("reg_date"));
-
-	             newList.add(board);
-	         }
-	      } catch (SQLException e) {
-	         e.printStackTrace();
-	      } finally {
-	         JDBCClose.close(pstmt, conn);
-	      }
-	      return newList;
-
-	}
-
-	// ----------------------------------泥⑤��뙆�씪---------------------------------
-	/**
-	 * 泥⑤��뙆�씪 ���옣�븯�뒗湲곕뒫
+	 * 첨부파일 저장하는기능
 	 */
 
 	/*public void insertFile(BoardFileVO fileVO) {
@@ -326,7 +289,7 @@ public class ReviewDAO {
 	}*/
 
 	/**
-	 * 寃뚯떆臾� 踰덊샇�뿉 �빐�떦 泥⑤��뙆�씪 議고쉶�븯�뒗 湲곕뒫
+	 * 게시물 번호에 해당 첨부파일 조회하는 기능
 	 */
 
 	/*public List<BoardFileVO> selectFileByNo(int boardNo) {
@@ -359,7 +322,7 @@ public class ReviewDAO {
 	}*/
 
 	/**
-	 * 泥⑤��뙆�씪 �궘�젣
+	 * 첨부파일 삭제
 	 */
 
 /*	public void deleteFile(int boardNo) {

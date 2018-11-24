@@ -26,7 +26,7 @@
 			<th width="15%">글쓴이</th>
 			<th width="10%">등록일</th>
 		</tr>
-		<c:forEach var="board" items="${boardList}">
+		<c:forEach var="board" items="${searchedList}">
 					<tr>	
 						<td align="center">${board.board_no}</td>
 						<td>

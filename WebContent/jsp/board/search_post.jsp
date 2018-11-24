@@ -29,7 +29,9 @@
 	});
 </script>
 <div align="center">
+	<hr>
 	<h3>"${ search }" 검색 결과</h3>
+	
 	<form class="R" action="/carpool/page/board/search_post.jsp" name="search" method="GET">
 		<select name="category">
 			<option value="">선택하세요</option>

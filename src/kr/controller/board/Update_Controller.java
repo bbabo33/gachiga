@@ -16,17 +16,19 @@ public class Update_Controller implements Controller {
 		BoardVO board = new BoardVO();
 		BoardDAO dao = new BoardDAO();
 		
-		int no = Integer.parseInt(request.getParameter("board_no"));
+		int no = Integer.parseInt(request.getParameter("no"));
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		
 		board.setBoard_no(no);
 		board.setTitle(title);
 		board.setContent(content);
-		int cnt = dao.updateBoard(board);
+		dao.updateBoard(board);	//업데이트
 		
-		request.setAttribute("cnt", cnt);
-		return "/page/board/update_board.jsp";
+		BoardVO changedBoard = dao.selectByNo(no);
+		request.setAttribute("board",changedBoard);
+		
+		return "/page/board/detail_board.jsp";
 	}
 	
 

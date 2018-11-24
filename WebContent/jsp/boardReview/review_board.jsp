@@ -8,7 +8,9 @@ $(document).ready(function() {
 	});
 });
 </script> 
+<hr>
 <h3 align="center">후기 게시판</h3>
+<hr>
 <div align="center">
 	<table class="list_table">
 		<tr>

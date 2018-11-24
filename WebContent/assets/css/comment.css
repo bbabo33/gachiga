@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+/* table #comment{
+ 	
+ 	width : 70%;
+ 	background-color: #f9f9f9; 
+ 	font-family: verdana, sans-serif;
+
+ } */
+ 
+#div_comment{
+	width : 562px;
+	background-color: #f9f9f9;
+} 
+
+ 
+ 
+/*  
+#table {display: table; width: 90%;}
+.row {display: table-row;}
+.cell {display: table-cell; padding: 3px; border-bottom: 1px solid #DDD;}
+.col1 { width: 40%;}
+.col2 {width: 60%;} 
+*/

@@ -9,6 +9,7 @@ public class Update_form_controller implements Controller {
 
 	@Override
 	public String handRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("updateform con line 12:"+request.getParameter("no"));
 		return "/page/board/update_board.jsp";
 	}
 }
