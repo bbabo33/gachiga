@@ -9,25 +9,41 @@ $(document).ready(function(){
 	$("input").click(function(event){
 		var name = $(event.target).attr("name");
 		switch(name){
-		case "edit_board":
-			if( confirm("글을 수정하시겠습니까?") )
-				location.href = "<%= request.getContextPath() %>/board/update_board_form.do?no=${no}";
-			break;
-		case "delete_board":
-			if( confirm("글을 삭제하시겠습니까?") )
-				location.href = "<%= request.getContextPath() %>/board/delete_board.do?no=${no}";
-			break;
-		case "post_list":
-			location.href = "<%= request.getContextPath() %>/board/free_board_list.do";
-			break;
+			case "edit_board":
+				if( confirm("글을 수정하시겠습니까?") )
+					location.href = "<%= request.getContextPath() %>/board/update_board_form.do?no=${no}";
+				break;
+			case "delete_board":
+				if( confirm("글을 삭제하시겠습니까?") )
+					<%-- location.href = "<%= request.getContextPath() %>/board/delete_board.do?no=${no}"; --%>
+					$.ajax({
+						url : "<%=request.getContextPath()%>/board/delete_board.do",
+						data :{
+							'no' : '${board.board_no}'	
+						},
+						type : 'post',
+						success : callback,
+						error : function(xhr, ajaxOptions, thrownError) {
+				             alert(xhr.status + " " + thrownError);
+			            }
+					});
+				break;
+			case "post_list":
+				location.href = "<%= request.getContextPath() %>/board/free_board_list.do";
+				break;
 		}
 	});
+	
+	function callback(){
+		alert("글 삭제완료");
+		location.href = "<%=request.getContextPath()%>/board/free_board_list.do";
+	}
 	
 });
 </script>
 <div align="center">
 	<hr>
-	<h3>상세2</h3>
+	<h3>상세 내용</h3>
 	<hr>
 	<table style="width: 100%;">
 
@@ -57,25 +73,40 @@ $(document).ready(function(){
 				<th width="23%">조회수</th>
 				<td>${ board.cnt }</td>
 			</tr>
-			<%-- <tr>
-				<th>첨부파일</th>
-				<td>
-					<c:forEach items="${ fileList }" var="file" >
-						<form name="downForm" action="/carpool/jsp/board/fileDownload.jsp" method="GET">
-							<img class="download" src="/carpool/upload/${file.fileSaveName}" width="100px">
-							<input type="hidden" name="oriName" value="${file.fileOriName}">
-							<input type="hidden" name="saveName" value="${file.fileSaveName}">
-						</form>
-					</c:forEach>
-				
-				</td>
-			</tr>
- --%>
+			
 		</c:if>
 	</table>
-<%-- 	<c:if test="${ login_result.id == board.id  }">--%>
-	<input class="btn" type="button" name="edit_board" value="수정"> 
-	<input class="btn" type="button" name="delete_board" value="삭제">
-<%-- 	</c:if> --%>
-	<input class="btn" type="button" name="post_list" value="목록">
+	
+ 	<c:if test="${ login_result.id == board.id  }">
+		<input class="btn" type="button" name="edit_board" value="수정"> 
+		<input class="btn" type="button" name="delete_board" value="삭제">
+	</c:if>
+	<hr width="100%">
+	<input class="btn" type="button" name="post_list" value="목록"><br><br>
+	<div id="div_comment">Comment</div>	
+			<c:if test="${ ! empty login_result }">
+				<jsp:include page="/page/include/board_Comment.jsp"/>
+			</c:if>
+	
+	<table class="commentBox">
+		<tr>
+			<th>작성자</th>
+			<th>내용</th>
+			<th>등록일</th>
+		</tr>
+		<c:forEach var="cl" items="${commentList }">
+		<tr>
+			<td>				
+				${cl.writer }
+			</td>
+			<td>
+				${cl.content }
+			</td>
+			<td>
+				${cl.regDate }
+			</td>
+		</tr>		
+		</c:forEach>
+	</table>	
+	<br>
 </div>

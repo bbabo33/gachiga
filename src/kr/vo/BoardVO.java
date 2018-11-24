@@ -7,7 +7,7 @@ public class BoardVO {
 	private String content;
 	private int cnt;
 	private String regDate;
-	
+
 	public BoardVO() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -76,12 +76,4 @@ public class BoardVO {
 		return "BoardVO [board_no=" + board_no + ", title=" + title + ", id=" + id + ", content=" + content + ", cnt="
 				+ cnt + ", regDate=" + regDate + "]";
 	}
-
-	
-	
-	
-	
-	
-	
-	
 }

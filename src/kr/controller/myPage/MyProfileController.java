@@ -11,16 +11,7 @@ public class MyProfileController implements Controller {
 	
 	@Override
 	public String handRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("!!!");
-		MemberVO user = new MemberVO();
-		HttpSession session = request.getSession();
-		user = (MemberVO) session.getAttribute("login_result");
-		String id = user.getId();
-
-		MemberDAO dao = new MemberDAO();
-		MemberVO member = dao.selectById(id);
-
-		request.setAttribute("member", member);
+		
 
 		return "/jsp/myPage/myProfile.jsp";
 	}

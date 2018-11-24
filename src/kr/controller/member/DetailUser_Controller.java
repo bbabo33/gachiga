@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.controller.Controller;
 import kr.dao.BoardDAO;
-import kr.vo.BoardFileVO;
 import kr.vo.BoardVO;
 
 public class DetailUser_Controller implements Controller{
@@ -15,23 +14,23 @@ public class DetailUser_Controller implements Controller{
 	@Override
 	public String handRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		int no = Integer.parseInt(request.getParameter("no")); // °Ô½Ã¹° ¹øÈ£
+		int no = Integer.parseInt(request.getParameter("no")); // ï¿½Ô½Ã¹ï¿½ ï¿½ï¿½È£
 		BoardDAO dao = new BoardDAO();
 
 		/*String type = request.getParameter("type");
 		 if(! type.equals("edit"))
 			dao.viewBoard(no); */
 		
-		/*String back_url = request.getHeader("REFERER"); // ÀÌÀüurlÀÌ ¼öÁ¤ÆäÀÌÁö°¡ ¾Æ´Ï¸é Á¶È¸¼ö ¾÷
+		/*String back_url = request.getHeader("REFERER"); // ï¿½ï¿½ï¿½ï¿½urlï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ï¸ï¿½ ï¿½ï¿½È¸ï¿½ï¿½ ï¿½ï¿½
 		System.out.println(back_url);
 		if (back_url.indexOf("board/edit_post") == -1)
 			dao.viewBoard(no);*/
 
-		BoardVO board = dao.selectByNo(no); // ÇöÀç °Ô½Ã¹° 
-		List<BoardFileVO> fileList = dao.selectFileList(no);
+		BoardVO board = dao.selectByNo(no); // ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½Ã¹ï¿½ 
+		/*List<BoardFileVO> fileList = dao.selectFileList(no);
 		
 		request.setAttribute("board", board);
-		request.setAttribute("fileList", fileList);
+		request.setAttribute("fileList", fileList);*/
 		
 		return "/jsp/login/logout.jsp";
 	}

@@ -2,19 +2,19 @@ package kr.controller.member;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kr.controller.Controller;
 import kr.dao.MemberDAO;
+import kr.vo.MemberVO;
 
-public class ListUser_Controller implements Controller{
-	
+public class WithdrawalController implements Controller {
+
 	@Override
 	public String handRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		MemberDAO dao = new MemberDAO();
-
-		request.setAttribute("memberList", dao.selectAllMember());
 		
-		return "/page/member/list_user.jsp";
+		
+		return "/page/myPage/withdrawal.jsp";
 	}
 
 }
