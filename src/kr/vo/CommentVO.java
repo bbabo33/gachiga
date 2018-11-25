@@ -6,20 +6,20 @@ public class CommentVO {
 	private String writer;
 	private int post_no;
 	private String content;
-	private String RegDate;
+	private String reg_date;
+	private String reg_date2;
 
 	public CommentVO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public CommentVO(int no, String writer, int post_no, String content, String RegDate) {
+	public CommentVO(int no, String writer, int post_no, String content, String reg_date) {
 		super();
 		this.no = no;
 		this.writer = writer;
 		this.post_no = post_no;
 		this.content = content;
-		this.RegDate = RegDate;
+		this.reg_date = reg_date;
 	}
 
 	public int getNo() {
@@ -54,17 +54,20 @@ public class CommentVO {
 		this.content = content;
 	}
 
-	public String getRegDate() {
-		return RegDate;
+	public String getReg_date() {
+		return reg_date;
 	}
 
-	public void setRegDate(String regDate) {
-		RegDate = regDate;
+	public void setReg_date(String reg_date) {
+		this.reg_date = reg_date;
 	}
 
-	@Override
-	public String toString() {
-		return "CommentVO [no=" + no + ", writer=" + writer + ", post_no=" + post_no + ", content=" + content
-				+ ", RegDate=" + RegDate + "]";
+	public String getReg_date2() {
+		return reg_date2;
 	}
+
+	public void setReg_date2(String reg_date2) {
+		this.reg_date2 = reg_date2;
+	}
+
 }

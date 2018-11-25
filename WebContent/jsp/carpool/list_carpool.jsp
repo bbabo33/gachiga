@@ -36,9 +36,9 @@ $(document).ready(function(){
 			<span class="cell col1 head">글쓴이</span>
 			<span class="cell col3 head">출발지</span>
 			<span class="cell col3 head">도착지</span>
-			<span class="cell col2 head">유형</span>
-			<span class="cell col2 head">좌석수</span>
-			<span class="cell col2 head">출발일</span>
+			<span class="cell col1 head">유형</span>
+			<span class="cell col1 head">좌석수</span>
+			<span class="cell col1 head">출발일</span>
 		</div>
 		<c:forEach items="${carpool_list}" var="post">
 			<div class="row list">	
@@ -49,12 +49,12 @@ $(document).ready(function(){
 				<span class="cell col1">${post.user_cnt - post.apply_cnt}/${ post.user_cnt }</span>
 				<span class="cell col1">${post.start_date}</span>
 				<input type="hidden" value="${post.no}">
-				<%-- <td><a href="javascript:go_detail('${board.no }', '${ not empty login_result }')"> 
-					<c:out value="${post.title }" />	
-				</a></td> --%>
 			</div>
 		</c:forEach>
 	</div>
+	<c:if test="${ empty carpool_list }">
+		<h3>등록된 게시글이 없습니다</h3>
+	</c:if>
 	
 	<div id="page_step">
 		<c:forEach var="i" begin="1" end="${step}" step="1">

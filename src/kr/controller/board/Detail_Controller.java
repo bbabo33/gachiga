@@ -14,30 +14,24 @@ public class Detail_Controller implements Controller {
 
 	@Override
 	public String handRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
 		request.setCharacterEncoding("utf-8");
-		
-		int boardno = Integer.parseInt(request.getParameter("no"));
 		BoardDAO dao = new BoardDAO();
-		System.out.println(boardno+":detail-con line 22");
+		int boardno = Integer.parseInt(request.getParameter("no"));
+		String post_type = request.getParameter("post_type");
+		BoardVO board = dao.selectByNo(boardno);
+
+		//조회수 처리
 		String back_url = request.getHeader("referer"); 
-		
 		if (back_url.indexOf("board/update_board_form") == -1){
 			dao.updateViewCnt(boardno);
 		}
-			
-		BoardVO board = dao.selectByNo(boardno);
-		
+		// 댓글정보
+		List<CommentVO> commentList = dao.selectAllComment(boardno);
+
 		request.setAttribute("no", boardno);
 		request.setAttribute("board", board);
-		System.out.println(board.toString()+":detail-con line 33");
-		
-		//댓글 내용 가져오기
-
-		List<CommentVO> commentList = dao.selectAllComment();
 		request.setAttribute("commentList", commentList);
-		
-		
+		request.setAttribute("post_type", post_type);
 		return "/page/board/detail_board.jsp";
 	}
 }

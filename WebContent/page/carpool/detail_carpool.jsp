@@ -3,12 +3,9 @@
 <%@ include file="/page/include/head.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script>
-$(document).ready(function(){
-	<c:if test="${ empty login_result }">
-	alert("로그인이 필요합니다.");
-	history.back(1);
-	</c:if>
-})
+<c:if test="${ empty login_result }">
+login_required();
+</c:if>
  </script>
 </head>
 <body>

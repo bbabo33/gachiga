@@ -71,7 +71,6 @@ $(document).ready(function() {
 			            map: map,
 			            position: coords
 			        });
-			        $("input[name=start_place]").val(result[0].y +", "+ result[0].x);
 				}
 				if( $(e.target).attr('name') == 'end_place_name'){
 					// 결과값으로 받은 위치를 마커로 표시합니다
@@ -81,7 +80,6 @@ $(document).ready(function() {
 						map: map,
 						position: coords
 					});
-					$("input[name=end_place]").val(result[0].y +", "+ result[0].x);
 				}
 				
 				if( start_marker != null && end_marker != null ){

@@ -2,15 +2,7 @@
 <%@page import="kr.dao.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
- <%
-	request.setCharacterEncoding("utf-8");
-	int no = Integer.parseInt(request.getParameter("no"));
- 	BoardDAO dao = new BoardDAO();
-	BoardVO board = dao.selectByNo(no);
- 	pageContext.setAttribute("board", board);
-%>
 <script type="text/javascript">
-
 	$(document).ready(function() {
 		$("input[name = post_list]").click(function() {
 			location.href = "free_board.jsp";
@@ -19,16 +11,38 @@
 		$("input").click(function(event) {
 			var name = $(event.target).attr("name");
 			switch (name) {
-				case "post_detail":
-					location.href = "detail_board.do?no=" + <%= no %>;
+				case "post_cancle":
+					location.href = "detail_board.do?post_type=${post_type}&no=${no}";
 					break;
 				case "post_list":
-					location.href = "free_board_list.do";
+					location.href = "board_list.do?post_type=${post_type}";
 					break;
 			}
 		});
- 		$("form[name=wForm]").submit(function() {
-			return checkForm();
+ 		$("form[name=wForm]").submit(function(e) {
+ 			if(!checkForm())
+ 				return false;
+ 			e.preventDefault();
+ 			$.ajax({
+				url : '<%=request.getContextPath()%>/board/update_board.do',
+				type : 'post',
+				data : {
+					'no' : $("input[name=no]").val(),
+					'title' : $("input[name=title]").val(),
+					'content' : $("textarea[name=content]").val()
+				},
+				success : function(data){
+					if(data.trim() == 1){
+						alert("게시글이 업데이트되었습니다");
+					} else {
+						alert("게시글 업데이트에 실패했습니다");
+					}
+					location.href="<%=request.getContextPath()%>/board/detail_board.do?post_type=${post_type}&no=${ board.board_no }";
+				},
+				error : function(xhr, ajaxOptions, thrownError) {
+					alert(xhr.status + " " + thrownError);
+				}
+			});
 		});
  		function checkForm() {
 			var f = document.wForm;

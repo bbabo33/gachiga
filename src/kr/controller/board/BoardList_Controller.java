@@ -9,39 +9,34 @@ import kr.controller.Controller;
 import kr.dao.BoardDAO;
 import kr.vo.BoardVO;
 
-public class FreeBoardList_Controller implements Controller{
+public class BoardList_Controller implements Controller{
 	@Override
 	public String handRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		/*BoardDAO dao = new BoardDAO();
-		List<BoardVO> BoardList = dao.selectAllBoard();
-		
-		request.setAttribute("boardList", BoardList);*/
+		request.setCharacterEncoding("utf-8");
+		String post_type = request.getParameter("post_type");
 		
 		BoardDAO dao = new BoardDAO();
+		int allRows=dao.cntAllRows(post_type);	// ÃÑ °Ô½Ã±Û¼ö
 		int start=1;
-		int allRows=dao.cntAllRows();	//workign ok
 		int end=0;
-		System.out.println("paging line20 allrows:"+allRows);
-		
+
 		if(allRows%5 !=0){
 			end = (allRows/5)+1;
-			
 		}else{
 			end = allRows/5;
 		}
+				
+		String pageData = request.getParameter("pageNo");
+		int pageNo = (pageData != null) ? Integer.parseInt(pageData) : 1;
+		
+		List<BoardVO> boardList= dao.getPage(pageNo, post_type);
 		
 		request.setAttribute("start", start);
 		request.setAttribute("end", end);
-		
-		String pageData = request.getParameter("pageNo");
-		System.out.println(pageData);
-		int pageNo = (pageData != null) ? Integer.parseInt(pageData) : 1;
-		
-		List<BoardVO> boardList= dao.getPage(pageNo);
-		
 		request.setAttribute("boardList",boardList);
+		request.setAttribute("post_type",post_type);
 		
-		return "/page/board/free_list.jsp";
+		return "/page/board/board_list.jsp";
 	}
 
 }

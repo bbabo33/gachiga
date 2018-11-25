@@ -3,6 +3,7 @@
 .list_wrap {
 	display: table; 
 	width: 1000px;
+	text-align:center;
 }
 .list:hover{
 	cursor:pointer;

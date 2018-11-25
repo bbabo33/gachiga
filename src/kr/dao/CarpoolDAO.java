@@ -16,7 +16,7 @@ import kr.vo.CarpoolVO;
 public class CarpoolDAO {
 
 	/**
-	 * 최신글 5개 반환하는 메소드
+	 * 理쒖떊湲� 5媛� 諛섑솚�븯�뒗 硫붿냼�뱶
 	 * 
 	 * @param postNo
 	 * @param cnt
@@ -57,7 +57,7 @@ public class CarpoolDAO {
 
 	}
 
-	// 예약자수 증가/감소
+	// �삁�빟�옄�닔 利앷�/媛먯냼
 	public void CountApply(int postNo, int cnt) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(" update c_carpool_post ");
@@ -79,7 +79,7 @@ public class CarpoolDAO {
 
 	}
 
-	// 카풀글 추가
+	// 移댄�湲� 異붽�
 	public int insertCarpoolPost(CarpoolVO post) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -89,23 +89,21 @@ public class CarpoolDAO {
 			StringBuilder sql = new StringBuilder();
 
 			sql.append(" insert into c_carpool_post (no, writer_id, start_date, ");
-			sql.append(" start_place, start_place_name, start_time, end_place, end_place_name, ");
+			sql.append(" start_place_name, start_time, end_place_name, ");
 			sql.append(" smoke, money, user_cnt, post_type, add_info ) ");
-			sql.append(" values (seq_c_carpool_post_no.nextval , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) ");
+			sql.append(" values (seq_c_carpool_post_no.nextval , ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) ");
 
 			pstmt = conn.prepareStatement(sql.toString());
 			pstmt.setString(1, post.getId());
 			pstmt.setString(2, post.getStart_date());
-			pstmt.setString(3, post.getStart_place());
-			pstmt.setString(4, post.getStart_place_name());
-			pstmt.setString(5, post.getStart_time());
-			pstmt.setString(6, post.getEnd_place());
-			pstmt.setString(7, post.getEnd_place_name());
-			pstmt.setString(8, post.getSmoke());
-			pstmt.setInt(9, post.getMoney());
-			pstmt.setInt(10, post.getUser_cnt());
-			pstmt.setString(11, post.getPost_type());
-			pstmt.setString(12, post.getAdd_info());
+			pstmt.setString(3, post.getStart_place_name());
+			pstmt.setString(4, post.getStart_time());
+			pstmt.setString(5, post.getEnd_place_name());
+			pstmt.setString(6, post.getSmoke());
+			pstmt.setInt(7, post.getMoney());
+			pstmt.setInt(8, post.getUser_cnt());
+			pstmt.setString(9, post.getPost_type());
+			pstmt.setString(10, post.getAdd_info());
 
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -116,7 +114,7 @@ public class CarpoolDAO {
 	}
 
 	/**
-	 * id로 적은 카풀 내용을 반환하는 메소드
+	 * id濡� �쟻�� 移댄� �궡�슜�쓣 諛섑솚�븯�뒗 硫붿냼�뱶
 	 * 
 	 * @param id
 	 * @return
@@ -127,7 +125,7 @@ public class CarpoolDAO {
 
 		StringBuilder sql = new StringBuilder();
 		sql.append(
-				" select no, start_date, start_place, start_time, end_place, money, user_cnt, post_type, add_info, reg_date, smoke, start_place_name, end_place_name, apply_cnt ");
+				" select no, start_date, start_time, money, user_cnt, post_type, add_info, reg_date, smoke, start_place_name, end_place_name, apply_cnt ");
 		sql.append(" from c_carpool_post ");
 		sql.append(" where writer_id = ? ");
 
@@ -139,9 +137,7 @@ public class CarpoolDAO {
 			while (rs.next()) {
 				int no = rs.getInt("no");
 				String startDate = rs.getString("start_date");
-				String startPlace = rs.getString("start_place");
 				String startTime = rs.getString("start_time");
-				String endPlace = rs.getString("end_place");
 				int money = rs.getInt("money");
 				int userCnt = rs.getInt("user_cnt");
 				String postType = rs.getString("post_type");
@@ -155,9 +151,7 @@ public class CarpoolDAO {
 				CarpoolVO carpool = new CarpoolVO();
 				carpool.setNo(no);
 				carpool.setStart_date(startDate);
-				carpool.setStart_place(startPlace);
 				carpool.setStart_time(startTime);
-				carpool.setEnd_place(endPlace);
 				carpool.setMoney(money);
 				carpool.setUser_cnt(userCnt);
 				carpool.setPost_type(postType);
@@ -180,7 +174,7 @@ public class CarpoolDAO {
 	}
 
 	/**
-	 * id로 적은 카풀글의 글번호를 배열에 넣어 리턴해주는 메소드
+	 * id濡� �쟻�� 移댄�湲��쓽 湲�踰덊샇瑜� 諛곗뿴�뿉 �꽔�뼱 由ы꽩�빐二쇰뒗 硫붿냼�뱶
 	 * 
 	 * @param id
 	 * @return
@@ -232,9 +226,7 @@ public class CarpoolDAO {
 				post.setSmoke(rs.getString("smoke"));
 				post.setStart_date(rs.getString("start_date"));
 				post.setStart_time(rs.getString("start_time"));
-				post.setStart_place(rs.getString("start_place"));
 				post.setStart_place_name(rs.getString("start_place_name"));
-				post.setEnd_place(rs.getString("end_place"));
 				post.setEnd_place_name(rs.getString("end_place_name"));
 				post.setMoney(rs.getInt("money"));
 				post.setUser_cnt(rs.getInt("user_cnt"));
@@ -277,9 +269,7 @@ public class CarpoolDAO {
 				post.setSmoke(rs.getString("smoke"));
 				post.setStart_date(rs.getString("start_date"));
 				post.setStart_time(rs.getString("start_time"));
-				post.setStart_place(rs.getString("start_place"));
 				post.setStart_place_name(rs.getString("start_place_name"));
-				post.setEnd_place(rs.getString("end_place"));
 				post.setEnd_place_name(rs.getString("end_place_name"));
 				post.setMoney(rs.getInt("money"));
 				post.setUser_cnt(rs.getInt("user_cnt"));

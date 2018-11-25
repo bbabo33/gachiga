@@ -14,10 +14,8 @@ $(document).ready(function(){
 			data : {
 				'writer_id' : $("input[name=writer_id]").val(),
 				'start_date' : $("input[name=start_date]").val(),
-				'start_place' : $("input[name=start_place]").val(),
 				'start_place_name' : $("input[name=start_place_name]").val(),
 				'start_time' : $("input[name=start_time]").val(),
-				'end_place' : $("input[name=end_place]").val(),
 				'end_place_name' : $("input[name=end_place_name]").val(),
 				'smoke' : $("input[name=smoke]:checked").val(),
 				'money' : $("input[name=money]").val(),
@@ -90,14 +88,12 @@ $(document).ready(function(){
 			<!-- start_place  -->
 			<div id="start_place"></div>
 			<input type="hidden" name="start_place_name" id="start_place_name" class="input_place_name">
-			<input type="hidden" name="start_place" id="start_place" class="input_place">
 		</div>
 		<div class="input_wrap">
 			<label for="end_place">도착지</label>
 			<!-- end_place  -->
 			<div id="end_place"></div>
 			<input type="hidden" name="end_place_name" id="end_place_name" class="input_place_name">
-			<input type="hidden" name="end_place" id="end_place" class="input_place">
 		</div>
 		<div class="input_wrap">
 			<label for="money">금액</label>

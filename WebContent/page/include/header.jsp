@@ -5,7 +5,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<link rel="stylesheet" href="/carpool/assets/css/header.css">
 <link rel="stylesheet" href="/carpool/assets/css/login.css">
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript">
@@ -88,10 +87,10 @@
 	</a>
 	<nav id="gnb">
 		<ul>
-			<li><a href="<%=request.getContextPath()%>/boardReview/review_board_list.do">후기게시판</a></li>
-			<li><a href="<%=request.getContextPath()%>/board/free_board_list.do">자유게시판</a></li>
-			<li><a href="<%=request.getContextPath()%>/carpool/add_carpool_form.do">카풀등록</a></li>
 			<li><a href="<%=request.getContextPath()%>/carpool/list_carpool.do">카풀목록</a></li>
+			<li><a href="<%=request.getContextPath()%>/carpool/add_carpool_form.do">카풀등록</a></li>
+			<li><a href="<%=request.getContextPath()%>/board/board_list.do?post_type=review">후기게시판</a></li>
+			<li><a href="<%=request.getContextPath()%>/board/board_list.do?post_type=free">자유게시판</a></li>
 		</ul>
 	</nav>
 	

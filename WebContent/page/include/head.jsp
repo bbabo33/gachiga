@@ -6,6 +6,9 @@
 <meta charset="UTF-8">
 <title>GACHIGA</title>
 <link rel="stylesheet" href="/carpool/assets/css/index.css">
+<link rel="stylesheet" href="/carpool/assets/css/header.css">
+<link rel="stylesheet" href="/carpool/assets/css/section.css">
+<link rel="stylesheet" href="/carpool/assets/css/footer.css">
 <link rel="stylesheet" href="/carpool/assets/css/table.css">
 
 <script src="/carpool/assets/js/jquery-3.3.1.min.js"></script>

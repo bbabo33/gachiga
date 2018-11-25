@@ -22,9 +22,8 @@ public class AddComment_Controller implements Controller {
 		BoardDAO dao = new BoardDAO();
 		int commentResult = dao.insertComment(comment);
 
-		request.setAttribute("no", post_no); // 다시 디테일보드로 돌아가기 위해 지정*/
-		request.setAttribute("commentResult", commentResult);
+		request.setAttribute("cnt", commentResult);
 
-		return "/jsp/board/detail_board_commentResult.jsp";
+		return "/jsp/board/cooment_result.jsp";
 	}
 }

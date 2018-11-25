@@ -16,10 +16,11 @@ public class Addboard_Controller implements Controller{
 		board.setTitle(request.getParameter("title"));
 		board.setId(request.getParameter("id"));
 		board.setContent(request.getParameter("content"));
+		board.setPost_type(request.getParameter("post_type"));
 
 		int cnt = dao.insertBoard(board);
 		request.setAttribute("cnt", cnt);
-		
+
 		return "/jsp/board/add_board.jsp";
 	}
 

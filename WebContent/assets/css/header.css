@@ -1,6 +1,8 @@
 @charset "UTF-8";
 
 header {
+	background-color: white;
+	border-bottom: 1px solid #adabab;
 }
 
 header #header_content {
@@ -8,6 +10,7 @@ header #header_content {
 	margin: 0 auto;
 	padding: 15px 0;
 	min-height: 90px;
+	text-align: center;
 }
 
 header nav#gnb {
@@ -19,7 +22,8 @@ header nav#gnb ul {
 }
 
 header nav#gnb li {
-	padding: 15px; display : inline-block;
+	padding: 15px;
+	display: inline-block;
 	font-size: 15px;
 	display: inline-block;
 }
@@ -32,13 +36,14 @@ header #main_link {
 header #main_link img {
 	vertical-align: middle;
 	padding: 0 15px;
+	width: 80px;
 }
 
-div#user_info {
+header div#user_info {
 	display: inline-block;
 	font-size: 15px;
 }
 
-div#user_info form .login {
+header div#user_info form .login {
 	width: 100px;
 }

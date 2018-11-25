@@ -18,7 +18,6 @@ import kr.vo.MemberVO;
 public class NaverCheckUser_Controller implements Controller{
 	@Override
 	public String handRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
 		request.setCharacterEncoding("utf-8");
 
 		String token = request.getParameter("token");// 네이버 로그인 접근 토큰;
@@ -56,15 +55,18 @@ public class NaverCheckUser_Controller implements Controller{
 
 			MemberVO NaverUser = dao.selectById((String) resp.get("id"));
 			
-			if (NaverUser == null ) { //로그인 실패 -> 회원가입
+			if (NaverUser == null ) { // 로그인 실패
+				String email = (String) resp.get("email");
+				String naver_id = email.substring(0, email.indexOf("@"));
+				request.getSession().setAttribute("naver_id", naver_id);
 				request.getSession().setAttribute("Nid", resp.get("id"));
 				request.getSession().setAttribute("gender", resp.get("gender"));
 				request.getSession().setAttribute("name", resp.get("name"));
-				request.getSession().setAttribute("email", resp.get("email"));
+				request.getSession().setAttribute("email", email);
 				
 				request.setAttribute("value", 1);
 
-			} else { // 로그인성공
+			} else { // 로그인 성공
 				request.setAttribute("value", 0);
 				request.getSession().setAttribute("login_result", NaverUser);
 			}

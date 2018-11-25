@@ -21,7 +21,7 @@ public class AddUser_Controller implements Controller{
 		String password = request.getParameter("password");
 		String email = request.getParameter("email");
 		String tel = request.getParameter("tel1");
-		String addr = request.getParameter("basic_addr");
+		String addr = request.getParameter("addr");
 		
 		user.setId(id);
 		user.setName(name);

@@ -4,10 +4,8 @@ public class CarpoolVO {
 	private int no;
 	private String writer_id;
 	private String start_date;
-	private String start_place;
 	private String start_place_name;
 	private String start_time;
-	private String end_place;
 	private String end_place_name;
 	private String smoke;
 	private int money;
@@ -38,23 +36,11 @@ public class CarpoolVO {
 	public void setStart_date(String start_date) {
 		this.start_date = start_date;
 	}
-	public String getStart_place() {
-		return start_place;
-	}
-	public void setStart_place(String start_place) {
-		this.start_place = start_place;
-	}
 	public String getStart_time() {
 		return start_time;
 	}
 	public void setStart_time(String start_time) {
 		this.start_time = start_time;
-	}
-	public String getEnd_place() {
-		return end_place;
-	}
-	public void setEnd_place(String end_place) {
-		this.end_place = end_place;
 	}
 	public String getSmoke() {
 		return smoke;

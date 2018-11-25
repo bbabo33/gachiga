@@ -21,7 +21,7 @@
 					'name' : $("input[name=name]").val(),
 					'email' : $("input[name=email]").val(),
 					'tel1' : $("input[name=tel1]").val(),
-					'addr' : $("input[name=addr]").val(),
+					'addr' : $("input[name=basic_addr]").val(),
 				},
 				success : function(data){
 					if(data == 1){
@@ -147,27 +147,27 @@
 		<fieldset>
 		<ol>
 			<li id="id">
-						<c:choose> 
-							<c:when test="${is_naver == 0 }">			
-								<label for="id">* 아이디 :</label><input type="text" name="id" id="id">
-							</c:when>
-							<c:otherwise>
-								<label for="id">* 아이디 :</label><input type="text" name ="id" id="id" value = "${Nid}" readonly>	
-							</c:otherwise>
-						</c:choose>
-					<input type="button" value="중복체크" name="idCheck"><br>
-					<span class="error_msg"></span>
+				<c:choose> 
+					<c:when test="${is_naver == 0 }">			
+						<label for="id">* 아이디 :</label><input type="text" name="id" id="id">
+					</c:when>
+					<c:otherwise>
+						<label for="id">* 아이디 :</label><input type="text" name ="id" id="id" value = "${naver_id}" readonly>	
+					</c:otherwise>
+				</c:choose>
+				<input type="button" value="중복체크" name="idCheck"><br>
+				<span class="error_msg"></span>
 			</li>
 		
 			<li id="name">	
 				<c:choose> 
-						<c:when test="${is_naver == 0}">				
-							<label for="name">* 이름 :</label><input type="text" id="name" name="name"><br>
-						</c:when>
-						<c:otherwise>
-							<label for="name">* 이름 :</label><input type="text" name ="name" id="name" value = "${name}" readonly><br>
-						</c:otherwise>
-					</c:choose>
+					<c:when test="${is_naver == 0}">				
+						<label for="name">* 이름 :</label><input type="text" id="name" name="name"><br>
+					</c:when>
+					<c:otherwise>
+						<label for="name">* 이름 :</label><input type="text" name ="name" id="name" value = "${name}" readonly><br>
+					</c:otherwise>
+				</c:choose>
 				<span class="error_msg"></span>
 			</li>
 		
@@ -184,30 +184,29 @@
 			</li>
 		
 			<li id="tel1">
-				<label for="tel1">* 전화번호 : </label> <input type="text" name="tel1" placeholder="      '-' 없이 입력해주세요" value="">
+				<label for="tel1">* 전화번호 : </label> <input type="text" name="tel1" placeholder="'-' 없이 입력해주세요" value="">
 				<br><span class="error_msg"></span>
 			</li>
 		
 			<li id="email">
-					<c:choose> 
-						<c:when test="${is_naver == 0 }">				
-							<label for="email"> 이메일 :</label><input type="text" name="email" placeholder="      xxx@xxx.com" value="">
-						</c:when>
-						<c:otherwise>
-							<label for="email"> 이메일 :</label><input type="email" name="email" placeholder="xxx@xxx.com" value="${email}" readonly>
-						</c:otherwise>
-					</c:choose>
+				<c:choose> 
+					<c:when test="${is_naver == 0 }">				
+						<label for="email"> 이메일 :</label><input type="text" name="email" placeholder="xxx@xxx.com" value="">
+					</c:when>
+					<c:otherwise>
+						<label for="email"> 이메일 :</label><input type="email" name="email" placeholder="xxx@xxx.com" value="${email}" readonly>
+					</c:otherwise>
+				</c:choose>
 				<span class="error_msg"></span>
 			</li>
 		
 			<li id="basic_addr">
-					<label for="basic_addr">주소 : </label><input type="text"
-						name="basic_addr" value=""><span class="error_msg"></span><br>
+				<label for="basic_addr">주소 : </label>
+				<input type="text" name="basic_addr" value=""><span class="error_msg"></span><br>
 			</li>
 		
 		</ol>
 		</fieldset>
-		
- 			<input type="submit" value="회원가입" name="submit">
+		<input type="submit" value="회원가입" name="submit">
 	</form>
 </div>

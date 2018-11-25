@@ -6,7 +6,7 @@ $(document).ready(function() {
 		location.href = "add_board_form.do";
 	});
 	$("input[name=new_board]").click(function() {
-		location.href = "free_board_list.do";
+		location.href = "board_list.do";
 	});
 	$("input[name=post_list]").click(function() {
 		location.href = "list_post.jsp";

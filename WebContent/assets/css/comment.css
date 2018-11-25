@@ -1,24 +1,38 @@
 @charset "UTF-8";
 
-/* table #comment{
- 	
- 	width : 70%;
- 	background-color: #f9f9f9; 
- 	font-family: verdana, sans-serif;
+ol.commentBox {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
 
- } */
- 
-#div_comment{
-	width : 562px;
-	background-color: #f9f9f9;
-} 
+li.comment_wrap {
+	width: 70%;
+	margin: 20px auto;
+	min-height: 60px;
+}
 
- 
- 
-/*  
-#table {display: table; width: 90%;}
-.row {display: table-row;}
-.cell {display: table-cell; padding: 3px; border-bottom: 1px solid #DDD;}
-.col1 { width: 40%;}
-.col2 {width: 60%;} 
-*/
+div#comment_profile {
+	position: absolute;
+}
+
+div#comment_info {
+	text-align: left;
+	margin-left: 70px;
+}
+
+span#comment_writer {
+	font-size: 23px;
+}
+span#comment_date {
+	font-size: 15px;
+}
+span#comment_content {
+	font-size: 18x;
+}
+
+div#comment_content {
+	text-align: left;
+	margin-left: 70px;
+}

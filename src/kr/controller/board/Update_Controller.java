@@ -23,12 +23,11 @@ public class Update_Controller implements Controller {
 		board.setBoard_no(no);
 		board.setTitle(title);
 		board.setContent(content);
-		dao.updateBoard(board);	//업데이트
+		int result = dao.updateBoard(board);
 		
-		BoardVO changedBoard = dao.selectByNo(no);
-		request.setAttribute("board",changedBoard);
+		request.setAttribute("cnt", result);
 		
-		return "/page/board/detail_board.jsp";
+		return "/jsp/board/update_board.jsp";
 	}
 	
 
