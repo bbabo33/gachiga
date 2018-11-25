@@ -21,7 +21,7 @@ section table.commentBox{
 }
 
 section table th {
-	background-color: #f9f9f9;
+	background-color: #CADBE9;
 	color: black;
 }
 
@@ -30,7 +30,7 @@ section table.list_table th {
 }
 
 section table td {
-	color: #888;
+	color: #686868;
 }
 
 section table.list_table td {
@@ -68,7 +68,8 @@ section table td a {
 	color: black;
 	font-size: 15px;
 }
-#page_step .page_link:hover, #page_step .check{
-	background-color:gray;
-	color:white;
+
+#page_step .page_link:hover, #page_step .check {
+	background-color: #CADBE9;
+	color: black;
 }

@@ -1,10 +1,7 @@
-	<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.util.Date"%>
-<%@ page import="java.sql.*"%>
-<%@ page import="java.util.*"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@page import="kr.dao.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" href="/carpool/assets/css/list.css">
 <script>
 $(document).ready(function(){
@@ -20,8 +17,9 @@ $(document).ready(function(){
 })
 </script>
 <jsp:include page="/jsp/carpool/search_carpool.jsp" />
-<div align="center">
-	<h3>카풀 목록</h3>
+<div class="C">
+	<h3 align="center">카풀 목록</h3>
+	<h4 class="R">'${word}' 검색결과</h4>
 	
 	<div class="list_wrap">
 		<div class="row">	
@@ -32,7 +30,7 @@ $(document).ready(function(){
 			<span class="cell col1 head">좌석수</span>
 			<span class="cell col1 head">출발일</span>
 		</div>
-		<c:forEach items="${carpool_list}" var="post">
+		<c:forEach items="${searchedList}" var="post">
 			<div class="row list">	
 				<span class="cell col1">${post.writer_id }</span>
 				<span class="cell col2">${post.start_place_name}</span>
@@ -44,10 +42,9 @@ $(document).ready(function(){
 			</div>
 		</c:forEach>
 	</div>
-	<c:if test="${ empty carpool_list }">
-		<h3>등록된 게시글이 없습니다</h3>
+	<c:if test="${ empty searchedList }">
+		<h3>검색된 카풀글이 없습니다</h3>
 	</c:if>
-	
 	<div id="page_step">
 		<c:forEach var="i" begin="${start}" end="${end}" step="1">
 			<a class="page_link ${ pageNo == i ? 'check' : '' }" href="<%=request.getContextPath()%>/carpool/list_carpool.do?pageNo=${i}">${i}</a>

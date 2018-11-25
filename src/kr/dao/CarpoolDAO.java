@@ -16,7 +16,7 @@ import kr.vo.CarpoolVO;
 public class CarpoolDAO {
 
 	/**
-	 * 理쒖떊湲� 5媛� 諛섑솚�븯�뒗 硫붿냼�뱶
+	 * 최신글 5개
 	 * 
 	 * @param postNo
 	 * @param cnt
@@ -57,7 +57,7 @@ public class CarpoolDAO {
 
 	}
 
-	// �삁�빟�옄�닔 利앷�/媛먯냼
+	// 예약자 수 처리
 	public void CountApply(int postNo, int cnt) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(" update c_carpool_post ");
@@ -79,7 +79,7 @@ public class CarpoolDAO {
 
 	}
 
-	// 移댄�湲� 異붽�
+	// 카풀 등록
 	public int insertCarpoolPost(CarpoolVO post) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -114,7 +114,7 @@ public class CarpoolDAO {
 	}
 
 	/**
-	 * id濡� �쟻�� 移댄� �궡�슜�쓣 諛섑솚�븯�뒗 硫붿냼�뱶
+	 * 회원이 등록한 카풀조회
 	 * 
 	 * @param id
 	 * @return
@@ -174,7 +174,7 @@ public class CarpoolDAO {
 	}
 
 	/**
-	 * id濡� �쟻�� 移댄�湲��쓽 湲�踰덊샇瑜� 諛곗뿴�뿉 �꽔�뼱 由ы꽩�빐二쇰뒗 硫붿냼�뱶
+	 * 본인이 등록한 카풀글 번호리스트
 	 * 
 	 * @param id
 	 * @return
@@ -244,6 +244,7 @@ public class CarpoolDAO {
 		return post;
 	}
 
+	// 모든 카풀목록
 	public List<CarpoolVO> selectAllPost() {
 		List<CarpoolVO> carpoolList = new ArrayList<>();
 
@@ -286,7 +287,8 @@ public class CarpoolDAO {
 
 		return carpoolList;
 	}
-
+	
+	// 카풀 삭제
 	public int deleteCarpool(int no) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -309,5 +311,148 @@ public class CarpoolDAO {
 		}
 
 		return result;
+	}
+
+	// 페이징
+	public List<CarpoolVO> getPage( int pageNo ) {
+		List<CarpoolVO> carpoolList = new ArrayList<>();
+
+		StringBuilder sql = new StringBuilder();
+		sql.append(" select *  ");
+		sql.append(" from ( select rowNum as rnum, c.* ");
+		sql.append(" from ( select no, writer_id, start_place_name, end_place_name, post_type, user_cnt, apply_cnt, start_date ");
+
+		sql.append(" from c_carpool_post order by no desc) c )  ");
+		sql.append(" where rnum between ? and ? ");
+
+		try (Connection conn = new ConnectionFactory().getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
+			pstmt.setInt(1, (pageNo * 5) - 4);
+			pstmt.setInt(2, pageNo * 5);
+			ResultSet rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				CarpoolVO post = new CarpoolVO();
+				post.setNo(rs.getInt("no"));
+				post.setWriter_id(rs.getString("writer_id"));
+				post.setPost_type(rs.getString("post_type"));
+				post.setStart_date(rs.getString("start_date"));
+				post.setStart_place_name(rs.getString("start_place_name"));
+				post.setEnd_place_name(rs.getString("end_place_name"));
+				post.setUser_cnt(rs.getInt("user_cnt"));
+				post.setApply_cnt(rs.getInt("apply_cnt"));
+				carpoolList.add(post);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return carpoolList;
+	}
+
+	// 페이징위한 모든 글 수
+	public int cntAllRows() {
+		StringBuilder sql = new StringBuilder();
+		sql.append(" select count(*) as count from c_carpool_post ");
+
+		int cntRows = 0;
+
+		try (Connection conn = new ConnectionFactory().getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				cntRows = rs.getInt("count");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return cntRows;
+	}
+
+	// 글 검색 페이징
+	public List<CarpoolVO> searchBoard(int pageNo, String category, String word) {
+		List<CarpoolVO> searchedList = new ArrayList<>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = new ConnectionFactory().getConnection();
+			StringBuffer sql = new StringBuffer();
+			sql.append(" select *  ");
+			sql.append(" from ( select rowNum as rnum, c.* ");
+			sql.append(" from ( select no, writer_id, start_place_name, end_place_name, post_type, user_cnt, apply_cnt, start_date ");
+
+			sql.append(" from c_carpool_post  ");
+			if (category.equals("rname")) { // 작성자
+				sql.append(" where writer_id like ? ");
+			} else if (category.equals("rstart")) { // 출발지
+				sql.append(" where start_place_name like ? ");
+			} else if (category.equals("rend")) { // 도착지
+				sql.append(" where end_place_name like ?");
+			}
+
+			sql.append(" order by no desc) c )  ");
+			sql.append(" where rnum between ? and ? "); //
+
+			pstmt = conn.prepareStatement(sql.toString());
+			pstmt.setString(1, "%" + word + "%");
+			pstmt.setInt(2, (pageNo * 5) - 4);
+			pstmt.setInt(3, pageNo * 5);
+
+			System.out.println("카풀검색 :" + category + "," + word);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				CarpoolVO post = new CarpoolVO();
+				post.setNo(rs.getInt("no"));
+				post.setWriter_id(rs.getString("writer_id"));
+				post.setPost_type(rs.getString("post_type"));
+				post.setStart_date(rs.getString("start_date"));
+				post.setStart_place_name(rs.getString("start_place_name"));
+				post.setEnd_place_name(rs.getString("end_place_name"));
+				post.setUser_cnt(rs.getInt("user_cnt"));
+				post.setApply_cnt(rs.getInt("apply_cnt"));
+				searchedList.add(post);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return searchedList;
+	}
+
+	// 검색 페이징위한 모든 글수
+	public int cntSearchAllRows(String category, String word) {
+		StringBuilder sql = new StringBuilder();
+		sql.append(" select count(*) as count from c_carpool_post ");
+
+		if (category.equals("rname")) { // 작성자
+			sql.append(" where writer_id like ? ");
+		} else if (category.equals("rstart")) { // 출발지
+			sql.append(" where start_place_name like ? ");
+		} else if (category.equals("rend")) { // 도착지
+			sql.append(" where end_place_name like ?");
+		}
+
+		int cntRows = 0;
+
+		try (Connection conn = new ConnectionFactory().getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
+			pstmt.setString(1, "%" + word + "%");
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				cntRows = rs.getInt("count");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return cntRows;
 	}
 }

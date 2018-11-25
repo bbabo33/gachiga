@@ -3,6 +3,8 @@
  */
 $(document).ready(function() {
 	$(function() {
+		var dateToday = new Date(); 
+
 	    $( "input#start_date" ).datepicker({
 	    	dateFormat: 'yy.mm.dd',
 	        prevText: '이전 달',
@@ -15,24 +17,13 @@ $(document).ready(function() {
 	        showMonthAfterYear: true,
 	        changeMonth: true,
 	        changeYear: true,
-	        yearSuffix: '년'
+	        yearSuffix: '년',
+	        minDate:dateToday
 	    });
-	});
-	$(function() { 	
-		$("div#start_place").postcodify({
-        	insertAddress : "input#start_place_name",
-        	hideOldAddresses : false
-    	}); 
-	});
-	$(function() { 
-		$("div#end_place").postcodify({
-        	insertAddress : "input#end_place_name",
-        	hideOldAddresses : false
-    	}); 
 	});
 	
 	$("input[name=post_list]").click(function() {
-		location.href = "list_post.jsp";
+		location.href = "/carpool/carpool/list_carpool.do";
 	});
 	
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -114,15 +105,6 @@ $(document).ready(function() {
 				} else {
 					map.setCenter(coords);
 				}
-	
-		        // 인포윈도우로 장소에 대한 설명을 표시합니다
-		        /*var infowindow = new daum.maps.InfoWindow({
-		            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
-		        });
-		        infowindow.open(map, marker);*/
-	
-		        
-		        
 		    } 
 		});     
 	});

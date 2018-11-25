@@ -27,7 +27,7 @@ if(window.sessionStorage.getItem('token') != null && document.referrer.indexOf("
 function getData(data){
 	if( data == 0) { //로그인성공
 		location.href="<%=request.getContextPath()%>";
-		}
+	}
 }
 </script>
 </head>

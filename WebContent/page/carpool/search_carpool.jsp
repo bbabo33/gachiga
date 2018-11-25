@@ -7,11 +7,10 @@
 		<%@ include file="/page/include/header.jsp" %> 
 	</header>
 	<section>
-		<%@ include file="/jsp/myPage/myProfile.jsp" %>
+		<%@ include file="/jsp/carpool/search_carpool_result.jsp" %>
 	</section>
 	<footer>
 		<%@ include file="/page/include/footer.jsp" %>
 	</footer>
-
 </body>
 </html>

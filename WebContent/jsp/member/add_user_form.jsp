@@ -40,13 +40,11 @@
 		});
 		
 		$("input[name=idCheck]").click(function(){
-			console.log("user_form.jsp line 43:")
 			idCheck();
 		});
 		
 		//중복체크
 		function idCheck(){
-			console.log("user_form.jsp line 48:")
 			var id = document.signform.id;
 			$.ajax({
 				url : '<%=request.getContextPath()%>/member/check_user.do',
@@ -137,7 +135,9 @@
 			}
 			return true;
 		};
+		
 	});
+	
 </script>
 
 <div id="add_user_form">
@@ -152,7 +152,7 @@
 						<label for="id">* 아이디 :</label><input type="text" name="id" id="id">
 					</c:when>
 					<c:otherwise>
-						<label for="id">* 아이디 :</label><input type="text" name ="id" id="id" value = "${naver_id}" readonly>	
+						<label for="id">* 아이디 :</label><input type="text" name ="id" id="id" value = "${naver_id}">	
 					</c:otherwise>
 				</c:choose>
 				<input type="button" value="중복체크" name="idCheck"><br>

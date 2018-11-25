@@ -55,9 +55,9 @@ input.btn {
 }
 
 .head {
-	background-color: #fafafa;
+	background-color: #CADBE9;
+	border-top: 1px solid black;
 }
-
 .row {
 	display: table-row;
 	width: 100%;

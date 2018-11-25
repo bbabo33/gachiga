@@ -1,5 +1,7 @@
 @charset "UTF-8";
-
+::-webkit-scrollbar {
+    display: none;
+}
 header {
 	background-color: white;
 	border-bottom: 1px solid #adabab;

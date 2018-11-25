@@ -36,8 +36,6 @@ public class AddUser_Controller implements Controller{
 			request.getSession().setAttribute("login_result", user);				
 		request.setAttribute("cnt", i);
 		
-		System.out.println(i);
-		
 		return "/jsp/member/add_user.jsp";
 	}
 

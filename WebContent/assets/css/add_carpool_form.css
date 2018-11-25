@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+#form_wrap {
+	float: left;
+	width: 550px;
+}
+
+#map_wrap {
+	float: right;
+	width: 450px;
+}
+
+form[name=cForm] {
+	width: 100%;
+	display: table;
+}
+
+.input_wrap {
+	display: table-row;
+}
+
+.input_wrap .cell1 {
+	font-size: 19px;
+	font-weight: bold;
+	text-align: right;
+	padding-right: 15px;
+}
+
+.input_wrap .cell2 {
+	text-align: left;
+	font-size: 15px;
+}
+
+.input_wrap#start_info img {
+	position: absolute;
+	padding: 3px;
+}
+
+.input_wrap input[name=start_date] {
+	padding: 5px 5px 5px 25px;
+	width: 108px;
+}

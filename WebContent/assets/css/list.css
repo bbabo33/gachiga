@@ -1,17 +1,38 @@
 @charset "UTF-8";
 
 .list_wrap {
-	display: table; 
+	display: table;
 	width: 1000px;
-	text-align:center;
+	text-align: center;
 }
-.list:hover{
-	cursor:pointer;
-	background-color:#fafafa;
+
+.list:hover {
+	cursor: pointer;
+	background-color: #fafafa;
 }
 
 .cell {
 	padding: 3px;
-	border: 1px solid #ddd;
 	font-size: 17px;
+}
+
+#page_step {
+	width: 100%;
+	margin: 40px 0;
+}
+
+#page_step .page_link {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	border: 1px solid black;
+	padding: 3px;
+	color: black;
+	font-size: 15px;
+}
+
+#page_step .page_link:hover, #page_step .check {
+	background-color: #CADBE9;
+	color: black;
 }

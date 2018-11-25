@@ -37,6 +37,8 @@
 		<span class="cell col1">${apply.start_place_name }<br>${apply.start_date}:${apply.start_time}</span> 
 		<span class="cell col1">${apply.end_place_name }</span> 
 		<span class="cell col1">${apply.type }</span> 
-		<span class="cell col1">${apply.user_cnt }</span>
+		<span class="cell col1">${apply.user_cnt }
+			<input type="button" value="예약취소" name="apply_cancel">
+		</span>
 	</div>
 </c:forEach>

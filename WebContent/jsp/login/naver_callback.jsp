@@ -22,12 +22,11 @@
 		var loginId = email.substring(0, email.indexOf('@'));
 		var opener = window.opener;
 
-		opener.sessionStorage.setItem('token',
-				naver_id_login.oauthParams.access_token);
+		opener.sessionStorage.setItem('token',naver_id_login.oauthParams.access_token);
 
-		opener.location.href = "http://localhost:8888/carpool/member/add_user_form.do";
+		opener.location.href = "http://localhost:8888/carpool/member/add_user_form.do?is_naver=1&token=" + naver_id_login.oauthParams.access_token;
 		window.close();
-
+		session.setAttribute("token", naver_id_login.oauthParams.access_token);
 	}
 
 </script>

@@ -12,6 +12,5 @@
 	<footer>
 		<%@ include file="/page/include/footer.jsp" %>
 	</footer>
-
 </body>
 </html>

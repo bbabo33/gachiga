@@ -13,47 +13,8 @@ import kr.vo.BoardVO;
 import kr.vo.CommentVO;
 
 public class BoardDAO {
-	/**
-	 * 모든 글
-	 */
-	public List<BoardVO> selectAllBoard(String post_type) {
-		List<BoardVO> boardList = new ArrayList<>();
-		Connection conn = null;
-		PreparedStatement pstmt = null;
 
-		try {
-			conn = new ConnectionFactory().getConnection();
-			StringBuilder sql = new StringBuilder();
-			sql.append(" select board_no, title, content, id, cnt, ");
-			sql.append(" case when to_char(reg_date, 'yyyy-mm-dd') >= to_char(sysdate, 'yyyy-mm-dd')  ");
-			sql.append(" then to_char(reg_date,'HH24.mi') ");
-			sql.append(" else to_char(reg_date, 'yyyy.mm.dd') end reg_date, ");
-			sql.append("  from c_board ");
-			sql.append(" order by board_no desc ");
-			sql.append(" where post_type = ? ");
-
-			pstmt = conn.prepareStatement(sql.toString());
-			pstmt.setString(1, post_type);
-			ResultSet rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				BoardVO board = new BoardVO();
-				board.setBoard_no(rs.getInt("board_no"));
-				board.setTitle(rs.getString("title"));
-				board.setId(rs.getString("id"));
-				board.setRegDate(rs.getString("reg_date"));
-				boardList.add(board);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			JDBCClose.close(pstmt, conn);
-		}
-
-		return boardList;
-	}
-
-	// 최신글 5개
+	// 최신글5개
 	public List<BoardVO> selectFive(String post_type) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -61,9 +22,10 @@ public class BoardDAO {
 		try {
 			conn = new ConnectionFactory().getConnection();
 			StringBuilder sql = new StringBuilder();
-			sql.append(" select * from ( "); // 갯수 필터링
-			sql.append(" select rownum as rnum, c.* from ( "); // 번호 매기기
-			sql.append(" select board_no , title, id, reg_date "); //
+			sql.append(" select * from ( "); // 媛��닔 �븘�꽣留�
+			sql.append(" select rownum as rnum, c.* from ( "); // 踰덊샇 留ㅺ린湲�
+			sql.append(" select board_no , title, id, "); //
+			sql.append(" to_char(reg_date, 'yyyy.mm.dd') as reg_date ");
 			sql.append(" from ( select * from c_board where post_type = ? order by reg_date desc ) ");
 			sql.append(" ) c ");
 			sql.append(" )where rnum between 1 and 5 ");
@@ -189,7 +151,7 @@ public class BoardDAO {
 	}
 
 	/**
-	 * 조회수 업데이트
+	 * 조회수 증가
 	 */
 	public void updateViewCnt(int board_no) {
 
@@ -227,26 +189,6 @@ public class BoardDAO {
 		}
 		return result;
 
-	}
-
-	public int cntAllRows(String post_type) {
-		StringBuilder sql = new StringBuilder();
-		sql.append(" select count(*) as count from c_board ");
-		sql.append(" where post_type = ? ");
-
-		int cntRows = 0;
-
-		try (Connection conn = new ConnectionFactory().getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
-			pstmt.setString(1, post_type);
-			ResultSet rs = pstmt.executeQuery();
-			if (rs.next()) {
-				cntRows = rs.getInt("count");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return cntRows;
 	}
 
 	// 페이징
@@ -290,7 +232,28 @@ public class BoardDAO {
 		return boardList;
 	}
 	
-	// 글검색
+	// 페이징위한 모든 글 수
+	public int cntAllRows(String post_type) {
+		StringBuilder sql = new StringBuilder();
+		sql.append(" select count(*) as count from c_board ");
+		sql.append(" where post_type = ? ");
+
+		int cntRows = 0;
+
+		try (Connection conn = new ConnectionFactory().getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
+			pstmt.setString(1, post_type);
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				cntRows = rs.getInt("count");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return cntRows;
+	}
+	
+	// 글 검색 페이징
 	public List<BoardVO> searchBoard(int pageNo, String category, String word, String post_type) {
 		List<BoardVO> searchedList = new ArrayList<>();;
 		Connection conn = null;
@@ -308,9 +271,9 @@ public class BoardDAO {
 			sql.append(" else to_char(reg_date, 'yyyy.mm.dd') end reg_date ");
 			
 			sql.append(" from c_board  ");
-			if (category.equals("rname")) {	// 작성자아이디
+			if (category.equals("rname")) {	// �옉�꽦�옄�븘�씠�뵒
 				sql.append(" where id like ? and post_type = ? ");
-			} else if (category.equals("rtitle")) {	// 제목
+			} else if (category.equals("rtitle")) {	// �젣紐�
 				sql.append(" where title like ? and post_type = ? ");
 			}
 			
@@ -323,7 +286,7 @@ public class BoardDAO {
 			pstmt.setInt(3, (pageNo * 5) - 4);
 			pstmt.setInt(4, pageNo * 5);
 
-			System.out.println("검색 :" + category + "," + word);
+			System.out.println("寃��깋 :" + category + "," + word);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				BoardVO board = new BoardVO();
@@ -351,14 +314,14 @@ public class BoardDAO {
 		return searchedList;
 	}
 	
-	// 검색결과 컬럼수
+	// 검색 페이징위한 모든 글수
 	public int cntSearchAllRows(String post_type, String category, String word) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(" select count(*) as count from c_board ");
 		
-		if (category.equals("rname")) {	// 작성자아이디
+		if (category.equals("rname")) {	// 작성자 아이디
 			sql.append(" where id like ? and post_type = ? ");
-		} else if (category.equals("rtitle")) {	// 제목
+		} else if (category.equals("rtitle")) {	// 글 제목
 			sql.append(" where title like ? and post_type = ? ");
 		}
 		
@@ -380,7 +343,6 @@ public class BoardDAO {
 	
 	// 댓글 추가
 	public int insertComment(CommentVO comment) {
-
 		int commentResult = 0;
 
 		StringBuffer sql = new StringBuffer();
@@ -399,7 +361,7 @@ public class BoardDAO {
 		return commentResult;
 	}
 
-	// 모든 댓글
+	// 글에대한 모든 댓글
 	public List<CommentVO> selectAllComment(int post_no) {
 		List<CommentVO> comments = new ArrayList<>();
 

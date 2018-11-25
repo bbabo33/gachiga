@@ -1,2 +1,5 @@
 eclipse.preferences.version=1
 encoding//WebContent/jsp/login/login_naver.jsp=UTF-8
+encoding//src/kr/controller/myPage/MyReservationController.java=UTF-8
+encoding//src/kr/dao/BoardDAO.java=UTF-8
+encoding//src/kr/dao/CarpoolDAO.java=UTF-8

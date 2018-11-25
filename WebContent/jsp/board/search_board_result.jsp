@@ -36,14 +36,9 @@
 	<c:if test="${ empty searchedList }">
 		<h3>검색된 게시글이 없습니다</h3>
 	</c:if>
-	<c:forEach var="i" begin="${start}" end="${end}" step="1">
-		<c:choose>
-			<c:when test="${i != end }">
-				<a href="<%=request.getContextPath()%>/board/search_board.do?post_type=${post_type}&pageNo=${i}&category=${category}&word=${word}">${i}/</a>
-			</c:when>
-			<c:otherwise>
-				<a href="<%=request.getContextPath()%>/board/search_board.do?post_type=${post_type}&pageNo=${i}&category=${category}&word=${word}">${i}</a>
-			</c:otherwise>
-		</c:choose>
-	</c:forEach>
+	<div id="page_step">
+		<c:forEach var="i" begin="${start}" end="${end}" step="1">
+			<a class="page_link ${ pageNo == i ? 'check' : '' }" href="<%=request.getContextPath()%>/board/search_board.do?post_type=${post_type}&pageNo=${i}&category=${category}&word=${word}">${i}</a>
+		</c:forEach>
+	</div>
 </div>

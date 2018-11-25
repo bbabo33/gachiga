@@ -22,29 +22,24 @@ public class MyReservationController implements Controller {
 		
 		HttpSession session = request.getSession();
 		MemberVO user = new MemberVO();
-		user = (MemberVO)session.getAttribute("login_result"); //세션 영역에 있던 login_result를  user에 담아준다
+		user = (MemberVO)session.getAttribute("login_result"); //�꽭�뀡 �쁺�뿭�뿉 �엳�뜕 login_result瑜�  user�뿉 �떞�븘以��떎
 		
 		CarpoolDAO dao = new CarpoolDAO();
-//		CarpoolVO carpool = new CarpoolVO();
-		List<CarpoolVO> carpoolList = new ArrayList<>(); //carpoolVO를 배열로 하는 arrayList 생성
-		carpoolList = dao.selectById(user.getId());//유저의 아이디로 작성한 글의 내용을 담은 List 반환
-		
-		request.setAttribute("carpoolList", carpoolList); //리퀘스트 영역에 등록
+
+		List<CarpoolVO> carpoolList = new ArrayList<>();
+		carpoolList = dao.selectById(user.getId()); // 본인글들
 		
 		
 		List<Integer> noList = new ArrayList<>();
-		noList = dao.selectBoardNO(user.getId()); //유저의 아이디로 작성한 카풀글의 번호 배열을 가져옴
+		noList = dao.selectBoardNO(user.getId()); //본인이 등록한 카풀글 번호리스트
 		
 		ApplyDAO aDao = new ApplyDAO();
 		
 		Map<Integer, List<MemberVO>> reservList = new HashMap<>(); 
 		reservList = aDao.selectReserv(noList); 
 		
-		//글번호에 따라 예약자의 정보를 담은 memberVO List를 받아서 글번호를 key로, memberVO List를 value로 하는 map객체 반환
-		
-		
-		
-		request.setAttribute("reservList", reservList); //리퀘스트 영역에 map인 reservList 등록
+		request.setAttribute("carpoolList", carpoolList); 
+		request.setAttribute("reservList", reservList); //由ы�섏뒪�듃 �쁺�뿭�뿉 map�씤 reservList �벑濡�
 		
 		
 		

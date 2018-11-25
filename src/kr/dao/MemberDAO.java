@@ -188,6 +188,42 @@ public class MemberDAO {
 		
 		return member;
 	}
+	public MemberVO selectByNidForNaver(String nid) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		MemberVO member = null;
+		try {
+			conn = new ConnectionFactory().getConnection();
+			StringBuilder sql = new StringBuilder();
+			
+			sql.append(" select name, id, email, password, ");
+			sql.append(" tel, addr, reg_date ");
+			sql.append(" from c_member ");
+			sql.append(" where password = ? ");
+			
+			pstmt = conn.prepareStatement(sql.toString());
+			pstmt.setString(1, nid);
+			
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				member = new MemberVO();
+				member.setName(rs.getString("name"));
+				member.setId(rs.getString("id"));
+				member.setPassword(rs.getString("password"));
+				member.setEmail(rs.getString("email"));
+				member.setTel(rs.getString("tel"));
+				member.setAddr(rs.getString("addr"));
+				member.setRegDate(rs.getString("reg_date"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return member;
+	}
 	
 	public int dele_user(String id) {
 		Connection conn = null;

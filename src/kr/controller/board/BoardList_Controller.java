@@ -16,7 +16,7 @@ public class BoardList_Controller implements Controller{
 		String post_type = request.getParameter("post_type");
 		
 		BoardDAO dao = new BoardDAO();
-		int allRows=dao.cntAllRows(post_type);	// �� �Խñۼ�
+		int allRows=dao.cntAllRows(post_type);	// 모든 컬럼수
 		int start=1;
 		int end=0;
 
@@ -31,6 +31,7 @@ public class BoardList_Controller implements Controller{
 		
 		List<BoardVO> boardList= dao.getPage(pageNo, post_type);
 		
+		request.setAttribute("pageNo", pageNo);
 		request.setAttribute("start", start);
 		request.setAttribute("end", end);
 		request.setAttribute("boardList",boardList);

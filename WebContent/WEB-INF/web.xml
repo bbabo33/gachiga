@@ -6,7 +6,7 @@
     <servlet-class>kr.controller.FrontController</servlet-class>
     <init-param>
       <param-name>proplocation</param-name>
-      <param-value>C:\Users\hong\eclipse-workspace\gachiga\bean.properties</param-value>
+      <param-value>C:\lecture\web-workspace\gachiga\bean.properties</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>

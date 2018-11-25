@@ -1,11 +1,16 @@
 <%@page import="java.util.List"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="/carpool/assets/css/detail.css">
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=407280bcdba9bde46f3475b7659d876b&libraries=services"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=407280bcdba9bde46f3475b7659d876b"></script>
 <script type="text/javascript">
+<%// 줄바꿈
+pageContext.setAttribute("br", "<br/>");
+pageContext.setAttribute("cn", "\n");
+%> 
 $(document).ready(function(){
 	$("input").click(function(event){
 		var name = $(event.target).attr("name");
@@ -17,7 +22,6 @@ $(document).ready(function(){
 			case "carpool_list":
 				location.href = "<%= request.getContextPath() %>/carpool/list_carpool.do";
 				break;
-			
 		}
 	});
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -145,10 +149,8 @@ $(document).ready(function(){
 });
 </script>
 <div id="container">
-	<h3>카풀 상세</h3>
 	<div id="detail_header">
-		<h4>카풀</h4>
-		<h5>${ carpool.post_type == 'driver' ? '타세요' : '태워주세요' }</h5>
+		<h3>카풀 ${ carpool.post_type == 'driver' ? '"타세요"' : '"태워주세요"' }</h3>
 	</div>
 	<div>
 		<div class="wrap" id="detail_wrap">
@@ -158,8 +160,8 @@ $(document).ready(function(){
 					<span class="cell">${ carpool.no }</span>
 				</div>
 				<div class="row">
-					<span class="cell">출발이</span>
-					<span class="cell">${ carpool.start_date }</span>
+					<span class="cell">출발날짜</span>
+					<span class="cell">${ carpool.start_date } ${carpool.start_time }</span>
 				</div>
 				<div class="row">
 					<span class="cell">출발지</span>
@@ -172,7 +174,7 @@ $(document).ready(function(){
 				</div>
 				<div class="row">
 					<span class="cell">흡연여부</span>
-					<span class="cell"><c:out value="${ carpool.smoke }" /></span>
+					<span class="cell">${ carpool.smoke == 1 ? '흡연' : '비흡연' }</span>
 				</div>
 				<div class="row">
 					<span class="cell">탑승가능자수</span>
@@ -208,13 +210,8 @@ $(document).ready(function(){
 	</div>
 	
 	<div class="wrap" id="add_info">
-		<span class="cell">추가 내용</span>
-		<span class="cell">${ carpool.add_info }</span>
-	</div>
-	
-	<div class="wrap" id="star_score">
-		<span class="cell">별점</span>
-		<span class="cell">★★★★★</span>
+		<p>추가 내용</p>
+		<p>${fn:replace(carpool.add_info, cn, br) }</p>
 	</div>
 	
 	<c:if test="${ login_result.id == carpozol.writer_id }">
