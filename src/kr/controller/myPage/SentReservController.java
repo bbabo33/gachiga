@@ -20,8 +20,10 @@ public class SentReservController implements Controller {
 		HttpSession session = request.getSession();
 		MemberVO user = new MemberVO();
 		user = (MemberVO)session.getAttribute("login_result");
+		if (user == null) {
+ 			return "redirect:" + request.getContextPath();
+		}
 		ApplyDAO dao = new ApplyDAO();
-		ApplyVO apply = new ApplyVO();
 		List<ApplyVO> list = new ArrayList<>();
 		
 		list = dao.selectById(user.getId());

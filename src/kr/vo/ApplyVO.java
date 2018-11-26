@@ -2,6 +2,7 @@ package kr.vo;
 
 public class ApplyVO {
 
+	private int no;
 	private String id;
 	private int post_no;
 	private int user_cnt;
@@ -43,6 +44,14 @@ public class ApplyVO {
 
 	public int getPost_no() {
 		return post_no;
+	}
+
+	public int getNo() {
+		return no;
+	}
+
+	public void setNo(int no) {
+		this.no = no;
 	}
 
 	public void setPost_no(int post_no) {

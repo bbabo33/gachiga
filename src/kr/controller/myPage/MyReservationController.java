@@ -23,7 +23,9 @@ public class MyReservationController implements Controller {
 		HttpSession session = request.getSession();
 		MemberVO user = new MemberVO();
 		user = (MemberVO)session.getAttribute("login_result"); //�꽭�뀡 �쁺�뿭�뿉 �엳�뜕 login_result瑜�  user�뿉 �떞�븘以��떎
-		
+		if (user == null) {
+ 			return "redirect:" + request.getContextPath();
+		}
 		CarpoolDAO dao = new CarpoolDAO();
 
 		List<CarpoolVO> carpoolList = new ArrayList<>();
@@ -40,9 +42,8 @@ public class MyReservationController implements Controller {
 		
 		request.setAttribute("carpoolList", carpoolList); 
 		request.setAttribute("reservList", reservList); //由ы�섏뒪�듃 �쁺�뿭�뿉 map�씤 reservList �벑濡�
-		
-		
-		
+
+		System.out.println("reserv"+reservList);
 		return "/page/myPage/myReservation.jsp";
 	}
 

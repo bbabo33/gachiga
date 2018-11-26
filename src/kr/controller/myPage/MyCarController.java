@@ -13,12 +13,16 @@ public class MyCarController implements Controller {
 
 		MemberVO user = new MemberVO();
 		user = (MemberVO) request.getSession().getAttribute("login_result");
+		if (user == null) {
+			return "redirect:" + request.getContextPath();
+		}
+		
 		// 차량 등록 여부를 확인하기 위해 세션 영역에 등록된 user를 가져옴
 		CarVO car = new CarVO();
 		CarDAO dao = new CarDAO();
 		car = dao.selectByID(user.getId());
 
 		request.setAttribute("car", car);
-		return "/jsp/myPage/myCar.jsp";
+		return "/page/myPage/myCar.jsp";
 	}
 }

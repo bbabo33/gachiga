@@ -9,8 +9,6 @@ import java.util.List;
 
 import kr.util.ConnectionFactory;
 import kr.util.JDBCClose;
-import kr.vo.ApplyVO;
-import kr.vo.BoardVO;
 import kr.vo.CarpoolVO;
 
 public class CarpoolDAO {

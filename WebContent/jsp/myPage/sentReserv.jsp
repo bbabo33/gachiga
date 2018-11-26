@@ -12,33 +12,61 @@
 		$('#detail').click(function(){
 			location.href="<%=request.getContextPath()%>/myPage/reservationDetail.do";
 		});
+		$("input[name=apply_cancel]").click(function(e){
+			var no = $(e.target).parent().find("input[name=no]").val();
+			$.ajax({
+				url : '<%=request.getContextPath()%>/apply/cancel_apply.do',
+				type : 'post',
+				data : {
+					'no' : no
+				},
+				success : function(data){
+					if(data.trim()==1){
+						alert("예약이 취소되었습니다");
+					}
+				},
+				error : function(xhr, ajaxOptions, thrownError) {
+					alert(xhr.status + " " + thrownError);
+				}
+			});
+		});
 	});
 </script>
-<div>
-	<jsp:include page="/jsp/myPage/myPageMenu.jsp"></jsp:include>
-</div>
-<div>
-	<jsp:include page="/jsp/myPage/reservMenu.jsp"></jsp:include>
-</div>
-
-<div id="table">
-	<div class="row">
-		<span class="cell col1 head">프로필</span> 
-		<span class="cell col1 head">출발</span> 
-		<span class="cell col1 head">도착</span> 
-		<span class="cell col1 head">타입</span> 
-		<span class="cell col1 head">자리</span>
+<div class="myProfileArea">
+	<div class="wrap">
+	<h2>나의예약내역</h2>
+		<div class="row">
+			<span class="cell col1 head">프로필</span> 
+			<span class="cell col1 head">출발</span> 
+			<span class="cell col1 head">도착</span> 
+			<span class="cell col1 head">타입</span> 
+			<span class="cell col1 head">자리</span>
+			<span class="cell col1 head">상태</span>
+		</div>
+		<c:forEach items="${requestScope.applyList }" var="apply">
+		<div class="row">
+			<span class="cell col1">${apply.writer_id }</span> 
+			<span class="cell col1">${apply.start_place_name }<br>${apply.start_date}:${apply.start_time}</span> 
+			<span class="cell col1">${apply.end_place_name }</span> 
+			<span class="cell col1">${apply.type }</span> 
+			<span class="cell col1">${apply.user_cnt }</span>
+			<span class="cell col1">
+			<c:if test="${apply.status == 'success' }">
+				예약성공
+				<input class="btn" type="button" value="예약취소" name="apply_cancel">
+				<input type="hidden" value="${apply.no }" name="no">
+			</c:if>
+			<c:if test="${apply.status == 'cancel' }">
+				예약취소
+			</c:if>
+			</span>
+			
+		</div>
+		</c:forEach>
+		<c:if test="${ empty applyList }">
+			<h2>예약 내역이 없습니다</h2>
+		</c:if>
 	</div>
+	<jsp:include page="/jsp/myPage/myPageMenu.jsp" />
+	<div class="clear"></div>
 </div>
-
-<c:forEach items="${requestScope.applyList }" var="apply">
-	<div class="row">
-		<span class="cell col1">${apply.writer_id }</span> 
-		<span class="cell col1">${apply.start_place_name }<br>${apply.start_date}:${apply.start_time}</span> 
-		<span class="cell col1">${apply.end_place_name }</span> 
-		<span class="cell col1">${apply.type }</span> 
-		<span class="cell col1">${apply.user_cnt }
-			<input type="button" value="예약취소" name="apply_cancel">
-		</span>
-	</div>
-</c:forEach>

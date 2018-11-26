@@ -1,18 +1,48 @@
 @charset "UTF-8";
 
+div.myProfileArea {
+	width: 80%;
+	margin: 0 auto;
+}
+
+section {
+	width:1200px !important;
+}
+
 section #menuNav li {
 	list-style: none;
 	width: 100%;
-	border: 1px solid;
 	text-align: left;
-	height: 50px;
-	line-height: 50px;
+	height: 35px;
+	line-height: 35px;
+	background-color: #CADBE9;
+	padding: 5px;
+	font-size: 15px;
 }
 
-section table {
+#menuNav li a:visited, #menuNav li a:link {
+	color: black;
+}
+
+section div.myProfileArea div.wrap {
 	width: 70%;
 	float: left;
 	margin: 0;
+	text-align: center;
+}
+
+section div.myProfileArea table td, section div.myProfileArea table, th
+	{
+	background-color: white !important;
+	border: 1px solid #CADBE9;
+}
+
+section div.myProfileArea table td {
+	
+}
+
+section div.myProfileArea table, th {
+	
 }
 
 div#myProfileMenu {

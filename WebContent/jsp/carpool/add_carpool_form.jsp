@@ -156,7 +156,7 @@ $(document).ready(function(){
 				</div> 
 			</div>
 			<div class="input_wrap">
-				<span class="cell cell1">츨발지</span>
+				<span class="cell cell1">출발지</span>
 				<div class="cell cell2">
 					<p>출발지를 선택해주세요</p>
 					<input type="button" name="addr_search" value="주소검색" id="start_place_btn">
