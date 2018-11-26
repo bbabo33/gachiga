@@ -56,13 +56,14 @@ public class NaverCheckUser_Controller implements Controller{
 			MemberVO NaverUser = dao.selectByNidForNaver((String) resp.get("id"));
 			
 			if (NaverUser == null ) { // 로그인 실패
-//				String email = (String) resp.get("email");
-//				String naver_id = email.substring(0, email.indexOf("@"));
-//				request.getSession().setAttribute("naver_id", naver_id);
-//				request.getSession().setAttribute("Nid", resp.get("id"));
-//				request.getSession().setAttribute("gender", resp.get("gender"));
-//				request.getSession().setAttribute("name", resp.get("name"));
-//				request.getSession().setAttribute("email", email);
+				String email = (String) resp.get("email");
+				
+				String naver_id = email.substring(0, email.indexOf("@"));
+				request.getSession().setAttribute("naver_id", naver_id);
+				request.getSession().setAttribute("Nid", resp.get("id"));
+				request.getSession().setAttribute("gender", resp.get("gender"));
+				request.getSession().setAttribute("name", resp.get("name"));
+				request.getSession().setAttribute("email", email);
 				
 				request.setAttribute("value", 1);
 
@@ -72,7 +73,7 @@ public class NaverCheckUser_Controller implements Controller{
 			}
 
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		return "/jsp/login/naver_login_callback.jsp";
 	}
