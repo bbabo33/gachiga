@@ -7,6 +7,24 @@ $(document).ready(function(){
 	$('#regiCar').click(function(){
 		location.href="<%=request.getContextPath()%>/myPage/MyCarForm.do";
 	});
+	$('#deleteCar').click(function(){
+		if( confirm("차량정보를 삭제하시겠습니까?") )
+		$.ajax({
+			url : '<%=request.getContextPath()%>/myPage/MyCarDelete.do',
+			type : 'post',
+			success : function(data){
+				if(data.trim()==1){
+					alert("차량 정보를 삭제했습니다");
+				} else {
+					alert("차량 정보삭제에 실패했습니다");
+				}
+				location.reload();
+			},
+			error : function(xhr, ajaxOptions, thrownError) {
+				alert(xhr.status + " " + thrownError);
+			}
+		});
+	});
 });
 </script>
 <div class="myProfileArea">

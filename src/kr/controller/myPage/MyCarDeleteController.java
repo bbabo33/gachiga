@@ -17,12 +17,9 @@ public class MyCarDeleteController implements Controller {
 		user = (MemberVO)session.getAttribute("login_result");
 		
 		CarDAO dao = new CarDAO();
-		int delete = dao.deleteCar(user.getId());
-		String msg="";
-		if(delete==1) {
-			msg="등록된 차량이 삭제되었습니다.";
-		}
-		request.setAttribute("carDeleteMsg", msg);
+		int result = dao.deleteCar(user.getId());
+		
+		request.setAttribute("result", result);
 		
 		return "/jsp/myPage/myCarDelete.jsp";
 	}
