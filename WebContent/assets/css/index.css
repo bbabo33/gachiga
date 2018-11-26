@@ -21,8 +21,10 @@ section h3 {
 }
 
 input.btn {
+	background-color:#CADBE9;
 	border: none;
 	padding: 10px;
+	
 }
 
 .R {

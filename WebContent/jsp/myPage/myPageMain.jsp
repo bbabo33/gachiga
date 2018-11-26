@@ -4,7 +4,6 @@
 <div class="myProfileArea">
 	<jsp:include page="/jsp/myPage/myPageMenu.jsp" />
 	<hr style="clear: both;">
-	<h2>내 정보</h2>
 	<table>
 		<tr>
 			<th>이름</th>
@@ -28,6 +27,7 @@
 		</tr>
 
 	</table>
-	<div align="center">
-		<input type="button" value="회원정보 수정" id="updateBtn">
+	<div class="R">
+		<input type="button" class="btn" value="회원정보 수정" id="updateBtn">
+	</div>
 </div>
