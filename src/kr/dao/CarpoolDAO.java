@@ -31,7 +31,7 @@ public class CarpoolDAO {
 			StringBuilder sql = new StringBuilder();
 			sql.append(" select * from ( ");
 			sql.append(" select rownum as rnum, c.* from ( ");
-			sql.append(" select writer_id, start_place_name, end_place_name, post_type , user_cnt, start_time ");
+			sql.append(" select writer_id, start_place_name, end_place_name, post_type , user_cnt, start_time, no ");
 			sql.append(" from ( select * from c_carpool_post order by reg_date desc) ");
 			sql.append(" ) c ");
 			sql.append(" )where rnum between 1 and 5 ");
@@ -45,7 +45,9 @@ public class CarpoolDAO {
 				carpool.setPost_type(rs.getString("post_type"));
 				carpool.setUser_cnt(rs.getInt("user_cnt"));
 				carpool.setStart_time(rs.getString("start_time"));
-
+				System.out.println(rs.getInt("no"));
+				carpool.setNo(rs.getInt("no"));
+				
 				newList.add(carpool);
 			}
 		} catch (SQLException e) {
