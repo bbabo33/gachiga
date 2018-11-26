@@ -20,6 +20,7 @@ public class AddUserForm_Controller implements Controller {
 	@Override
 	public String handRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String token = request.getParameter("token");
+		System.out.println("!!!");
 
 		if (request.getParameter("is_naver") != null) { // 네이버 로그인한경우
 			request.setAttribute("is_naver", 1);
