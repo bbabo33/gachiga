@@ -18,13 +18,13 @@ public class Detail_Controller implements Controller {
 		BoardDAO dao = new BoardDAO();
 		int boardno = Integer.parseInt(request.getParameter("no"));
 		String post_type = request.getParameter("post_type");
-		BoardVO board = dao.selectByNo(boardno);
 
 		//조회수 처리
 		String back_url = request.getHeader("referer"); 
 		if (back_url.indexOf("board/update_board_form") == -1){
 			dao.updateViewCnt(boardno);
 		}
+		BoardVO board = dao.selectByNo(boardno);
 		// 댓글정보
 		List<CommentVO> commentList = dao.selectAllComment(boardno);
 

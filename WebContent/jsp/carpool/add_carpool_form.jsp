@@ -151,7 +151,7 @@ $(document).ready(function(){
 				<div class="cell cell2">
 					<p>출발날짜와 시간을 선택해주세요</p>
 					<img src="/carpool/assets/images/icon_cal.gif">
-					<input type="text" id="start_date" name="start_date"> 
+					<input type="text" id="start_date" name="start_date" autocomplete="off"> 
 					<input type="time" id="start_time" name="start_time">
 				</div> 
 			</div>
@@ -179,7 +179,7 @@ $(document).ready(function(){
 				</div>
 			</div>
 			<div class="input_wrap">
-				<span class="cell cell1">금액</span>
+				<span class="cell cell1">인원수</span>
 				<div class="cell cell2">
 					<p>카풀 이용 인원수를 입력해주세요</p>
 					<input type="text" name="user_cnt">
