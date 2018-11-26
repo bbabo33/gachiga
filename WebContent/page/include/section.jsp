@@ -3,6 +3,27 @@
 <%@ page import="kr.vo.BoardVO"%>
 <%@ page import="kr.dao.BoardDAO"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<script>
+	
+		function goPage(cate, board_no){
+			console.log(cate);
+			console.log(board_no);
+			switch(cate){
+				case 'free':
+					location.href="<%=request.getContextPath()%>/board/detail_board.do?post_type=free&no="+board_no;
+					break;
+				case 'review':
+					location.href="<%=request.getContextPath()%>/board/detail_board.do?post_type=review&no="+board_no;
+					break;
+				case 'carpool':
+					location.href="<%=request.getContextPath()%>/carpool/detail_carpool.do?post_type=carpool&no="+board_no;
+					break;
+			}
+		}
+		
+	
+</script>
 <ul id="logo_wrap">
 	<li id="logo">
 		<img src="/carpool/assets/images/carpool1.jpg"> 
@@ -37,13 +58,15 @@
 			<th class="head cell col2">출발일</th>
 		</tr>
 		<c:forEach items="${cList }" var="carpool">
-		<tr class="row">
+		<tr class="row" onclick="goPage('carpool','${carpool.no}')">
+			
 			<td class="cell col1">${carpool.writer_id }</td>
 			<td class="cell col2">${carpool.start_place_name}</td>
 			<td class="cell col2">${carpool.end_place_name }</td>
 			<td class="cell col1">${carpool.post_type }</td>
 			<td class="cell col1">${carpool.user_cnt}</td>
 			<td class="cell col2">${carpool.start_time}</td>
+			
 		</tr>
 		</c:forEach>
 	</table>
@@ -61,9 +84,9 @@
 			<th class="head cell col2">등록시간</th>
 		</tr>
 		<c:forEach items="${bList }" var="board">
-		<tr class="row">
+		<tr class="row" onclick="goPage('free','${board.board_no}')">
 			<td class="cell col2">${board.board_no}</td>
-			<td class="cell col2">${board.title}</td>
+			<td class="cell col2" >${board.title}</td>
 			<td class="cell col2">${board.id }</td>
 			<td class="cell col2">${board.regDate}</td>
 		</tr>
@@ -83,9 +106,9 @@
 			<th class="head cell col2">등록시간</th>
 		</tr>
 		<c:forEach items="${rList }" var="review">
-		<tr id="row">
+		<tr id="row" onclick="goPage('review','${review.board_no}')">
 			<td class="cell col2">${review.board_no}</td>
-			<td class="cell col2">${review.title}</td>
+			<td class="cell col2" >${review.title}</td>
 			<td class="cell col2">${review.id }</td>
 			<td class="cell col2">${review.regDate}</td>
 		</tr>

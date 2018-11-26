@@ -27,6 +27,7 @@ public class FrontController extends HttpServlet {
 		uri = uri.substring(context.length());
 		try {
 			Controller controller = mapping.get_Controller(uri);
+			System.out.println(uri);
 			String callPage = controller.handRequest(request, response); 
 			if(callPage.startsWith("redirect:")) {
 				response.sendRedirect(callPage.substring("redirect:".length()));

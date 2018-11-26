@@ -48,6 +48,10 @@ section #table {
 	width: 100%;
 }
 
+section table :hover{
+	cursor: pointer;
+}
+
 #freeboardList {
 	width: 48%;
 	float: left;
@@ -59,6 +63,7 @@ section #table {
 	float: right;
 	margin: 0 10px;
 }
+
 
 /* .boardList td.content { 글자수 넘칠떄
 	display: block;

@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="/carpool/assets/css/myPageCss.css">
 <div class="myProfileArea">
 	<div class="wrap">
-	<h2>프로필 정보</h2>
+		<h2>프로필 정보</h2>
 		<table>
 			<tr>
 				<th>이름</th>
@@ -24,7 +24,5 @@
 		</table>
 	</div>
 	<jsp:include page="/jsp/myPage/myPageMenu.jsp" />
-	<div class="R clear">
-		<input type="button" class="btn clear" value="회원정보 수정" id="updateBtn">
-	</div>
+	<div class="clear"></div>
 </div>
