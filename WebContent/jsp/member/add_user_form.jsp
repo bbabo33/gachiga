@@ -165,7 +165,7 @@
 						<label for="name">* 이름 :</label><input type="text" id="name" name="name"><br>
 					</c:when>
 					<c:otherwise>
-						<label for="name">* 이름 :</label><input type="text" name ="name" id="name" value = "${name}" readonly><br>
+						<label for="name">* 이름 :</label><input type="text" name ="name" id="name" value = "${name}"><br>
 					</c:otherwise>
 				</c:choose>
 				<span class="error_msg"></span>

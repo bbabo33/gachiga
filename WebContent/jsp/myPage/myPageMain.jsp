@@ -2,8 +2,7 @@
 	pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="/carpool/assets/css/myPageCss.css">
 <div class="myProfileArea">
-	<jsp:include page="/jsp/myPage/myPageMenu.jsp" />
-	<hr style="clear: both;">
+	<h1>내정보</h1>
 	<table>
 		<tr>
 			<th>이름</th>
@@ -27,7 +26,8 @@
 		</tr>
 
 	</table>
+	<jsp:include page="/jsp/myPage/myPageMenu.jsp" />
 	<div class="R">
-		<input type="button" class="btn" value="회원정보 수정" id="updateBtn">
+		<input type="button" class="btn clear" value="회원정보 수정" id="updateBtn">
 	</div>
 </div>

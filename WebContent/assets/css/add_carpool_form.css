@@ -34,6 +34,7 @@ form[name=cForm] {
 .input_wrap#start_info img {
 	position: absolute;
 	padding: 3px;
+	height:auto;
 }
 
 .input_wrap input[name=start_date] {

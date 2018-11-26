@@ -1,10 +1,34 @@
 @charset "UTF-8";
+
 section #menuNav li {
 	list-style: none;
-	float: left;
-	margin: 0 10px;
+	width: 100%;
+	border: 1px solid;
+	text-align: left;
+	height: 50px;
+	line-height: 50px;
 }
 
 section table {
-	width:80%;
+	width: 70%;
+	float: left;
+	margin: 0;
+}
+
+div#myProfileMenu {
+	float: right;
+	width: 30%;
+}
+
+#menuNav {
+	width: 100%;
+}
+
+.profileMenu {
+	padding: 0 50px;
+}
+
+.profileMenu h3 {
+	font-size: 25px;
+	margin: 0;
 }
