@@ -133,7 +133,7 @@ public class ApplyDAO {
 			memList = new ArrayList<>();
 			StringBuilder sql = new StringBuilder();
 			sql.append(
-					" select m.name as name , m.id as id, SUBSTR(m.tel,1,3)||'-****-**'||substr(m.tel,10,2) as tel ");
+					" select m.name as name , m.id as id, SUBSTR(m.tel,1,3)||'-'|| SUBSTR(m.tel,4,4)||'-'||substr(m.tel,8,4) as tel ");
 			sql.append(" from c_member m, c_apply a ");
 			sql.append(" where m.id = a.id ");
 			sql.append(" and a.post_no = ? ");

@@ -33,22 +33,20 @@
 	});
 </script>
 <div class="myProfileArea">
-	<div class="wrap">
+	<div class="wrap" id="reserv_list">
 		<h2>나의예약내역</h2>
 		<div class="row">
-			<span class="cell col1 head">프로필</span> 
+			<span class="cell col1 head">작성자</span> 
 			<span class="cell col1 head">출발</span> 
 			<span class="cell col1 head">도착</span> 
-			<span class="cell col1 head">타입</span> 
 			<span class="cell col1 head">자리</span>
 			<span class="cell col1 head">상태</span>
 		</div>
 		<c:forEach items="${requestScope.applyList }" var="apply">
 		<div class="row">
-			<span class="cell col1">${apply.writer_id }</span> 
-			<span class="cell col1">${apply.start_place_name }<br>${apply.start_date}:${apply.start_time}</span> 
+			<span class="cell col1">${apply.writer_id }<br>${apply.start_date}:${apply.start_time}</span> 
+			<span class="cell col1">${apply.start_place_name }</span> 
 			<span class="cell col1">${apply.end_place_name }</span> 
-			<span class="cell col1">${apply.type }</span> 
 			<span class="cell col1">${apply.user_cnt }</span>
 			<span class="cell col1">
 			<c:if test="${apply.status == 'success' }">

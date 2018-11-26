@@ -62,3 +62,7 @@ div#myProfileMenu {
 	font-size: 25px;
 	margin: 0;
 }
+
+#reserv_list span.cell{
+	font-size:15px;	
+}
