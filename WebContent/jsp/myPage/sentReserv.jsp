@@ -34,7 +34,7 @@
 </script>
 <div class="myProfileArea">
 	<div class="wrap">
-	<h2>나의예약내역</h2>
+		<h2>나의예약내역</h2>
 		<div class="row">
 			<span class="cell col1 head">프로필</span> 
 			<span class="cell col1 head">출발</span> 
