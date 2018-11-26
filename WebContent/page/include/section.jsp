@@ -3,9 +3,7 @@
 <%@ page import="kr.vo.BoardVO"%>
 <%@ page import="kr.dao.BoardDAO"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <script>
-	
 		function goPage(cate, board_no){
 			console.log(cate);
 			console.log(board_no);
@@ -21,8 +19,6 @@
 					break;
 			}
 		}
-		
-	
 </script>
 <ul id="logo_wrap">
 	<li id="logo">
@@ -46,7 +42,7 @@
 		<span>5. 승객은 운전자에게 사전에 협의한 금액을 지불합니다</span>
 	</li>
  </ul>
-<div align="center" id="carpoolList" style="clear:both">
+<div align="center" id="carpoolList" style="clear:both" class="boardList">
 	<h3>카풀 게시판</h3>
 	<table id="table">
 		<tr class="row">

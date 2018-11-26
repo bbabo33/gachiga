@@ -63,6 +63,9 @@ section table :hover{
 	float: right;
 	margin: 0 10px;
 }
+.boardList tr:hover{
+	background-color: #D4DFE6;	
+}
 
 
 /* .boardList td.content { 글자수 넘칠떄
