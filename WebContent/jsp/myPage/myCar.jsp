@@ -8,7 +8,7 @@ $(document).ready(function(){
 		location.href="<%=request.getContextPath()%>/myPage/MyCarForm.do";
 	});
 	$('#deleteCar').click(function(){
-		if( confirm("차량정보를 삭제하시겠습니까?") )
+		if( confirm	("차량정보를 삭제하시겠습니까?") )
 		$.ajax({
 			url : '<%=request.getContextPath()%>/myPage/MyCarDelete.do',
 			type : 'post',
