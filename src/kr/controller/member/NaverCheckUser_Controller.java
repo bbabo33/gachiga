@@ -20,9 +20,9 @@ public class NaverCheckUser_Controller implements Controller{
 	public String handRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 
-		String token = request.getParameter("token");// 네이버 로그인 접근 토큰;
+		String token = request.getParameter("token");// �꽕�씠踰� 濡쒓렇�씤 �젒洹� �넗�겙;
 		
-		String header = "Bearer " + token; // Bearer 다음에 공백 추가
+		String header = "Bearer " + token; // Bearer �떎�쓬�뿉 怨듬갚 異붽�
 
 		try {
 			String apiURL = "https://openapi.naver.com/v1/nid/me";
@@ -32,9 +32,9 @@ public class NaverCheckUser_Controller implements Controller{
 			con.setRequestProperty("Authorization", header);
 			int responseCode = con.getResponseCode();
 			BufferedReader br;
-			if (responseCode == 200) { // 정상 호출
+			if (responseCode == 200) { // �젙�긽 �샇異�
 				br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-			} else { // 에러 발생
+			} else { // �뿉�윭 諛쒖깮
 				br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
 			}
 			String inputLine;
@@ -55,19 +55,10 @@ public class NaverCheckUser_Controller implements Controller{
 
 			MemberVO NaverUser = dao.selectByNidForNaver((String) resp.get("id"));
 			
-			if (NaverUser == null ) { // 로그인 실패
-				String email = (String) resp.get("email");
-				
-				String naver_id = email.substring(0, email.indexOf("@"));
-				request.getSession().setAttribute("naver_id", naver_id);
-				request.getSession().setAttribute("Nid", resp.get("id"));
-				request.getSession().setAttribute("gender", resp.get("gender"));
-				request.getSession().setAttribute("name", resp.get("name"));
-				request.getSession().setAttribute("email", email);
-				
+			if (NaverUser == null ) { // 회원가입ㄱ
 				request.setAttribute("value", 1);
 
-			} else { // 로그인 성공
+			} else { // 바로 로그인 ㄱ
 				request.setAttribute("value", 0);
 				request.getSession().setAttribute("login_result", NaverUser);
 			}

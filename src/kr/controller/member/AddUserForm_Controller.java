@@ -12,25 +12,21 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import kr.controller.Controller;
-import kr.dao.MemberDAO;
-import kr.vo.MemberVO;
 
 public class AddUserForm_Controller implements Controller {
 
 	@Override
 	public String handRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String token = request.getParameter("token");
-		System.out.println("!!!");
-		System.out.println("!!!");
-
-		if (request.getParameter("is_naver") != null) { // 네이버 로그인한경우
+		
+		if (request.getParameter("is_naver") != null) { // 네이버로그인했을때
 			request.setAttribute("is_naver", 1);
 		} else {
 			request.setAttribute("is_naver", 0);
 		}
 
 		if (token != null) {
-			String header = "Bearer " + token; // Bearer 다음에 공백 추가
+			String header = "Bearer " + token; // Bearer �떎�쓬�뿉 怨듬갚 異붽�
 
 			try {
 				String apiURL = "https://openapi.naver.com/v1/nid/me";
@@ -40,9 +36,9 @@ public class AddUserForm_Controller implements Controller {
 				con.setRequestProperty("Authorization", header);
 				int responseCode = con.getResponseCode();
 				BufferedReader br;
-				if (responseCode == 200) { // 정상 호출
+				if (responseCode == 200) { // �젙�긽 �샇異�
 					br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-				} else { // 에러 발생
+				} else { // �뿉�윭 諛쒖깮
 					br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
 				}
 				String inputLine;
@@ -59,18 +55,16 @@ public class AddUserForm_Controller implements Controller {
 				JSONObject jsonObj = (JSONObject) json.parse(obj.toString());
 				JSONObject resp = (JSONObject) jsonObj.get("response");
 
-				MemberDAO dao = new MemberDAO();
+//				MemberVO NaverUser = dao.selectById((String) resp.get("id"));
 
-				MemberVO NaverUser = dao.selectById((String) resp.get("id"));
-
-				if (NaverUser == null) { // 로그인 실패
+				if (resp.get("id") != null) { // 회원가입
 					String email = (String) resp.get("email");
 					String naver_id = email.substring(0, email.indexOf("@"));
-					request.getSession().setAttribute("naver_id", naver_id);
-					request.getSession().setAttribute("Nid", resp.get("id"));
-					request.getSession().setAttribute("gender", resp.get("gender"));
-					request.getSession().setAttribute("name", resp.get("name"));
-					request.getSession().setAttribute("email", email);
+					request.setAttribute("naver_id", naver_id);
+					request.setAttribute("Nid", resp.get("id"));
+					request.setAttribute("gender", resp.get("gender"));
+					request.setAttribute("name", resp.get("name"));
+					request.setAttribute("email", email);
 
 					request.setAttribute("value", 1);
 				}
